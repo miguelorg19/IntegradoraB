@@ -1,14 +1,11 @@
 <?php
 
 namespace src\Modelos;
-
-require '../bootstrap.php';
-require 'vendor/phpmailer/phpmailer/src/PHPMailer.php';
-require 'vendor/phpmailer/phpmailer/src/Exception.php';
-require 'vendor/phpmailer/phpmailer/src/smtp.php';
-
 use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
+//Load Composer's autoloader
+require '../../vendor/autoload.php';
 
 $mensajeEnvio = "";
 $estiloMensaje = "";

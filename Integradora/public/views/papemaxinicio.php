@@ -1,5 +1,5 @@
 <?php
-require 'src/Modelos/enviocorreoinicio.php'
+require '../../src/Modelos/enviocorreoinicio.php';
 
 ?>
 <!DOCTYPE html>
