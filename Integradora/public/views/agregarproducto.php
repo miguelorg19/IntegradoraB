@@ -65,7 +65,7 @@
         <div class="collapse navbar-collapse col-lg-11 col-sm-6 col-md-6" id="menu">
             <ul class="navbar-nav d-flex justify-content-center">
               <li class="nav-item">
-              <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#"><img src="public/imagenes/menu.png" width="40" height="40"></a>
+              <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#"><img src="../imagenes/menu.png" width="40" height="40"></a>
               <ul class="dropdown-menu bg-light">
                 <li>
                   <a class="dropdown-item" href="">Inicio</a>
@@ -94,8 +94,8 @@
         <div class="collapse navbar-collapse col-lg-1 col-sm-6 col-md-6 d-flex justify-content-end con" id="menu">
             <ul class="navbar-nav">
               <li class="nav-item">
-              <a href="usuario.php"><img src="public/imagenes/usuario.png" width="40" height="40"></a>
-              <img src="public/imagenes/carrito.png" width="40" height="40">
+              <a href="usuario.php"><img src="../imagenes/usuario.png" width="40" height="40"></a>
+              <img src="../imagenes/carrito.png" width="40" height="40">
               </li>
         </div>      
         </div>
@@ -104,7 +104,7 @@
         <div class="container col-xl-8 col-lg-8 col-sm-6 col-md-6 col-sm-12 col-12 mt-4 row cos">
         <div class="col-xl-5 col-lg-5 col-sm-6 col-md-6 col-sm-12 col-12 d-flex justify-content-center coss row">
             <div class="d-flex justify-content-center row contg">
-                <img src="public/imagenes/iconoimg.png" class="img">
+                <img src="../imagenes/iconoimg.png" class="img">
                 <form action="" method="post" enctype="multipart/form-data">
                 <input type="file" class="arch">
                 </form>
