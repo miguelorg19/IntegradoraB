@@ -1,0 +1,16 @@
+{
+    "name": "miguel/proyectointe",
+    "description": "Proyecto Integradora",
+    "autoload": {
+        "psr-4": {
+            "Miguel\\Proyectointe\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Miguel Villalpando",
+            "email": "miguelvillalpando19@gmail.com"
+        }
+    ],
+    "require": {}
+}
