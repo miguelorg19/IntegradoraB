@@ -68,7 +68,7 @@ require '../../src/Modelos/enviocorreoinicio.php';
             <!--Menu-->
 
             <label for="Nav-MenuBtn">
-                <img src="imagenes/barra-de-menus.png" role="button" alt="" id="menu">
+                <img src="imagenes/menu.png" role="button" alt="" id="menu">
             </label>
 
             <input type="checkbox" id="Nav-MenuBtn">
@@ -79,8 +79,8 @@ require '../../src/Modelos/enviocorreoinicio.php';
             </form>
             <!--Contenedor Del Usuario Y Carrito De Compras-->
             <div id="Contenedor-UC">
-                <a href=""><img src="imagenes/usuarioo.png" alt="" id="usuario"></a>
-                <a href=""><img src="imagenes/carrito-de-compras.png" alt="" id="carrito"></a>
+                <a href=""><img src="imagenes/usuario.png" alt="" id="usuario"></a>
+                <a href=""><img src="imagenes/carrito.png" alt="" id="carrito"></a>
             </div>
             <!--Menu Desplegado-->
             <div id="Menu-Desplegado">
