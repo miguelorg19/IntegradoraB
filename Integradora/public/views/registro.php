@@ -90,7 +90,7 @@
                 </div>
                 <div class="mt-4 d-flex justify-content-center">
                 <p class="ya">Ya eres miembro?</p>
-                <a href="../Productos/index.html" class="ini text">
+                <a href="public/views/login.html" class="ini text">
                 Iniciar Sesion
                 </a>
                 </div>
