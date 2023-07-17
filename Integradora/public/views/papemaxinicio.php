@@ -68,19 +68,19 @@ require '../../src/Modelos/enviocorreoinicio.php';
             <!--Menu-->
 
             <label for="Nav-MenuBtn">
-                <img src="imagenes/menu.png" role="button" alt="" id="menu">
+                <img src="../imagenes/menu.png" role="button" alt="" id="menu">
             </label>
 
             <input type="checkbox" id="Nav-MenuBtn">
 
             <form action="" role="search" id="Buscador1">
                 <input type="text" placeholder="Buscar" id="Buscador">
-                <img role="button" src="imagenes/busqueda.png" id="Buscar" alt="">
+                <img role="button" src="../imagenes/busqueda.png" id="Buscar" alt="">
             </form>
             <!--Contenedor Del Usuario Y Carrito De Compras-->
             <div id="Contenedor-UC">
-                <a href=""><img src="imagenes/usuario.png" alt="" id="usuario"></a>
-                <a href=""><img src="imagenes/carrito.png" alt="" id="carrito"></a>
+                <a href="usuario.php"><img src="../imagenes/usuario.png" alt="" id="usuario"></a>
+                <a href="carrito.php"><img src="../imagenes/carrito.png" alt="" id="carrito"></a>
             </div>
             <!--Menu Desplegado-->
             <div id="Menu-Desplegado">
@@ -99,7 +99,7 @@ require '../../src/Modelos/enviocorreoinicio.php';
                         <li>
                             <form action="" role="search" id="Buscador2">
                                 <input type="text" placeholder="Buscar" id="Buscador">
-                                <img role="button" src="imagenes/busqueda.png" id="Buscar" alt="">
+                                <img role="button" src="../imagenes/busqueda.png" id="Buscar" alt="">
                             </form>
                         </li>
                     </ul>
@@ -111,7 +111,7 @@ require '../../src/Modelos/enviocorreoinicio.php';
 
     <div class="logocontainer text-center">
 
-        <img src="imagenes/jakiepape.png" class="img-fluid logojakie" width="280" height="150" alt="Logo de la papelería">
+        <img src="../imagenes/jakiepape.png" class="img-fluid logojakie" width="280" height="150" alt="Logo de la papelería">
 
     </div>
 
@@ -127,8 +127,8 @@ require '../../src/Modelos/enviocorreoinicio.php';
                 <div class="carousel-item active">
                     <div class="row">
                         <div class="col text-center">
-                            <a href="corrector.php">
-                                <img src="imagenes/corrector.jpeg" class="d-block w-50 mx-auto img-fluid" alt="...">
+                            <a href="producto.php">
+                                <img src="../imagenes/corrector.jpeg" class="d-block w-50 mx-auto img-fluid" alt="...">
                             </a>
                             <div class="row">
                                 <div class="col">
@@ -138,8 +138,8 @@ require '../../src/Modelos/enviocorreoinicio.php';
                             </div>
                         </div>
                         <div class="col text-center">
-                            <a href="corrector.php">
-                                <img src="imagenes/corrector.jpeg" class="d-block w-50 mx-auto img-fluid" alt="...">
+                            <a href="producto.php">
+                                <img src="../imagenes/corrector.jpeg" class="d-block w-50 mx-auto img-fluid" alt="...">
                             </a>
                             <div class="row">
                                 <div class="col">
@@ -149,8 +149,8 @@ require '../../src/Modelos/enviocorreoinicio.php';
                             </div>
                         </div>
                         <div class="col text-center">
-                            <a href="corrector.php">
-                                <img src="imagenes/corrector.jpeg" class="d-block w-50 mx-auto img-fluid" alt="...">
+                            <a href="producto.php">
+                                <img src="../imagenes/corrector.jpeg" class="d-block w-50 mx-auto img-fluid" alt="...">
                             </a>
                             <div class="row">
                                 <div class="col">
@@ -164,8 +164,8 @@ require '../../src/Modelos/enviocorreoinicio.php';
                 <div class="carousel-item img-fluid">
                     <div class="row">
                         <div class="col">
-                            <a href="cuaderno.php">
-                                <img src="imagenes/cuadernoscribeplus.jpeg" class="d-block w-50 mx-auto img-fluid" alt="...">
+                            <a href="producto.php">
+                                <img src="../imagenes/cuadernoscribeplus.jpeg" class="d-block w-50 mx-auto img-fluid" alt="...">
                             </a>
                             <div class="row">
                                 <h5 class="text-center">Cuaderno</h5>
@@ -173,8 +173,8 @@ require '../../src/Modelos/enviocorreoinicio.php';
                             </div>
                         </div>
                         <div class="col">
-                            <a href="cuaderno.php">
-                                <img src="imagenes/cuadernoscribeplus.jpeg" class="d-block w-50 mx-auto img-fluid" alt="...">
+                            <a href="producto.php">
+                                <img src="../imagenes/cuadernoscribeplus.jpeg" class="d-block w-50 mx-auto img-fluid" alt="...">
                             </a>
                             <div class="row">
                                 <h5 class="text-center">Cuaderno</h5>
@@ -182,8 +182,8 @@ require '../../src/Modelos/enviocorreoinicio.php';
                             </div>
                         </div>
                         <div class="col">
-                            <a href="cuaderno.php">
-                                <img src="imagenes/cuadernoscribeplus.jpeg" class="d-block w-50 mx-auto img-fluid" alt="...">
+                            <a href="producto.php">
+                                <img src="../imagenes/cuadernoscribeplus.jpeg" class="d-block w-50 mx-auto img-fluid" alt="...">
                             </a>
                             <div class="row">
                                 <h5 class="text-center">Cuaderno</h5>
@@ -195,8 +195,8 @@ require '../../src/Modelos/enviocorreoinicio.php';
                 <div class="carousel-item img-fluid">
                     <div class="row">
                         <div class="col">
-                            <a href="boligrado.php">
-                                <img src="imagenes/boloigrafo.jpeg" class="d-block w-50 mx-auto img-fluid" alt="...">
+                            <a href="producto.php">
+                                <img src="/..imagenes/boloigrafo.jpeg" class="d-block w-50 mx-auto img-fluid" alt="...">
                             </a>
                             <div class="row">
                                 <h5 class="text-center">Bolígrafo</h5>
@@ -205,8 +205,8 @@ require '../../src/Modelos/enviocorreoinicio.php';
                         </div>
 
                         <div class="col">
-                            <a href="boligrado.php">
-                                <img src="imagenes/boloigrafo.jpeg" class="d-block w-50 mx-auto img-fluid" alt="...">
+                            <a href="producto.php">
+                                <img src="../imagenes/boloigrafo.jpeg" class="d-block w-50 mx-auto img-fluid" alt="...">
                             </a>
                             <div class="row">
                                 <h5 class="text-center">Bolígrafo</h5>
@@ -215,7 +215,7 @@ require '../../src/Modelos/enviocorreoinicio.php';
                         </div>
 
                         <div class="col">
-                            <a href="boligrado.php">
+                            <a href="producto.php">
                                 <img src="imagenes/boloigrafo.jpeg" class="d-block w-50 mx-auto img-fluid" alt="...">
                             </a>
                             <div class="row">
@@ -238,7 +238,7 @@ require '../../src/Modelos/enviocorreoinicio.php';
 
             <div class="col-6 col-sm-6 col-md-4 col-lg-3 producto">
                 <div class="card">
-                    <img src="imagenes/cuadernoscribeplus.jpeg" class="card-img-top" alt="...">
+                    <img src="../imagenes/cuadernoscribeplus.jpeg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Nombre Del Producto.</h5>
                         <p class="card-text">Precio.</p>
@@ -249,7 +249,7 @@ require '../../src/Modelos/enviocorreoinicio.php';
 
             <div class="col-6 col-sm-6 col-md-4 col-lg-3 producto">
                 <div class="card">
-                    <img src="imagenes/boloigrafo.jpeg" class="card-img-top" alt="...">
+                    <img src="../imagenes/boloigrafo.jpeg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Nombre Del Producto.</h5>
                         <p class="card-text">Precio.</p>
@@ -260,7 +260,7 @@ require '../../src/Modelos/enviocorreoinicio.php';
 
             <div class="col-6 col-sm-6 col-md-4 col-lg-3 producto">
                 <div class="card">
-                    <img src="imagenes/corrector.jpeg" class="card-img-top" alt="...">
+                    <img src="../imagenes/corrector.jpeg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Nombre Del Producto.</h5>
                         <p class="card-text">Precio.</p>
@@ -271,7 +271,7 @@ require '../../src/Modelos/enviocorreoinicio.php';
 
             <div class="col-6 col-sm-6 col-md-4 col-lg-3 producto">
                 <div class="card">
-                    <img src="imagenes/cuadernoscribeplus.jpeg" class="card-img-top" alt="...">
+                    <img src="../imagenes/cuadernoscribeplus.jpeg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Nombre Del Producto.</h5>
                         <p class="card-text">Precio.</p>
@@ -287,7 +287,7 @@ require '../../src/Modelos/enviocorreoinicio.php';
         <div class="row mt-5">
             <div class="col-6 col-sm-6 col-md-4 col-lg-3 producto">
                 <div class="card">
-                    <img src="imagenes/cuadernoscribeplus.jpeg" class="card-img-top" alt="...">
+                    <img src="../imagenes/cuadernoscribeplus.jpeg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Nombre Del Producto.</h5>
                         <p class="card-text">Precio.</p>
@@ -298,7 +298,7 @@ require '../../src/Modelos/enviocorreoinicio.php';
 
             <div class="col-6 col-sm-6 col-md-4 col-lg-3 producto">
                 <div class="card">
-                    <img src="imagenes/boloigrafo.jpeg" class="card-img-top" alt="...">
+                    <img src="../imagenes/boloigrafo.jpeg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Nombre Del Producto.</h5>
                         <p class="card-text">Precio.</p>
@@ -309,7 +309,7 @@ require '../../src/Modelos/enviocorreoinicio.php';
 
             <div class="col-6 col-sm-6 col-md-4 col-lg-3 producto">
                 <div class="card">
-                    <img src="imagenes/corrector.jpeg" class="card-img-top" alt="...">
+                    <img src="../imagenes/corrector.jpeg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Nombre Del Producto.</h5>
                         <p class="card-text">Precio.</p>
@@ -320,7 +320,7 @@ require '../../src/Modelos/enviocorreoinicio.php';
 
             <div class="col-6 col-sm-6 col-md-4 col-lg-3 producto">
                 <div class="card">
-                    <img src="imagenes/cuadernoscribeplus.jpeg" class="card-img-top" alt="...">
+                    <img src="../imagenes/cuadernoscribeplus.jpeg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Nombre Del Producto.</h5>
                         <p class="card-text">Precio.</p>

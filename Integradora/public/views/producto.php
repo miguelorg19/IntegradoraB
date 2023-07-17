@@ -117,7 +117,7 @@
         <div class="collapse navbar-collapse col-lg-4 col-sm-12 col-md-6 col-xl-4" id="menu">
             <ul class="navbar-nav d-flex justify-content-center">
               <li class="nav-item">
-              <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#"><img src="public/imagenes/menu.png" width="40" height="40"></a>
+              <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#"><img src="../imagenes/menu.png" width="40" height="40"></a>
               <ul class="dropdown-menu bg-light">
                 <li>
                   <a class="dropdown-item" href="">Inicio</a>
@@ -154,8 +154,8 @@
                 <div class="col-xl-2 col-lg-2 col-md-2 col-sm-4 col-4 d-flex justify-content-end">
                 <ul class="navbar-nav">
                 <li class="nav-item">
-                <a href="usuario.php"><img src="public/imagenes/usuario.png" width="40" height="40"></a>
-                <img src="public/imagenes/carrito.png" width="40" height="40">
+                <a href="usuario.php"><img src="../imagenes/usuario.png" width="40" height="40"></a>
+                <img src="../imagenes/carrito.png" width="40" height="40">
                 </div>
               </li>
             </div>    
@@ -164,7 +164,7 @@
 </header>
                 <div class="container mt-4 row col-9 d-flex justify-content-center con" >
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 d-flex justify-content-center cons">
-                        <img src="public/imagenes/libreta.jpg" class="img2 img-fluid img-thumbnail">
+                        <img src="../imagenes/libreta.jpg" class="img2 img-fluid img-thumbnail">
                     </div>
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                         <h1 class="te">Cuaderno Scribe de Raya 100 hojas</h1>
@@ -212,7 +212,7 @@
                 <div class="container  d-flex justify-content-between cons mt-2 col-9 row">
                 <div class="card col-xl-2 col-lg-2 col-md-5 col-sm-5 col-5">
                   <div class="imgcards d-flex justify-content-center">
-                    <img src="public/imagenes/libreta.jpg" class="card-img-top img" alt="...">
+                    <img src="../imagenes/libreta.jpg" class="card-img-top img" alt="...">
                  </div>
                   <div class="card-body">
                     <h5 class="text">Cuaderno de raya scribe 150 hojas</h5>
@@ -224,7 +224,7 @@
                 </div>
                 <div class="card col-xl-2 col-lg-2 col-md-5 col-sm-5 col-5">
                   <div class="imgcards d-flex justify-content-center">
-                    <img src="public/imagenes/libreta.jpg" class="card-img-top img" alt="...">
+                    <img src="../imagenes/libreta.jpg" class="card-img-top img" alt="...">
                  </div>
                   <div class="card-body">
                     <h5 class="text">Cuaderno de raya scribe 150 hojas</h5>
@@ -236,7 +236,7 @@
                 </div>
                 <div class="card col-xl-2 col-lg-2 col-md-5 col-sm-5 col-5">
                   <div class="imgcards d-flex justify-content-center">
-                    <img src="public/imagenes/libreta.jpg" class="card-img-top img" alt="...">
+                    <img src="../imagenes/libreta.jpg" class="card-img-top img" alt="...">
                  </div>
                   <div class="card-body">
                     <h5 class="text">Cuaderno de raya scribe 150 hojas</h5>
@@ -248,7 +248,7 @@
                 </div>
                 <div class="card col-xl-2 col-lg-2 col-md-5 col-sm-5 col-5">
                   <div class="imgcards d-flex justify-content-center">
-                    <img src="public/imagenes/libreta.jpg" class="card-img-top img" alt="...">
+                    <img src="../imagenes/libreta.jpg" class="card-img-top img" alt="...">
                  </div>
                   <div class="card-body">
                     <h5 class="text">Cuaderno de raya scribe 150 hojas</h5>

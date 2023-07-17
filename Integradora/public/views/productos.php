@@ -101,42 +101,61 @@
         </div>
   </nav>
 </header> 
-        <div class="container col-xl-8 col-lg-8 col-sm-6 col-md-6 col-sm-12 col-12 mt-4 row cos">
-        <div class="col-xl-5 col-lg-5 col-sm-6 col-md-6 col-sm-12 col-12 d-flex justify-content-center coss row">
-            <div class="d-flex justify-content-center row contg">
-                <img src="../imagenes/iconoimg.png" class="img">
-                <form action="" method="post" enctype="multipart/form-data">
-                <input type="file" class="arch">
-                </form>
+        <div class="container col-xl-8 col-lg-8 col-sm-6 col-md-6 col-sm-12 col-12 mt-4 row cos table-responsive">
+        <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Descripcion</th>
+            <th scope="col">Existencias</th>
+            <th scope="col">Precio de venta</th>
+            <th scope="col">Categoria</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Lapiz</td>
+            <td>Lapiz</td>
+            <td>15</td>
+            <td>$12.50</td>
+            <td>Papel</td>
+            <td><button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-pencil-square"></i></button></td>
+            <td><button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="ti">Editar</h1>
             </div>
-            <div class="mt-4">
-            <input type="text" class="form-control in" placeholder="Marca" aria-label="Recipient's username" aria-describedby="button-addon2">
+            <div class="modal-body">
+            <input type="text" class="form-control tex" aria-label="Amount (to the nearest dollar)" placeholder="Nombre">
+            <input type="number" class="form-control tex mt-2" aria-label="Amount (to the nearest dollar)" placeholder="Precio de venta">
+            <div class="input-group mt-3">
+              <span class="input-group-text tex" id="inputGroup-sizing-default">Categoria</span>
+              <select class="form-select form-select-md tex" aria-label=".form-select-md example">
+                <option selected>Seleccione</option>
+                <option value="1">Escritura</option>
+                <option value="2">Papel</option>
+                <option value="3">Cuadernos</option>
+                <option value="4">Archivo</option>
+                <option value="5">Escolares</option>
+              </select>
+              </div>
             </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-success">Guardar</button>
+            </div>
+          </div>
         </div>
-        <div class="col-xl-7 col-lg-7 col-sm-6 col-md-6 col-sm-12 col-12 coss row">
-            <h3 class="ti">Nuevo producto</h3>
-        <form>
-        <input type="text" class="form-control in" placeholder="Nombre del producto" aria-label="Recipient's username" aria-describedby="button-addon2">
-        <textarea class="form-control mt-3 in" placeholder="Descripcion del producto"rows="3"></textarea>
-        <input type="number" class="form-control mt-3 in"placeholder="Cantidad para stock" aria-label="Recipient's username" aria-describedby="button-addon2">
-        <input type="number" class="form-control mt-3 in"placeholder="Cantidad por paquete" aria-label="Recipient's username" aria-describedby="button-addon2">
-        <div class="input-group input-group-md mb-3 mt-3">
-                    <span class="input-group-text tex">$</span>
-                    <input type="text" class="form-control tex" aria-label="Amount (to the nearest dollar)" placeholder="Pago con">
-            <span class="input-group-text tex">.00</span>
-        </div>
-        <select class="form-select form-select-md in mt-3" aria-label=".form-select-md example">
-        <option selected>Categoria</option>
-        <option value="1">Escritura</option>
-        <option value="2">Papel</option>
-        <option value="3">Cuadernos</option>
-        <option value="4">Archivo</option>
-        <option value="5">Escolares</option>
-        </select>
-        <div class="col-xl-12 col-lg-12 col-sm-12 col-md-12 col-12 coss d-flex justify-content-center cop">
-        <button type="submit" class="btn btn-success">Agregar</button>
-        </div>
-        </div>
+      </div>
         </div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>

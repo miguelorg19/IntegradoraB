@@ -112,7 +112,7 @@
         <div class="collapse navbar-collapse col-lg-4 col-sm-12 col-md-6 col-xl-4" id="menu">
             <ul class="navbar-nav d-flex justify-content-center">
               <li class="nav-item">
-              <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#"><img src="imagenes/barra-de-menus.png" width="40" height="40"></a>
+              <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#"><img src="../imagenes/menu.png" width="40" height="40"></a>
               <ul class="dropdown-menu bg-light">
                 <li>
                   <a class="dropdown-item" href="">Inicio</a>
@@ -143,7 +143,7 @@
               <div class="col-xl-5 col-lg-5 col-md-4 col-sm-8 col-7 d-flex justify-content-center bas">
                 <form class="d-flex" role="search">
                 <input class="form-control bus1" type="search" placeholder="Buscar" aria-label="Buscar">
-                <button class="btn btn-light bus2 justify-content-center" type="submit"><img src="imagenes/busqueda.png" width="20" height="20"></button>
+                <button class="btn btn-light bus2 justify-content-center" type="submit"><img src="../imagenes/busqueda.png" width="20" height="20"></button>
                 </form>
               </div>
                 <div class="col-xl-2 col-lg-2 col-md-2 col-sm-4 col-4 d-flex justify-content-end">
@@ -190,7 +190,6 @@
                         <option value="10">Octubre</option>
                         <option value="11">Noviembre</option>
                         <option value="12">Diciembre</option>
-
                     </select>
                 </form>
 

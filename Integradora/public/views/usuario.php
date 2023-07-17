@@ -49,7 +49,7 @@
         <div class="collapse navbar-collapse col-lg-11 col-sm-6 col-md-6" id="menu">
             <ul class="navbar-nav d-flex justify-content-center">
               <li class="nav-item">
-              <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#"><img src="public/imagenes/menu.png" width="40" height="40"></a>
+              <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#"><img src="../imagenes/menu.png" width="40" height="40"></a>
               <ul class="dropdown-menu bg-light">
                 <li>
                   <a class="dropdown-item" href="">Inicio</a>
@@ -78,7 +78,7 @@
         <div class="collapse navbar-collapse col-lg-1 col-sm-6 col-md-6 d-flex justify-content-end con" id="menu">
             <ul class="navbar-nav">
               <li class="nav-item">
-              <img src="public/imagenes/carrito.png" width="40" height="40">
+              <img src="../imagenes/carrito.png" width="40" height="40">
               </li>
         </div>      
         </div>
@@ -88,7 +88,7 @@
         <div class="col-xl-8 col-lg-8 col-md-6 col-sm-12 col-12 d-flex justify-content-center conss">
           <form action="" method="post" enctype="multipart/form-data">
             <div  class="d-flex justify-content-center">
-            <img src="public/imagenes/usuarioimg.png" width="200px" height="200px">
+            <img src="../imagenes/usuarioimg.png" width="200px" height="200px">
             </div>
             <div class="d-flex justify-content-center">
             <h5>Seleccione una imagen</h5>

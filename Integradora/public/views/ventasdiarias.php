@@ -61,15 +61,15 @@
             </form>
             <!--Contenedor Del Usuario Y Carrito De Compras-->
             <div id="Contenedor-UC">
-                <a href=""><img src="imagenes/usuarioo.png" alt="" id="usuario"></a>
-                <a href=""><img src="imagenes/carrito-de-compras.png" alt="" id="carrito"></a>
+                <a href=""><img src="../imagenes/usuario.png" alt="" id="usuario"></a>
+                <a href=""><img src="../imagenes/carrito.png" alt="" id="carrito"></a>
             </div>
             <!--Menu Desplegado-->
             <div id="Menu-Desplegado">
                 <div id="Contenedor-Menu-Desplegado">
                     <h3>Jacky Papeleria</h3>
                     <label for="Nav-MenuBtn">
-                        <img src="imagenes/cerca.png" role="button" alt="" id="Cerrar">
+                        <img src="../imagenes/cerca.png" role="button" alt="" id="Cerrar">
                     </label>
                 </div>
 
@@ -81,7 +81,7 @@
                         <li>
                             <form action="" role="search" id="Buscador2">
                                 <input type="text" placeholder="Buscar" id="Buscador">
-                                <img role="button" src="imagenes/busqueda.png" id="Buscar" alt="">
+                                <img role="button" src="../imagenes/busqueda.png" id="Buscar" alt="">
                             </form>
                         </li>
                     </ul>

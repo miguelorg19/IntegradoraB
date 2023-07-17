@@ -66,7 +66,7 @@
 <body>
     <nav class="navbar bg-black barra"></nav>
     <div class="container justify-content-center">
-    <div class="mt-4 d-flex justify-content-center"><img src="public/imagenes/jakiepape.png" class="imglogo img-fluid"></div>
+    <div class="mt-4 d-flex justify-content-center"><img src="../imagenes/jakiepape.png" class="imglogo img-fluid"></div>
     <div class="container d-flex justify-content-center mt-4">
         <div class="col-lg-5 col-sm-12 col-md-8 col-xl-5 con ">
                 <br/>

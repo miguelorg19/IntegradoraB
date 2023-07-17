@@ -58,7 +58,7 @@
                 <div class="collapse navbar-collapse col-lg-11 col-sm-6 col-md-6" id="menu">
                     <ul class="navbar-nav d-flex justify-content-center">
                     <li class="nav-item">
-                    <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#"><img src="public/imagenes/menu.png" width="40" height="40"></a>
+                    <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#"><img src="../imagenes/menu.png" width="40" height="40"></a>
                     <ul class="dropdown-menu bg-light">
                         <li>
                         <a class="dropdown-item" href="">Inicio</a>
@@ -90,8 +90,8 @@
                 <div class="collapse navbar-collapse col-lg-1 col-sm-6 col-md-6 d-flex justify-content-end con" id="menu">
                     <ul class="navbar-nav">
                     <li class="nav-item">
-                    <a href="usuario.php"><img src="public/imagenes/usuario.png" width="40" height="40"></a>
-                    <img src="public/imagenes/carrito.png" width="40" height="40">
+                    <a href="usuario.php"><img src="../imagenes/usuario.png" width="40" height="40"></a>
+                    <img src="../imagenes/carrito.png" width="40" height="40">
                     </li>
                 </div>      
                 </div>
@@ -101,7 +101,7 @@
             <h1 class="text">Detalles del pedido</h1>
             <hr>
             <div class="col-xl-4 col-lg-4 col-md-8 col-sm-12 col-12 conn">
-                <img src="public/imagenes/libreta.jpg" class="imgs img-thumbnail"></img>
+                <img src="../imagenes/libreta.jpg" class="imgs img-thumbnail"></img>
             </div>
             <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12 col-12 conn2">
                 <h3 class="te">Cuaderno escribe Raya 100 hojas</h3>
@@ -110,7 +110,7 @@
             </div>
             <hr class="mt-2">
             <div class="col-xl-4 col-lg-4 col-md-8 col-sm-12 col-12 conn">
-                <img src="public/imagenes/borra.png" class="imgs img-thumbnail"></img>
+                <img src="../imagenes/borra.png" class="imgs img-thumbnail"></img>
             </div>
             <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12 col-12 conn2">
                 <h3 class="te">Cuaderno escribe Raya 100 hojas</h3>
