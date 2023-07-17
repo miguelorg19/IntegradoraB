@@ -57,7 +57,7 @@
 
             <form action="" role="search" id="Buscador1">
                 <input type="text" placeholder="Buscar" id="Buscador">
-                <img role="button" src="imagenes/busqueda.png" id="Buscar" alt="">
+                <img role="button" src="../imagenes/busqueda.png" id="Buscar" alt="">
             </form>
             <!--Contenedor Del Usuario Y Carrito De Compras-->
             <div id="Contenedor-UC">
