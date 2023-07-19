@@ -117,45 +117,83 @@
         </thead>
         <tbody>
           <tr>
-            <th scope="row">1</th>
-            <td>Lapiz</td>
-            <td>Lapiz</td>
-            <td>15</td>
-            <td>$12.50</td>
-            <td>Papel</td>
-            <td><button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-pencil-square"></i></button></td>
-            <td><button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button></td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="ti">Editar</h1>
-            </div>
-            <div class="modal-body">
-            <input type="text" class="form-control tex" aria-label="Amount (to the nearest dollar)" placeholder="Nombre">
-            <input type="number" class="form-control tex mt-2" aria-label="Amount (to the nearest dollar)" placeholder="Precio de venta">
-            <div class="input-group mt-3">
-              <span class="input-group-text tex" id="inputGroup-sizing-default">Categoria</span>
-              <select class="form-select form-select-md tex" aria-label=".form-select-md example">
-                <option selected>Seleccione</option>
-                <option value="1">Escritura</option>
-                <option value="2">Papel</option>
-                <option value="3">Cuadernos</option>
-                <option value="4">Archivo</option>
-                <option value="5">Escolares</option>
-              </select>
+          <?php foreach ($datos as $producto) {
+             ?>
+                <tr>
+                    <td><?php echo $producto['ID_Productos']; ?></td>
+                    <td><?php echo $producto['Prod']; ?></td>
+                    <td><?php echo $producto['Descripcion']; ?></td>
+                    <td><?php echo $producto['Existencias']; ?></td>
+                    <td>$<?php echo $producto['Precio_de_Venta']; ?></td>
+                    <td><?php echo $producto['Cat']; ?></td>
+                    <td><button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $producto['ID_Productos']; ?>"><i class="bi bi-pencil-square"></i></button></td>
+                    <td><button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modaldel<?php echo $producto['ID_Productos']; ?>"><i class="bi bi-trash"></i></button></td>
+    </tr>
+    
+    <div class="modal fade" id="exampleModal<?php echo $producto['ID_Productos']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h1 class="ti">Editar</h1>
+                          </div>
+                          <div class="modal-body">
+                              <form action="../../src/http/actualizar_producto.php" method="POST">
+                                  <input type="hidden" name="id_producto" value="<?php echo $producto['ID_Productos']; ?>">
+                                  <input type="text" class="form-control tex" name="nombre" aria-label="Amount (to the nearest dollar)" placeholder="Nombre" value="<?php echo $producto['Prod']; ?>">
+                                  <input type="number" class="form-control tex mt-2" name="precio" aria-label="Amount (to the nearest dollar)" placeholder="Precio de venta" value="<?php echo $producto['Precio_de_Venta']; ?>">
+                                  <div class="input-group mt-3">
+                                      <span class="input-group-text tex" id="inputGroup-sizing-default">Categoria</span>
+                                      <select class="form-select form-select-md tex" aria-label=".form-select-md example" name="categoria">
+                                          <option value="1" <?php if ($producto['Cat'] == 'Escritura') echo 'selected'; ?>>Escritura</option>
+                                          <option value="2" <?php if ($producto['Cat'] == 'Papel') echo 'selected'; ?>>Papel</option>
+                                          <option value="3" <?php if ($producto['Cat'] == 'Cuadernos') echo 'selected'; ?>>Cuadernos</option>
+                                          <option value="4" <?php if ($producto['Cat'] == 'Archivo') echo 'selected'; ?>>Archivo</option>
+                                          <option value="5" <?php if ($producto['Cat'] == 'Escolares') echo 'selected'; ?>>Escolares</option>
+                                      </select>
+                                  </div>
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                              <button type="submit" class="btn btn-success">Guardar</button>
+                          </div>
+                              </form>
+                      </div>
+                  </div>
               </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
-              <button type="button" class="btn btn-success">Guardar</button>
-            </div>
-          </div>
-        </div>
-      </div>
+              <div class="modal fade" id="modaldel<?php echo $producto['ID_Productos']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h1 class="ti">Eliminacion</h1>
+                          </div>
+                          <div class="modal-body">
+                              <form action="../../src/http/borrarproducto.php" method="POST">
+                                <h3>Esta seguro que desea eliminar?</h3>
+                                  <input type="hidden" name="id_producto" value="<?php echo $producto['ID_Productos']; ?>">
+                                  <input type="text" class="form-control mt-2 tex" name="nombre" aria-label="Amount (to the nearest dollar)" placeholder="Nombre" value="<?php echo $producto['Prod']; ?>" disabled>
+                                  <h6 class="mt-1">Existencias</h6>
+                                  <input type="text" class="form-control mt-2 tex" name="nombre" aria-label="Amount (to the nearest dollar)" placeholder="Nombre" value="<?php echo $producto['Existencias']; ?>" disabled>
+                                  <h6 class="mt-1">Precio de venta</h6>
+                                  <input type="text" class="form-control mt-2 tex" name="nombre" aria-label="Amount (to the nearest dollar)" placeholder="Nombre" value="<?php echo $producto['Precio_de_Venta']; ?>" disabled>
+                                  <div class="input-group">
+                                      <span class="input-group-text tex mt-2" id="inputGroup-sizing-default">Categoria</span>
+                                      <select class="form-select form-select-md tex mt-2" aria-label=".form-select-md example" name="categoria" disabled>
+                                          <option value="1" <?php if ($producto['Cat'] == 'Escritura') echo 'selected'; ?>>Escritura</option>
+                                          <option value="2" <?php if ($producto['Cat'] == 'Papel') echo 'selected'; ?>>Papel</option>
+                                          <option value="3" <?php if ($producto['Cat'] == 'Cuadernos') echo 'selected'; ?>>Cuadernos</option>
+                                          <option value="4" <?php if ($producto['Cat'] == 'Archivo') echo 'selected'; ?>>Archivo</option>
+                                          <option value="5" <?php if ($producto['Cat'] == 'Escolares') echo 'selected'; ?>>Escolares</option>
+                                      </select>
+                                  </div>
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                              <button type="submit" class="btn btn-success">Si eliminar</button>
+                          </div>
+                              </form>
+                      </div>
+                  </div>
+          <?php } ?>
         </div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
