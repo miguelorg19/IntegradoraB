@@ -36,6 +36,7 @@
         .text{
             font-family: 'Inter', sans-serif;
             font-weight: bold;
+            font-size:2rem
         }
     </style>
 </head>
@@ -50,7 +51,7 @@
         <div class="collapse navbar-collapse col-lg-11 col-sm-6 col-md-6" id="menu">
             <ul class="navbar-nav d-flex justify-content-center">
               <li class="nav-item">
-              <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#"><img src="public/imagenes/menu.png" width="40" height="40"></a>
+              <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#"><img src="../imagenes/menu.png" width="40" height="40"></a>
               <ul class="dropdown-menu bg-light">
                 <li>
                   <a class="dropdown-item" href="">Inicio</a>
@@ -76,8 +77,8 @@
         <div class="collapse navbar-collapse col-lg-1 col-sm-6 col-md-6 d-flex justify-content-end con" id="menu">
             <ul class="navbar-nav">
               <li class="nav-item">
-              <a href="usuario.php"><img src="public/imagenes/usuario.png" width="40" height="40"></a>
-              <img src="public/imagenes/carrito.png" width="40" height="40">
+              <a href="usuario.php"><img src="../imagenes/usuario.png" width="40" height="40"></a>
+              <img src="../imagenes/carrito.png" width="40" height="40">
               </li>
         </div>      
         </div>
@@ -85,7 +86,52 @@
 </header>
  <div class="container-fluid conts row justify-content-around">
       <div class="col-sm-12 col-md-12 col-lg-7 col-xl-7 cont mt-4">
+      <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 row">
+      <div class="col-sm-6 col-md-6 col-lg-9 col-xl-9">
       <h1 class="text">Registro Compras</h1>
+      </div>
+      <div class="col-sm-6 col-md-6 col-lg-3 col-xl-3 ">
+      <button type="submit" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">Nuevo producto</button>
+      <div class="modal modal-dialog-scrollable" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="ti">Agregar producto</h1>
+            </div>
+            <div class="modal-body">
+            <input type="text" class="form-control tex" aria-label="Amount (to the nearest dollar)" placeholder="Nombre">
+            <input type="number" class="form-control tex mt-2" aria-label="Amount (to the nearest dollar)" placeholder="Precio de venta">
+            <input type="number" class="form-control tex mt-2" aria-label="Amount (to the nearest dollar)" placeholder="Cantidad">
+            <div class="mt-2">
+              <textarea class="form-control" placeholder="Descripcion del producto" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+            <h2>Detalles</h2>
+            <input type="number" class="form-control tex mt-2" aria-label="Amount (to the nearest dollar)" placeholder="Marca">
+            <input type="number" class="form-control tex mt-2" aria-label="Amount (to the nearest dollar)" placeholder="Tamaño(opcional)">
+            <input type="number" class="form-control tex mt-2" aria-label="Amount (to the nearest dollar)" placeholder="Color">
+            <input type="number" class="form-control tex mt-2" aria-label="Amount (to the nearest dollar)" placeholder="Cantidad por paquete">
+
+            <div class="input-group mt-3">
+              <span class="input-group-text tex" id="inputGroup-sizing-default">Categoria</span>
+              <select class="form-select form-select-md tex" aria-label=".form-select-md example">
+                <option selected>Seleccione</option>
+                <option value="1">Escritura</option>
+                <option value="2">Papel</option>
+                <option value="3">Cuadernos</option>
+                <option value="4">Archivo</option>
+                <option value="5">Escolares</option>
+              </select>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-success">Guardar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      </div>
       <br/>
       <h5 class="te">Categoria</h5>
       <div class="input-group mt-3">
@@ -105,12 +151,6 @@
         <input type="text" class="form-control tex" placeholder="Producto" aria-label="Recipient's username" aria-describedby="button-addon2">
         <button class="btn btn-outline-secondary tex" type="button" id="button-addon2">Buscar</button>
       </div>
-      <h5>Total</h5>
-      <div class="input-group input-group-md mb-3 mt-3">
-        <span class="input-group-text tex">$</span>
-        <input type="text" class="form-control tex" aria-label="Amount (to the nearest dollar)" placeholder="Total gastado">
-        <span class="input-group-text tex">.00</span>
-      </div>
       <div class="mb-3">
         <h5 class="text">Descripcion del producto</h5>
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled></textarea>
@@ -120,7 +160,7 @@
       <input type="number" class="form-control tex" placeholder="Cantidad" aria-label="Recipient's username" aria-describedby="button-addon2">
       </div>
       <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 d-flex justify-content-center mt-3">
-        <button type="submit" class="btn btn-outline-dark btn-md text">Agregar</button>
+        <button type="submit" class="btn btn-outline-dark btn-md">Agregar</button>
       </div>
       </div>
       <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 cont table-responsive mt-4">
@@ -141,8 +181,9 @@
           </tbody>
     </table>
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 d-flex justify-content-center mt-3">
-    <button type="submit" class="btn btn-dark btn-md text">Aceptar</button>
+    <button type="submit" class="btn btn-dark btn-md">Aceptar</button>
     </div>
+    
     </div>
  </div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>

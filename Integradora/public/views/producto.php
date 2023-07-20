@@ -197,10 +197,8 @@ $sql = null;
                 <div class="col-xl-2 col-lg-2 col-md-2 col-sm-4 col-4 d-flex justify-content-end">
                 <ul class="navbar-nav">
                 <li class="nav-item">
-                <a href="usuario.php"><img src="../imagenes/usuario.png" width="40" height="40"></a>
-                <a href="carritodecompras.php"><img src="../imagenes/carrito.png" width="40" height="40"></a>
-                <span id="num_cart" class="badge bg-primary"><?php echo $num_cart; ?></span>
-                
+                <a href="usuario.php"><img src="public/imagenes/usuario.png" width="40" height="40"></a>
+                <img src="public/imagenes/carrito.png" width="40" height="40">
                 </div>
               </li>
             </div>    
@@ -212,7 +210,7 @@ $sql = null;
                   ?>
                 <div class="container mt-4 row col-9 d-flex justify-content-center con" >
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 d-flex justify-content-center cons">
-                        <img src="../imagenes/Borra.png" class="img2 img-fluid img-thumbnail">
+                        <img src="public/imagenes/libreta.jpg" class="img2 img-fluid img-thumbnail">
                     </div>
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                         <h1 class="te"><?php echo $res['Nombre']; ?></h1>
@@ -260,7 +258,7 @@ $sql = null;
                 <div class="container  d-flex justify-content-between cons mt-2 col-9 row">
                 <div class="card col-xl-2 col-lg-2 col-md-5 col-sm-5 col-5">
                   <div class="imgcards d-flex justify-content-center">
-                    <img src="public/imagenes/libreta.jpg" class="card-img-top img" alt="...">
+                    <img src="../imagenes/libreta.jpg" class="card-img-top img" alt="...">
                  </div>
                   <div class="card-body">
                     <h5 class="text">Cuaderno de raya scribe 150 hojas</h5>
@@ -272,7 +270,7 @@ $sql = null;
                 </div>
                 <div class="card col-xl-2 col-lg-2 col-md-5 col-sm-5 col-5">
                   <div class="imgcards d-flex justify-content-center">
-                    <img src="public/imagenes/libreta.jpg" class="card-img-top img" alt="...">
+                    <img src="../imagenes/libreta.jpg" class="card-img-top img" alt="...">
                  </div>
                   <div class="card-body">
                     <h5 class="text">Cuaderno de raya scribe 150 hojas</h5>
@@ -284,7 +282,7 @@ $sql = null;
                 </div>
                 <div class="card col-xl-2 col-lg-2 col-md-5 col-sm-5 col-5">
                   <div class="imgcards d-flex justify-content-center">
-                    <img src="public/imagenes/libreta.jpg" class="card-img-top img" alt="...">
+                    <img src="../imagenes/libreta.jpg" class="card-img-top img" alt="...">
                  </div>
                   <div class="card-body">
                     <h5 class="text">Cuaderno de raya scribe 150 hojas</h5>
@@ -296,7 +294,7 @@ $sql = null;
                 </div>
                 <div class="card col-xl-2 col-lg-2 col-md-5 col-sm-5 col-5">
                   <div class="imgcards d-flex justify-content-center">
-                    <img src="public/imagenes/libreta.jpg" class="card-img-top img" alt="...">
+                    <img src="../imagenes/libreta.jpg" class="card-img-top img" alt="...">
                  </div>
                   <div class="card-body">
                     <h5 class="text">Cuaderno de raya scribe 150 hojas</h5>
