@@ -1,19 +1,22 @@
 <?php
+namespace src\Config;
 use PDO;
-use PDOexceptions;
-
-function conectar()
-{
-    $bd = 'mysql:host=localhost; dbname=papemax';
+use PDOException;
+class Conexion{
+    function conectar()
+    {
+    $bd = 'mysql:host=localhost; dbname=papemaxp';
     $usuario = 'root';
-    $contraseña = '';
-    
-
+    $contraseña = '';  
+    $options = [
+        \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
+        \PDO::ATTR_EMULATE_PREPARES=>false
+    ];
     try{
-        $gbd = new PDO($this->$bd, $this->$usuario,$this->$contraseña);
-        echo 'Conexion valida';
+        $gbd = new PDO($bd, $usuario,$contraseña,$options);
+        return $gbd;
     }catch(PDOException $e){
         echo 'Fallo la conexion'. $e->getmessage();
     }
-
+    }
 }
