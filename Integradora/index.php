@@ -21,10 +21,10 @@
             <img src="public/imagenes/zyro-image.png" alt="" id="logo">
             <div id="ContenedorBtns">
                 <div id="ContBtn1">
-                    <button type="submit" href="public/views/login.php" id="ingresar">Ingresar</button>
+                    <a type="submit" href="public/views/login.php" id="ingresar">Ingresar</a>
                 </div>
                 <div id="ContBtn2">
-                    <button type="submit" href="public/views/registro.php" id="registrarse">Registrarse</button>
+                    <a type="submit" href="public/views/registro.php" id="registrarse">Registrarse</a>
                 </div>
             </div>
         </div>
