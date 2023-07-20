@@ -155,7 +155,9 @@
                 <ul class="navbar-nav">
                 <li class="nav-item">
                 <a href="usuario.php"><img src="../imagenes/usuario.png" width="40" height="40"></a>
-                <img src="../imagenes/carrito.png" width="40" height="40">
+                <a href="carritodecompras.php"><img src="../imagenes/carrito.png" width="40" height="40"></a>
+                <span id="num_cart" class="badge bg-primary"><?php echo $num_cart; ?></span>
+                
                 </div>
               </li>
             </div>    
@@ -164,7 +166,7 @@
 </header>
                 <div class="container mt-4 row col-9 d-flex justify-content-center con" >
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 d-flex justify-content-center cons">
-                        <img src="../imagenes/libreta.jpg" class="img2 img-fluid img-thumbnail">
+                        <img src="../imagenes/Borra.png" class="img2 img-fluid img-thumbnail">
                     </div>
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                         <h1 class="te">Cuaderno Scribe de Raya 100 hojas</h1>
