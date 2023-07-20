@@ -1,3 +1,11 @@
+<?php
+require_once '../../src/modelos/consultasproductos.php';
+
+use Src\Config\Productos;
+$productos = new Productos();
+$datos= $productos->todos();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
