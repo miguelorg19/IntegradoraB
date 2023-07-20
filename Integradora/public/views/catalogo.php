@@ -5,7 +5,7 @@ require '../../src/Config/database.php';
 
 session_start();
 
-if(!isset($_SESSION["Nombre"])){
+if(!isset($_SESSION['NOMBRE_USUARIO'])){
 
   header("location:login.php");
 
@@ -114,6 +114,10 @@ $sql = null;
         padding:2vh;
       }
 
+      #B2{
+        display:none;
+      }
+
       
 
       @media(width<768px){
@@ -122,9 +126,22 @@ $sql = null;
           left:-100vh;
           z-index: 1;
         }
+
         #M:checked ~ #lateral{
-        left:0;
+          left:0;
+        }
       }
+
+      @media(width < 767px){
+       
+        #B1{
+          display:none;
+        }
+
+        #B2{
+          width:36vh;
+          display:flex;
+        }
 
       }
 
@@ -155,7 +172,7 @@ $sql = null;
           <img role="button" src="../imagenes/menu.png" id="menu" alt="">
         </label>
         
-        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get" id="Buscador1" class="btn-group">
+        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get" id="B1" class="btn-group">
             <input type="text" placeholder="Buscar" id="Buscador" name="Producto" class="form-control">
               <button class="btn btn-light" type="submit" id="BtnBuscar">
                 <img src="../imagenes/busqueda.png" id="Buscar" alt="">
@@ -189,9 +206,11 @@ $sql = null;
                         <li><a href="catalogo.php">Inicio</a></li>
                         <li><a href="">Filtro</a></li>
                         <li><a href="">Categorias</a></li>
+                        <li><a href="cerrar_sesion.php">Cerrar Sesion</a></li>
+                        <li><a href="detallespedido.php">a</a></li>
                         <br>
                         <li>
-                        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get" id="Buscador2" class="btn-group">
+                        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get" id="B2" class="btn-group">
                           <input type="text" placeholder="Buscar" id="Buscador" name="Producto" class="form-control">
                           <button class="btn btn-light" type="submit" id="BtnBuscar">
                             <img src="../imagenes/busqueda.png" id="Buscar" alt="">
@@ -206,7 +225,7 @@ $sql = null;
         <div class="row">
         <?php foreach($resultado as $res){  
                     ?>
-                    <div class="col-6 col-sm-6 col-md-6 col-lg-4 col-xl-3 producto">
+                    <div class="col-6 col-sm-4 col-md-6 col-lg-4 col-xl-3 producto">
                         <div class="card">
                           <img src="../imagenes/libreta.jpg" class="card-img-top" alt="...">
                           <div class="card-body">

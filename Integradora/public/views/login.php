@@ -15,21 +15,30 @@ $query->execute(array(":correo"=>$correo));
 
 
 
-if($res = $query->fetch(PDO::FETCH_ASSOC)){
+$reg = $query->rowCount();
 
-    if(password_verify($contraseña,$res['Contrasenia'])){
-       
+if($reg = $query->fetchALL(PDO::FETCH_ASSOC)){
+
+    foreach($reg as $usuario){
+
+        if(password_verify($contraseña, $usuario['Contrasenia'])){
             session_start();
-            $_SESSION["ID_USUARIO"] = $res["ID_Usuario"];
-            $_SESSION["NOMBRE_USUARIO"] = $res["Nombre"];
-        
+
+            $_SESSION['ID_USUARIO'] = $usuario['ID_Usuario'];
+            $_SESSION['NOMBRE_USUARIO'] = $usuario['Nombre'];
+            
             header("location:catalogo.php");
-        exit;
+            exit;
+        }
+
     }
 }
 else{
     header("location:login.php");
 }
+    
+
+
 }
 
 ?>

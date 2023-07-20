@@ -4,7 +4,7 @@ require '../../src/Config/database.php';
 
 session_start();
 
-if(!isset($_SESSION["Nombre"])){
+if(!isset($_SESSION['NOMBRE_USUARIO'])){
 
   header("location:login.php");
 

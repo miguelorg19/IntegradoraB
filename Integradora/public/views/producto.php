@@ -4,7 +4,7 @@ require '../../src/Config/database.php';
 
 session_start();
 
-if(!isset($_SESSION["Nombre"])){
+if(!isset($_SESSION['NOMBRE_USUARIO'])){
 
   header("location:login.php");
 
@@ -27,8 +27,8 @@ else{
   header("location:catalogo.php");
 }
 
-$sql = $con->prepare("SELECT * FROM Productos WHERE ID_Productos = :ID");
-$sql->execute(array("ID"=>$id));
+$sql = $con->prepare("SELECT * FROM Productos WHERE ID_Productos = :id");
+$sql->execute(array("id"=>$id));
 $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 
 

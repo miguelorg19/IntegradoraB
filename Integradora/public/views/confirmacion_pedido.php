@@ -8,9 +8,9 @@ $con = $db->conectar();
 session_start();
 
 
-if(!isset($_SESSION["Nombre"])){
+if(!isset($_SESSION['NOMBRE_USUARIO'])){
 
-    header("location:../Login/index.php");
+    header("location:login.php");
   
 }
 

@@ -108,29 +108,6 @@ body{
   }
 
 
-  @media (width <= 800px){
-    #Buscador1{
-      display: none;
-    }
-
-      .main{
-        left: -100vh;
-      }
-
-
-
-      
-
-      #M:checked ~ .main{
-        transition: .5s;
-        width: 100%;
-        left: 0;
-      }
-
-      #Buscador2{
-        width:30vh;
-        display:flex;
-      }
-  }
+  
 
 
