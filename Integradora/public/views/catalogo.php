@@ -26,11 +26,9 @@ $con = $db->conectar();
 
 
 
-$sql = $con->prepare("SELECT ID_Productos, Nombre, Precio_de_Venta FROM Productos INNER JOIN Imagenes on ID_Productos = producto_ID_producto;");
+$sql = $con->prepare("SELECT ID_Productos, Nombre, Precio_de_Venta, Imagen FROM Productos INNER JOIN Imagenes on ID_Productos = producto_ID_producto;");
 $sql->execute();
 $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
-$productimg = $resultado['imagen'];
-$img = $imagenes->obtenerimag($productimg);
 
 if(isset($_GET['Producto'])){
   $nombre = $_GET['Producto'];
@@ -90,8 +88,21 @@ $sql = null;
       .details{
         width:100%;
       }
+      .img{
+            width:9.2rem;
+            height:9.2rem;
+            filter: brightness(1.1);
+            mix-blend-mode: multiply;
+            margin: 0 auto;
+            margin-top:.5rem;
+        }
+      .ti{
+            font-size: .9rem;
+            text-color:gray;
+            font-family: 'Inter', sans-serif;
+            font-weight: bold;
 
-      
+      }
 
      
 
@@ -232,9 +243,12 @@ $sql = null;
                     ?>
                     <div class="col-6 col-sm-4 col-md-6 col-lg-4 col-xl-3 producto">
                         <div class="card">
-                          <img src="<?php echo $img ?>" class="card-img-top" alt="...">
+                        <?php
+                          $productimg = $res['Imagen']; 
+                          $img = $imagenes->obtenerimag($productimg); ?>
+                          <img src="<?php echo $img ?>" class="card-img-top img" alt="...">
                           <div class="card-body">
-                            <h5 class="card-title"><?php echo $res['Nombre']; ?></h5>
+                            <h5 class="card-title ti"><?php echo $res['Nombre']; ?></h5>
                             <p class="card-text"><?php echo "$" . $res['Precio_de_Venta']; ?></p>
                             <a href="producto.php?id=<?php echo $res['ID_Productos']; ?>" class="btn btn-primary details">Detalles</a>
 

@@ -2,6 +2,12 @@
 
 require '../../src/Config/conexion.php';
 use Src\Config\Conexion;
+require_once '../../src/Modelos/imagenes.php';
+require_once '../../src/Modelos/consultasproductos.php';
+use Src\Config\Imagenes;
+use Src\Config\Productos;
+$productos = new Productos();
+$imagenes = new Imagenes();
 session_start();
 
 if(!isset($_SESSION['NOMBRE_USUARIO'])){
@@ -26,17 +32,15 @@ $id = $_GET['id'];
 else{
   header("location:catalogo.php");
 }
-
-$sql = $con->prepare("SELECT * FROM Productos WHERE ID_Productos = :id");
+$sql = $con->prepare("SELECT p.ID_Productos,p.Nombre, p.Descripcion AS 'Desc', p.Existencias, p.Precio_de_Venta, i.Imagen, p.Categorias_ID_Categorias
+FROM Productos p
+INNER JOIN IMAGENES i ON p.ID_Productos = i.producto_ID_producto
+WHERE p.ID_Productos = :id");
 $sql->execute(array("id"=>$id));
 $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 
-
-
 $con = null;
 $sql = null;
-
-
 ?>
 
 <!DOCTYPE html>
@@ -55,6 +59,9 @@ $sql = null;
     <title>Producto</title>
 
     <style>
+        .todo{
+          height: 6rem;
+        }
         .bus1{
             border-radius:.5rem 0rem 0rem .5rem;
             border: none;
@@ -84,8 +91,8 @@ $sql = null;
             mix-blend-mode: multiply;
         }
         .img2{
-            width: 100%;
-            height:100%;
+            width: 10rem;
+            height:10rem;
             filter: brightness(1.1);
             mix-blend-mode: multiply;
         }
@@ -110,7 +117,7 @@ $sql = null;
         }
         .text{
             font-family: 'Noto Sans JP', sans-serif;
-            font-size: .8rem;
+            font-size: 80%;
             font-weight: bold;
         }
         .tex{
@@ -146,6 +153,7 @@ $sql = null;
             font-size: .9rem;
             font-family: 'Inter', sans-serif;
         }
+
     </style>
 
 </head>
@@ -197,8 +205,8 @@ $sql = null;
                 <div class="col-xl-2 col-lg-2 col-md-2 col-sm-4 col-4 d-flex justify-content-end">
                 <ul class="navbar-nav">
                 <li class="nav-item">
-                <a href="usuario.php"><img src="public/imagenes/usuario.png" width="40" height="40"></a>
-                <img src="public/imagenes/carrito.png" width="40" height="40">
+                <a href="usuario.php"><img src="../imagenes/usuario.png" width="40" height="40"></a>
+                <a href="carritodecompras.php"><img src="../imagenes/carrito.png" width="40" height="40"></a>
                 </div>
               </li>
             </div>    
@@ -210,7 +218,11 @@ $sql = null;
                   ?>
                 <div class="container mt-4 row col-9 d-flex justify-content-center con" >
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 d-flex justify-content-center cons">
-                        <img src="public/imagenes/libreta.jpg" class="img2 img-fluid img-thumbnail">
+                    <?php $productimg = $res['Imagen']; 
+                          $img = $imagenes->obtenerimag($productimg); 
+                          $cat = $res['Categorias_ID_Categorias'];
+                          ?>
+                        <img src="<?php echo $img ?>" class="img img-fluid img-thumbnail">
                     </div>
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                         <h1 class="te"><?php echo $res['Nombre']; ?></h1>
@@ -249,64 +261,37 @@ $sql = null;
 
         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 mt-3">
         <h1 class="te">Detalles</h1>
-        <p class="texd"><?php echo $res['Descripcion']; ?></p>
+        <p class="texd"><?php echo $res['Desc']; ?></p>
         </div>
         </div>
-                </div>
-                  <?php } ?>
-              <div class="container d-flex justify-content-center mt-3 col-9">
-                <h1 class="texxx text-center">Productos recomendados</h1></div>
-                <div class="container  d-flex justify-content-between cons mt-2 col-9 row">
-                <div class="card col-xl-2 col-lg-2 col-md-5 col-sm-5 col-5">
-                  <div class="imgcards d-flex justify-content-center">
-                    <img src="../imagenes/libreta.jpg" class="card-img-top img" alt="...">
-                 </div>
-                  <div class="card-body">
-                    <h5 class="text">Cuaderno de raya scribe 150 hojas</h5>
-                    <h5 class="texx">$27.50</h5>
-                    <div class="d-flex justify-content-center row">
-                    <button type="submit" class="btn btn-dark btn-md tex col-12">Comprar</button>
-                    </div>
-                  </div>
-                </div>
-                <div class="card col-xl-2 col-lg-2 col-md-5 col-sm-5 col-5">
-                  <div class="imgcards d-flex justify-content-center">
-                    <img src="../imagenes/libreta.jpg" class="card-img-top img" alt="...">
-                 </div>
-                  <div class="card-body">
-                    <h5 class="text">Cuaderno de raya scribe 150 hojas</h5>
-                    <h5 class="texx">$27.50</h5>
-                    <div class="d-flex justify-content-center row">
-                    <button type="submit" class="btn btn-dark btn-md tex col-12">Comprar</button>
-                    </div>
-                  </div>
-                </div>
-                <div class="card col-xl-2 col-lg-2 col-md-5 col-sm-5 col-5">
-                  <div class="imgcards d-flex justify-content-center">
-                    <img src="../imagenes/libreta.jpg" class="card-img-top img" alt="...">
-                 </div>
-                  <div class="card-body">
-                    <h5 class="text">Cuaderno de raya scribe 150 hojas</h5>
-                    <h5 class="texx">$27.50</h5>
-                    <div class="d-flex justify-content-center row">
-                    <button type="submit" class="btn btn-dark btn-md tex col-12">Comprar</button>
-                    </div>
-                  </div>
-                </div>
-                <div class="card col-xl-2 col-lg-2 col-md-5 col-sm-5 col-5">
-                  <div class="imgcards d-flex justify-content-center">
-                    <img src="../imagenes/libreta.jpg" class="card-img-top img" alt="...">
-                 </div>
-                  <div class="card-body">
-                    <h5 class="text">Cuaderno de raya scribe 150 hojas</h5>
-                    <h5 class="texx">$27.50</h5>
-                    <div class="d-flex justify-content-center row">
-                    <button type="submit" class="btn btn-dark btn-md tex col-12">Comprar</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
+        <?php }?>
 
+                </div>
+                <div class="container d-flex justify-content-center mt-3 col-9">
+                  <h1 class="texxx text-center">Productos recomendados</h1>
+                </div>
+                <div class="container d-flex justify-content-between cons mt-2 col-9 row">
+                  <?php foreach ($productos->cat(rand(1, 5)) as $prod) { ?>
+                    <div class="card col-xl-2 col-lg-2 col-md-5 col-sm-5 col-5">
+                      <div class="imgcards d-flex justify-content-center">
+                        <?php
+                        $productimg = $prod['Imagen'];
+                        $img = $imagenes->obtenerimag($productimg);
+                        ?>
+                        <img src="<?php echo $img ?>" class="card-img-top img" alt="...">
+                      </div>
+                      <div class="card-body">
+                        <div class ="d-flex justify-content-center col-12 row todo">
+                        <h5 class="text"><?php echo $prod['Nombre'] ?></h5>
+                        <h5 class="texx">$<?php echo $prod['Precio'] ?></h5>
+                      </div>
+                        <div class="d-flex justify-content-center">
+                          <a type="submit" href="producto.php? id=<?php echo $prod['ID_Productos']?>" class="btn btn-dark btn-md tex col-12">Comprar</a>
+                        </div>
+                      </div>
+                    </div>
+                  <?php } ?>
+                </div>
                 <script type="text/javascript">                    
                       function addProduct(id){
                       const elemento = document.getElementById('num_cart');
