@@ -1,7 +1,11 @@
 <?php
 
+require '../../src/Config/conexion.php';
+require_once '../../src/Modelos/imagenes.php';
+use Src\Config\Conexion;
+use Src\Config\Imagenes;
 
-require '../../src/Config/database.php';
+$imagenes = new Imagenes();
 
 session_start();
 
@@ -22,10 +26,11 @@ $con = $db->conectar();
 
 
 
-$sql = $con->prepare("SELECT ID_Productos, Nombre, Precio_de_Venta FROM Productos");
+$sql = $con->prepare("SELECT ID_Productos, Nombre, Precio_de_Venta FROM Productos INNER JOIN Imagenes on ID_Productos = producto_ID_producto;");
 $sql->execute();
 $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
-
+$productimg = $resultado['imagen'];
+$img = $imagenes->obtenerimag($productimg);
 
 if(isset($_GET['Producto'])){
   $nombre = $_GET['Producto'];
@@ -203,7 +208,7 @@ $sql = null;
         <p id="Jacky">Jacky Papeleria</p>
         <div id="Nav-Items">
                     <ul>
-                        <li><a href="catalogo.php">Inicio</a></li>
+                        <li><a href="papemaxinicio.php">Inicio</a></li>
                         <li><a href="">Filtro</a></li>
                         <li><a href="">Categorias</a></li>
                         <li><a href="cerrar_sesion.php">Cerrar Sesion</a></li>
@@ -227,7 +232,7 @@ $sql = null;
                     ?>
                     <div class="col-6 col-sm-4 col-md-6 col-lg-4 col-xl-3 producto">
                         <div class="card">
-                          <img src="../imagenes/libreta.jpg" class="card-img-top" alt="...">
+                          <img src="<?php echo $img ?>" class="card-img-top" alt="...">
                           <div class="card-body">
                             <h5 class="card-title"><?php echo $res['Nombre']; ?></h5>
                             <p class="card-text"><?php echo "$" . $res['Precio_de_Venta']; ?></p>

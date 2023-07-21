@@ -1,7 +1,7 @@
 <?php
 
-require '../../src/Config/database.php';
-
+require '../../src/Config/conexion.php';
+use Src\Config\Conexion;
 session_start();
 
 if(!isset($_SESSION['NOMBRE_USUARIO'])){
@@ -215,6 +215,7 @@ $sql = null;
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                         <h1 class="te"><?php echo $res['Nombre']; ?></h1>
                         <p class="texp">Precio del producto</p>
+                        <p class="tex">Existencias: <?php echo $res['Existencias']?></p>
                         <p class="prec"><?php echo "$ ".$res['Precio_de_Venta']; ?></p>
                         <div class="mt-4 row ">
                         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-4 mt-1">

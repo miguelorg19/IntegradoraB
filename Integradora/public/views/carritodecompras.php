@@ -1,7 +1,7 @@
 <?php
 
-require '../../src/Config/database.php';
-
+require '../../src/Config/conexion.php';
+use Src\Config\Conexion;
 session_start();
 
 if(!isset($_SESSION['NOMBRE_USUARIO'])){
