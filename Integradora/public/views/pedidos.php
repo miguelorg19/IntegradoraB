@@ -1,3 +1,11 @@
+<?php
+require_once '../../src/modelos/consultaspedidos.php';
+
+use Src\Config\Pedidos;
+$productos = new Pedidos();
+$datos = $productos->orden();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -97,16 +105,19 @@
             </tr>
           </thead>
           <tbody>
+          <?php foreach($datos as $productos) {
+             ?>
             <tr>
-              <th scope="row">1</th>
-              <td>22/07/2023</td>
-              <td>$220.60</td>
-              <td>Pendiente</td>
+              <th scope="row"><?php echo $productos['Id_Orden_Venta'];?></th>
+              <td><?php echo $productos['Fecha'];?></td>
+              <td>$<?php echo $productos['Costo_Total'];?></td>
+              <td><?php echo $productos['Estatus'];?></td>
               <td>
-              <a class="btn btn-dark btn-sm" href="detallespedido.php">Ver pedido</a>
+              <a class="btn btn-dark btn-sm" href="detallespedido.php?id=<?php echo $productos['Id_Orden_Venta']?>">Ver pedido</a>
               </td>
               <td><button class="btn btn-success btn-sm">Completado</button> <button class="btn btn-danger btn-sm btn2">Cancelar pedido</button></td>
             </tr>
+            <?php } ?>
           </tbody>
     </table>
     </form>

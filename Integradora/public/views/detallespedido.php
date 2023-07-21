@@ -1,3 +1,13 @@
+<?php
+require_once '../../src/modelos/consultaspedidos.php';
+require_once '../../src/modelos/imagenes.php';
+use Src\Config\Pedidos;
+use Src\Config\Imagenes;
+$productos = new Pedidos();
+$imagenes = new Imagenes();
+$id = $_GET['id'];
+$datos = $productos->detallesorden($id);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,8 +33,8 @@
             box-shadow: 0px .3rem .3rem gray;
         }
         .imgs{
-            width:8.9rem;
-            height:8.9rem;
+            width:9.2rem;
+            height:9.2rem;
             filter: brightness(1.1);
             mix-blend-mode: multiply;
         }
@@ -98,27 +108,28 @@
         </nav>
         </header>
         <div class="container col-8 mt-4 row conss d-flex justify-content-center">
-            <h1 class="text">Detalles del pedido</h1>
-            <hr>
-            <div class="col-xl-4 col-lg-4 col-md-8 col-sm-12 col-12 conn">
-                <img src="../imagenes/libreta.jpg" class="imgs img-thumbnail"></img>
+                <h1 class="text">Detalles del pedido</h1>
+                <hr>
+                <?php 
+                foreach ($datos as $detalles) { ?>
+                    <div class="col-xl-4 col-lg-4 col-md-8 col-sm-12 col-12 conn">
+                        <?php                 $productimg = $detalles['imagen'];
+                        $img = $imagenes->obtenerimag($productimg)?>
+                        <img src='<?php echo $img?>' class="imgs img-thumbnail">
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12 col-12 conn2">
+                        <h3 class="te"><?php echo $detalles['Nombre'] ?></h3>
+                        <h3 class="te"><?php echo $detalles['Cantidad'] ?></h3>
+                        <?php
+                        $productId = $detalles['ID_productos'];
+                        $idVe = $detalles['Id_Detalle_orden_Venta'];
+                        $total = $productos->tot($idVe, $productId);
+                        ?>
+                        <h3 class="te">$<?php echo $total ?></h3>
+                    </div>
+                    <hr class="mt-2">
+                <?php } ?>
             </div>
-            <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12 col-12 conn2">
-                <h3 class="te">Cuaderno escribe Raya 100 hojas</h3>
-                <h3 class="te">Cantidad:3</h3>
-                <h3 class="te">Total:$50</h3>
-            </div>
-            <hr class="mt-2">
-            <div class="col-xl-4 col-lg-4 col-md-8 col-sm-12 col-12 conn">
-                <img src="../imagenes/borra.png" class="imgs img-thumbnail"></img>
-            </div>
-            <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12 col-12 conn2">
-                <h3 class="te">Cuaderno escribe Raya 100 hojas</h3>
-                <h3 class="te">Cantidad:3</h3>
-                <h3 class="te">Total:$50</h3>
-            </div>
-            <hr class="mt-2">
-        </div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
 </body>
