@@ -1,6 +1,7 @@
 <?php
 
-require '../../src/Config/database.php';
+require '../../src/Config/conexion.php';
+use src\Config\Conexion;
 $db = new Conexion();
 $con = $db->conectar();
 

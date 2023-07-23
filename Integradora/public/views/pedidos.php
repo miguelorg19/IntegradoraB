@@ -1,7 +1,7 @@
 <?php
 require_once '../../src/modelos/consultaspedidos.php';
 
-use Src\Config\Pedidos;
+use src\Config\Pedidos;
 $productos = new Pedidos();
 $datos = $productos->orden();
 ?>

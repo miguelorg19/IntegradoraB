@@ -1,5 +1,5 @@
 <?php
-require '../../src/Modelos/graficadiaria.php';
+require_once '../../src/Modelos/graficadiaria.php';
 
 $graficadiaria = new \src\Config\Graficadiaria();
 setlocale(LC_TIME, 'es_ES.UTF-8');

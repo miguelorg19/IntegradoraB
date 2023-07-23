@@ -1,6 +1,6 @@
 <?php 
-require_once '../../src/modelos/consultasproductos.php';
-use Src\Config\Productos;
+require_once '../../src/Modelos/consultasproductos.php';
+use src\Config\Productos;
 $cons = new Productos(); 
 $id_producto = $_POST['id_producto'];
 $nombre = $_POST['nombre'];

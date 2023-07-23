@@ -1,7 +1,7 @@
 <?php
 
-require '../../src/Config/database.php';
-
+require_once '../../src/Config/conexion.php';
+use src\Config\Conexion;
 session_start();
 
 if(!isset($_SESSION['NOMBRE_USUARIO'])){
@@ -27,7 +27,7 @@ $total = 0;
 
 if($productos != null){
     foreach($productos as $clave => $cantidad){
-        $sql = $con->prepare("SELECT ID_Productos, Nombre, Precio_de_Venta, $cantidad AS cantidad FROM Productos WHERE ID_Productos = ?");
+        $sql = $con->prepare("SELECT ID_Productos, Nombre, Precio_de_Venta, $cantidad AS cantidad FROM productos WHERE ID_Productos = ?");
         $sql->execute([$clave]);
         $lista_productos[] = $sql->fetch(PDO::FETCH_ASSOC);
     }

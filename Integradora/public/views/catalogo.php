@@ -1,9 +1,10 @@
 <?php
 
-require '../../src/Config/conexion.php';
+require_once '../../src/Config/conexion.php';
 require_once '../../src/Modelos/imagenes.php';
 use Src\Config\Conexion;
 use Src\Config\Imagenes;
+
 
 $imagenes = new Imagenes();
 
@@ -26,13 +27,13 @@ $con = $db->conectar();
 
 
 
-$sql = $con->prepare("SELECT ID_Productos, Nombre, Precio_de_Venta, Imagen FROM Productos INNER JOIN Imagenes on ID_Productos = producto_ID_producto;");
+$sql = $con->prepare("SELECT ID_Productos, Nombre, Precio_de_Venta, Imagen FROM productos INNER JOIN imagenes on ID_Productos = producto_ID_producto;");
 $sql->execute();
 $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 
 if(isset($_GET['Producto'])){
   $nombre = $_GET['Producto'];
-$query= "SELECT ID_Productos, Nombre, Precio_de_Venta FROM Productos WHERE Nombre LIKE '%".$nombre."%'";
+$query= "SELECT ID_Productos, Nombre, Precio_de_Venta FROM productos WHERE Nombre LIKE '%".$nombre."%'";
 
 $sql = $con->prepare($query);
 $sql->execute();

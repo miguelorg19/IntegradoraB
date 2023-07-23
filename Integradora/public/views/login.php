@@ -1,7 +1,7 @@
 <?php
 
 require '../../src/Config/conexion.php';
-use Src\Config\Conexion;
+use src\Config\Conexion;
 $db = new Conexion();
 $con = $db->conectar();
 
@@ -10,7 +10,7 @@ if(isset($_POST['correo']) && isset($_POST['contraseña'])){
 $correo = $_POST['correo'];
 $contraseña = $_POST['contraseña'];
 
-$query = $con->prepare("SELECT * FROM Usuarios WHERE Correo = :correo LIMIT 1");
+$query = $con->prepare("SELECT * FROM usuarios WHERE Correo = :correo LIMIT 1");
 
 $query->execute(array(":correo"=>$correo));
 

@@ -1,11 +1,11 @@
 <?php
 
-require '../../src/Config/conexion.php';
-use Src\Config\Conexion;
+require_once '../../src/Config/conexion.php';
 require_once '../../src/Modelos/imagenes.php';
 require_once '../../src/Modelos/consultasproductos.php';
-use Src\Config\Imagenes;
-use Src\Config\Productos;
+use src\Config\Conexion;
+use src\Config\Imagenes;
+use src\Config\Productos;
 $productos = new Productos();
 $imagenes = new Imagenes();
 session_start();
@@ -33,8 +33,8 @@ else{
   header("location:catalogo.php");
 }
 $sql = $con->prepare("SELECT p.ID_Productos,p.Nombre, p.Descripcion AS 'Desc', p.Existencias, p.Precio_de_Venta, i.Imagen, p.Categorias_ID_Categorias
-FROM Productos p
-INNER JOIN IMAGENES i ON p.ID_Productos = i.producto_ID_producto
+FROM productos p
+INNER JOIN imagenes i ON p.ID_Productos = i.producto_ID_producto
 WHERE p.ID_Productos = :id");
 $sql->execute(array("id"=>$id));
 $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
