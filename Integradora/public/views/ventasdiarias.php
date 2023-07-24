@@ -1,7 +1,8 @@
 <?php
-require_once(__DIR__ .'../../src/Modelos/graficadiaria.php');
+use src\Modelos\Graficadiaria;
+require_once (__DIR__ . '/../../src/Modelos/graficadiaria.php');
 
-$graficadiaria = new \src\Config\Graficadiaria();
+$graficadiaria = new Graficadiaria();
 setlocale(LC_TIME, 'es_ES.UTF-8');
 date_default_timezone_set('America/Monterrey');
 $fechaConsulta = date('Y-m-d');
@@ -11,14 +12,14 @@ $datosSemana = $graficadiaria->obtenerGananciasPorSemana();
 
 $labels = array();
 $gananciasSemana = array();
-
+$fechaConsulta = date('Y-m-d');
 $nombreDias = array(
     'Monday' => 'Lunes',
     'Tuesday' => 'Martes',
-    'Wednesday' => 'Miércoles',
+    'Wednesday' => 'Miercoles',
     'Thursday' => 'Jueves',
     'Friday' => 'Viernes',
-    'Saturday' => 'Sábado',
+    'Saturday' => 'Sabado',
     'Sunday' => 'Domingo'
 );
 
