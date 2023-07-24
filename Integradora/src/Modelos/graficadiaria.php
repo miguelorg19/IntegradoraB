@@ -3,6 +3,7 @@ namespace src\Modelos;
 use src\Config\Conexion;
 require __DIR__ . '/../Config/conexion.php';
 require __DIR__ . '/../../vendor/autoload.php';
+require_once(__DIR__ . '/../../public/views/ventasdiarias.php');
 use PDO;
 use PDOException;
 
