@@ -1,7 +1,13 @@
 <?php
 
 require_once '../../src/Config/conexion.php';
-use src\Config\Conexion;
+require_once '../../src/Modelos/imagenes.php';
+use Src\Config\Conexion;
+use Src\Config\Imagenes;
+
+
+$imagenes = new Imagenes();
+
 session_start();
 
 if(!isset($_SESSION['NOMBRE_USUARIO'])){
@@ -26,7 +32,7 @@ $total = 0;
 
 if($productos != null){
     foreach($productos as $clave => $cantidad){
-        $sql = $con->prepare("SELECT ID_Productos, Nombre, Precio_de_Venta, $cantidad AS cantidad FROM productos WHERE ID_Productos = ?");
+        $sql = $con->prepare("SELECT ID_Productos, Nombre, Precio_de_Venta, $cantidad AS cantidad, Imagen FROM productos INNER JOIN imagenes on ID_Productos = producto_ID_producto WHERE ID_Productos = ?");
         $sql->execute([$clave]);
         $lista_productos[] = $sql->fetch(PDO::FETCH_ASSOC);
     }
@@ -409,6 +415,9 @@ if($productos != null){
             <div class="row">
                 <?php
                     foreach($lista_productos as $p){
+                        
+                        $productimg = $p['Imagen']; 
+                        $img = $imagenes->obtenerimag($productimg); 
                         $_id = $p['ID_Productos'];
                         $nombre = $p['Nombre'];
                         $precio = $p['Precio_de_Venta'];
@@ -419,26 +428,33 @@ if($productos != null){
                 ?>
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="producto">
-                        <img src="../imagenes/Borra.png" alt="">
+                        <img src="<?php echo $img; ?>" alt="">
                         <div class="detalles">
                             <p class="nombre"><?php echo $nombre; ?></p>
                             <p class="precio">Precio: $<?php echo $precio; ?></p>
                             <p class="">Cantidad:</p>
                             
                                 <div class="input-group cantidad">
-                                    <button class="btn btn-outline-danger" onclick="disminuir(<?php echo $_id; ?>)"> &minus;</button>
+                                    <button class="btn btn-outline-danger" onclick="disminuir(<?php echo $_id; ?>)">&minus;</button>
                                     <input class="form-control text-center" onchange="actualizarCantidad(this.value, <?php echo $_id; ?>)" type="number" min="1" value="<?php echo $_SESSION['carrito']['productos'][$_id]; ?>" id="cant_<?php echo $_id; ?>">
-                                    <button class="btn btn-outline-success"  onclick="aumentar(<?php echo $_id; ?>)"> &plus;</button>
-                                    <button data-bs-id="<?php echo $_id; ?>" data-bs-toggle="modal" data-bs-target="#eliminarModal" id="btn-eliminar" class="btn btn-outline-dark eliminar"><img src="../imagenes/compartimiento.png" alt=""></button>
+                                    <button class="btn btn-outline-success"  onclick="aumentar(<?php echo $_id; ?>)">&plus;</button>
+                                    <button data-bs-id="<?php echo $_id; ?>" data-bs-toggle="modal" data-bs-target="#eliminarModal"  class="btn btn-outline-dark eliminar"><img src="../imagenes/compartimiento.png" alt=""></button>
                                 </div>
                         </div>
                         <div class="subtotal">
                             <h4>Subtotal</h4>
-                            <div id="sub_<?php echo $_id; ?>"><?php echo "$".$subtotal; ?></div>
+                            <div id="sub_<?php echo $_id; ?>" name="subtotal[]"><?php echo "$".number_format($subtotal,2,'.',','); ?></div>
                         </div>
 
                     </div>
                 </div>
+
+        
+                
+        <?php  } ?>
+
+            </div>
+        </div>
 
         <div class="modal fade" id="eliminarModal" tabindex="-1" aria-labelledby="eliminarModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -452,14 +468,9 @@ if($productos != null){
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" id="btn-eliminar" class="btn btn-danger" onclick="eliminar(<?php echo $_id; ?>)">Eliminar</button>
+                    <button id="btn-eliminar" type="button" class="btn btn-danger" onclick="eliminar()">Eliminar</button>
                 </div>
                 </div>
-            </div>
-        </div>
-                
-        <?php  } ?>
-
             </div>
         </div>
 
@@ -472,7 +483,7 @@ if($productos != null){
                 <p>Cantidad De Producto(s): <?php echo $num_cart; ?></p>
                 <hr/>
                 <div id="TC">
-                    <p>Total: $<?php echo $total; ?></p>
+                    <p id="Total">$<?php echo number_format($total,2,'.',','); ?></p>
                     <a href="confirmacion.php" class="btn btn-primary">Continuar</a>
                 </div>
             </div>
@@ -482,10 +493,21 @@ if($productos != null){
 </div>
 
     <script>
+                let eliminarModal = document.getElementById('eliminarModal')
+                eliminarModal.addEventListener('show.bs.modal', function(event){
+                    let boton = event.relatedTarget
+                    let id = button.getAttribute('data-bs-id')
+                    let botonEliminar = eliminarModal.querySelector('.modal-footer #btn-eliminar')
+                    botonEliminar.value = id
 
+                })
                     
 
-                    function eliminar(id){
+                    function eliminar(){
+                        let boton = document.getElementById("btn-eliminar")
+                        let id = boton.value
+
+
                       let url = 'actualizar_carrito.php';
                       let formData = new FormData()
                       formData.append('id',id)
@@ -519,9 +541,32 @@ if($productos != null){
                       }).then(response => response.json())
                       .then(data => {
                         if(data.ok){
+
                             let subt = document.getElementById('sub_'+id);
-                          subt.innerHTML = data.sub;
-                          location.reload();
+                            let subtotal = data.sub;
+                            subtotal = new Intl.NumberFormat('es-MX', {
+                                minimumFractionDigits: 2
+                            }).format(subtotal)
+
+                            subt.innerHTML = "$" + subtotal;
+
+                            let PrecioTotal = 0.00
+                            let Lista  = document.getElementsByName('subtotal[]')
+
+                            for (let i = 0; i < Lista.length; i++) {
+                                 PrecioTotal += parseFloat(Lista[i].innerHTML.replace(/[$,]/g, ''))
+                                
+                            }
+
+                            PrecioTotal = new Intl.NumberFormat('es-MX', {
+                                minimumFractionDigits: 2
+                            }).format(PrecioTotal)
+                            
+
+                            document.getElementById('Total').innerHTML = "$" + PrecioTotal;
+
+                          
+
                         }
                       })
                     }              
