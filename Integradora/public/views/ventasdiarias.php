@@ -1,11 +1,11 @@
 <?php
-use src\Modelos\Graficadiaria;
+
 require_once (__DIR__ . '/../../src/Modelos/graficadiaria.php');
 
-$graficadiaria = new Graficadiaria();
+$graficadiaria = new src\Modelos\Graficadiaria();
 setlocale(LC_TIME, 'es_ES.UTF-8');
 date_default_timezone_set('America/Monterrey');
-$fechaConsulta = date('Y-m-d');
+
 $fecha_actual = date('Y-m-d');
 $dia_actual_en_espanol = $graficadiaria->obtenerDiaSemanaEnEspanol($fecha_actual);
 $datosSemana = $graficadiaria->obtenerGananciasPorSemana();
@@ -23,7 +23,6 @@ $nombreDias = array(
     'Sunday' => 'Domingo'
 );
 
-
 foreach ($datosSemana as $fecha => $datos) {
     $nombreDia = date('l', strtotime($fecha));
     $nombreDiaEspanol = $nombreDias[$nombreDia];
@@ -34,7 +33,7 @@ foreach ($datosSemana as $fecha => $datos) {
 
 $resultados = $graficadiaria->obtenerGananciasPorDia($fechaConsulta);
 
-// Obtiene las órdenes de venta
+// Obtiene las Ã³rdenes de venta
 $ordenesVenta = $graficadiaria->obtenerOrdenesVenta($fechaConsulta);
 
 if ($resultados) {
@@ -55,10 +54,6 @@ if ($resultados) {
     $gananciaTotal = 0;
 }
 ?>
-
-
-
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -207,16 +202,14 @@ if ($resultados) {
 
 
 
-    </div>
-
 
 
 
     <script>
-    // Obtén el elemento canvas
+  // Obtiene el elemento canvas
     var canvas = document.getElementById("grafica");
 
-    // Crea la gráfica
+    // Crea la grÃ¡fica
     var ctx = canvas.getContext("2d");
     var chart = new Chart(ctx, {
         type: "bar",

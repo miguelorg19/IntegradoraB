@@ -1,5 +1,5 @@
 <?php
-require_once '../../src/modelos/consultasproductos.php';
+require_once '../../src/Modelos/consultasproductos.php';
 
 use Src\Config\Productos;
 $productos = new Productos();
