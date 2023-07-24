@@ -1,3 +1,12 @@
+<?php
+require_once __DIR__ . '/../../src/Modelos/consultasventas.php';
+require_once __DIR__ . '/../../src/Modelos/registroven.php';
+use src\Config\Compras;
+$productos = new Compras();
+if (isset($_GET['categoria'])) {
+  $categoriaSeleccionada = $_GET['categoria'];
+  $resultadoConsulta = $productos->consultarprod($categoriaSeleccionada);}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -97,23 +106,30 @@
       <h1 class="text">Registro Ventas</h1>
       <br/>
       <h5 class="te">Categoria</h5>
-      <div class="input-group mt-3">
-      <span class="input-group-text tex" id="inputGroup-sizing-default">Categoria</span>
-      <select class="form-select form-select-md tex" aria-label=".form-select-md example">
+      <div class="input-group mt-3 ">
+      <form action="registroventas.php" class="input-group">
+      <select class="form-select form-select-md tex" aria-label=".form-select-md example" name="categoria" id="categoria">
         <option selected>Seleccione</option>
-        <option value="1">Escritura</option>
-        <option value="2">Papel</option>
-        <option value="3">Cuadernos</option>
-        <option value="4">Archivo</option>
-        <option value="5">Escolares</option>
+        <option value="Escritura">Escritura</option>
+        <option value="Papel">Papel</option>
+        <option value="Cuadernos">Cuadernos</option>
+        <option value="Archivo">Archivo</option>
+        <option value="Escolares">Escolares</option>
       </select>
+      <button type="submit" class="input-group-text tex" id="inputGroup-sizing-default">Buscar</button>
+      </form>
       </div>
        <br/>
       <h5 class="te">Producto</h5>
-      <div class="input-group mb-3 mt-3">
-        <input type="text" class="form-control tex" placeholder="Producto" aria-label="Recipient's username" aria-describedby="button-addon2">
-        <button class="btn btn-outline-secondary tex" type="button" id="button-addon2">Buscar</button>
-      </div>
+       <div class="input-group mb-3 mt-3">
+       <select class="form-select form-select-md tex" aria-label=".form-select-md example" id="producto">
+        <option selected>Seleccione el producto</option>
+                <?php 
+                foreach ($resultadoConsulta as $producto) { ?>
+                   <option value="<?php $producto['Prod']?>"><?php echo $producto['Prod'].'  '.$producto['Color'] ?></option>
+                <?php } ?>
+        </select>
+    </div>
       <div class="mb-3">
         <h5>Descripcion del producto</h5>
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled></textarea>
@@ -122,31 +138,31 @@
       <div>
       <input type="number" class="form-control tex" placeholder="Cantidad" aria-label="Recipient's username" aria-describedby="button-addon2">
       </div>
-      <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 cont table-responsive mt-4">
-      <table class="table table-hover tex">
-          <thead>
-            <tr>
-              <th scope="col">#Producto</th>
-              <th scope="col">Nombre del producto </th>
-              <th scope="col">Fecha</th>
-              <th scope="col">Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Cuaderno</td>
-              <td>22/07/2023</td>
-              <td>$220.50</td>
-            </tr>
-          </tbody>
-    </table>
-    </div>
       <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 d-flex justify-content-center mt-3">
         <button type="submit" class="btn btn-outline-dark btn-md tex">Agregar</button>
       </div>
       </div>
       <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 cont mt-4">
+                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 cont table-responsive mt-4">
+                <table class="table table-hover tex">
+                    <thead>
+                      <tr>
+                        <th scope="col">#Producto</th>
+                        <th scope="col">Nombre del producto </th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>Cuaderno</td>
+                        <td>22/07/2023</td>
+                        <td>$220.50</td>
+                      </tr>
+                    </tbody>
+              </table>
+              </div>
                 <div class="mt-3">
                 <h6 class="te">Metodo de pago:</h6>
                 <input type="text" class="form-control tex" placeholder="Efectivo" aria-label="Recipient's username" aria-describedby="button-addon2" disabled>
@@ -166,7 +182,7 @@
                 </div>
                 </br>
                 <div class="d-flex flex-row-reverse col-12">
-                    <a href="#" class="btn btn-dark tex">Ver mis ventas diarias</a>
+                    <a href="ventasdiarias.php" class="btn btn-dark tex">Ver mis ventas diarias</a>
                 </div>
     </div>
  </div>
