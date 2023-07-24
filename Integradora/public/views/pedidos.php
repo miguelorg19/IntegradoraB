@@ -1,5 +1,5 @@
 <?php
-require_once '../../src/modelos/consultaspedidos.php';
+require_once __DIR__ . '/../../src/Modelos/consultaspedidos.php';
 
 use src\Config\Pedidos;
 $productos = new Pedidos();

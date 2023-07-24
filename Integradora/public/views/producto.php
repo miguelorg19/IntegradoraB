@@ -2,7 +2,7 @@
 
 require_once '../../src/Config/conexion.php';
 require_once '../../src/Modelos/imagenes.php';
-require_once '../../src/Modelos/consultasproductos.php';
+require_once __DIR__ . '/../../src/Modelos/consultasproductos.php';
 use src\Config\Conexion;
 use src\Config\Imagenes;
 use src\Config\Productos;

@@ -1,6 +1,6 @@
 <?php
 namespace src\Config;
-require_once __DIR__ . '/../config/conexion.php';
+require_once __DIR__ . '/../Config/conexion.php';
 class imagenes{
     public function obtenerimag($nombreimg){
         $dir = __DIR__.'/../../public/Productos/';

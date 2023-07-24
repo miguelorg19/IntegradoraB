@@ -1,6 +1,6 @@
 <?php
 namespace src\Config;
-require __DIR__ . '/../config/conexion.php';
+require __DIR__ . '/../Config/conexion.php';
 require __DIR__ . '/../../vendor/autoload.php';
 use PDO;
 use PDOException;

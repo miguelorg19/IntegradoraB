@@ -1,5 +1,5 @@
 <?php
-require_once '../../src/Modelos/graficadiaria.php';
+require_once(__DIR__ .'../../src/Modelos/graficadiaria.php');
 
 $graficadiaria = new \src\Config\Graficadiaria();
 setlocale(LC_TIME, 'es_ES.UTF-8');
@@ -197,7 +197,7 @@ if ($resultados) {
 
 
         <div class="info-venta mt-4 text-center">
-        <h2>Informe del día: <?php echo ucfirst($dia_actual_en_espanol); ?></h2>
+        <h2>Informe del dia: <?php echo ucfirst($dia_actual_en_espanol); ?></h2>
             <h4>Venta: <?php echo $totalVentaDiario; ?></h4>
             <h4>Costo: <?php echo $costoTotal; ?></h4>
             <h4>Ganancia: <?php echo $gananciaTotal; ?></h4>

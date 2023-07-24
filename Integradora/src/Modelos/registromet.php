@@ -81,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $obj = new Registro();
         $obj->Registro($nombre, $apellidoPat, $apellidoMat, $telefono,$correo,$contraseña);
         echo 'regitro exitoso';
-        header('Location: /../../public/views/Usuario.php');
+        header('Location: /../../public/views/usuario.php');
         $obj -> cerrarConexion();
         exit;
         }
