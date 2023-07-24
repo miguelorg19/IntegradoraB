@@ -81,7 +81,7 @@ use Src\Modelos\Registro;
                 <div class="col-lg-6 col-sm-6 col-md-6 col-xl-6 mt-1"><p class="te">Crea tu perfil para acceder a la variedad de productos que ofrecemos en PAPEMAX</p></div>
                 </div>
                 <div class="d-flex justify-content-center mt-2">
-                <form action="../../src/modelos/registromet.php" method="post">
+                <form action="../../src/Modelos/registromet.php" method="post">
                 <input type="text" name="nombre" class="form-control text-center input " placeholder="Nombre"> 
                 <input type="text" name="ApP"class="form-control text-center input mt-3" placeholder="Apellido Paterno"> 
                 <input type="text" name="ApM"class="form-control text-center input mt-3" placeholder="Apellido Materno"> 
