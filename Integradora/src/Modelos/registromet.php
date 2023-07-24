@@ -1,7 +1,10 @@
 <?php
 namespace src\Config;
-require __DIR__ . '/../config/conexion.php';
-require __DIR__ . '/../../vendor/autoload.php';
+require_once (__DIR__ . '/../Config/conexion.php');
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 
 class Registro
 {
@@ -37,7 +40,7 @@ class Registro
 
     public function usuarios()
     {
-        $consulta = $this->database->query('SELECT * FROM USUARIOS');
+        $consulta = $this->database->query('SELECT * FROM usuarios');
         return $consulta->fetchAll(\PDO::FETCH_ASSOC);
     }
 
@@ -45,7 +48,7 @@ class Registro
     {
         $hasheo = password_hash($Contraseña, PASSWORD_DEFAULT);
         $Rol = 'USUARIO';
-        $mt = $this->database->prepare('INSERT INTO USUARIOS (Nombre, Apellido_paterno, Apellido_Materno, Telefono, Correo, Contrasenia, Rol) VALUES (?, ?, ?, ?, ?, ?,?)');
+        $mt = $this->database->prepare('INSERT INTO usuarios (Nombre, Apellido_paterno, Apellido_Materno, Telefono, Correo, Contrasenia, Rol) VALUES (?, ?, ?, ?, ?, ?,?)');
         $mt->execute([$nombre, $ApellidoPat, $ApellidoMat, $Telefono, $Correo, $hasheo, $Rol]);
     }
 
@@ -78,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $obj = new Registro();
         $obj->Registro($nombre, $apellidoPat, $apellidoMat, $telefono,$correo,$contraseña);
         echo 'registro exitoso';
-        header('Location: /../../public/views/Usuario.php');
+        header('Location: /../../public/views/usuario.php');
         $obj -> cerrarConexion();
         exit;
         }

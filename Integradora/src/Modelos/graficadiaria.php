@@ -1,6 +1,7 @@
 <?php
-namespace src\Config;
-require __DIR__ . '/../config/conexion.php';
+namespace src\Modelos;
+use src\Config\Conexion;
+require __DIR__ . '/../Config/conexion.php';
 require __DIR__ . '/../../vendor/autoload.php';
 use PDO;
 use PDOException;
@@ -9,6 +10,7 @@ class Graficadiaria{
     public function obtenerGananciasPorDia($fecha_consulta)
     {
         try {
+          
             $conexion = new Conexion();
             $conn = $conexion->conectar();
 

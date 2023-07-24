@@ -1,7 +1,7 @@
 <?php
-require '../../vendor/autoload.php';
-use Src\Config\Conexion;
-use Src\Modelos\Registro;
+require_once '../../vendor/autoload.php';
+use src\Config\Conexion;
+use src\Modelos\Registro;
 ?>
 <!DOCTYPE html>
 <html lang="en">

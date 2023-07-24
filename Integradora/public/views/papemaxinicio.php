@@ -1,5 +1,5 @@
 <?php
-require '../../src/Modelos/enviocorreoinicio.php';
+require_once '../../src/Modelos/enviocorreoinicio.php';
 
 ?>
 <!DOCTYPE html>
@@ -370,15 +370,15 @@ require '../../src/Modelos/enviocorreoinicio.php';
                 <div class="mt-5 col-md-6 text-center">
                     <div class="d-flex flex-column mt-5">
                         <div class="ubicacion mt-5">
-                            <img src="imagenes/ubicacion.png" alt="Icono de ubicación" width="20" height="20">
+                            <img src="../imagenes/ubicacion.png" alt="Icono de ubicación" width="20" height="20">
                             Avenida del pedregal #567 col. San pedro
                         </div>
                         <div class="telefono mt-5">
-                            <img src="imagenes/telefonologo.png" alt="Icono de teléfono" width="20" height="20">
+                            <img src="../imagenes/telefonologo.png" alt="Icono de teléfono" width="20" height="20">
                             +52 8713114045
                         </div>
                         <div class="correojakie mt-5">
-                            <img src="imagenes/correo.avif" alt="Icono de correo electrónico" width="20" height="20">
+                            <img src="../imagenes/correo.avif" alt="Icono de correo electrónico" width="20" height="20">
                             jakiepape@papeleria.com
                         </div>
                     </div>

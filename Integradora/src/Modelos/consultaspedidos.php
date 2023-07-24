@@ -1,8 +1,9 @@
 <?php
-namespace Src\Config;
+namespace src\Config;
 
-require_once __DIR__ . '/../config/conexion.php';
-
+require_once __DIR__ . '/../Config/conexion.php';
+use PDO;
+use PDOException;
 
 class Pedidos{
     private $conexion;

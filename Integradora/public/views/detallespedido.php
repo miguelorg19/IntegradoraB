@@ -1,8 +1,8 @@
 <?php
-require_once '../../src/modelos/consultaspedidos.php';
-require_once '../../src/modelos/imagenes.php';
-use Src\Config\Pedidos;
-use Src\Config\Imagenes;
+require_once '../../src/Modelos/consultaspedidos.php';
+require_once '../../src/Modelos/imagenes.php';
+use src\Config\Pedidos;
+use src\Config\Imagenes;
 $productos = new Pedidos();
 $imagenes = new Imagenes();
 $id = $_GET['id'];
