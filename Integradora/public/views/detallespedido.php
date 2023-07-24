@@ -122,7 +122,7 @@ $datos = $productos->detallesorden($id);
                         <h3 class="te"><?php echo $detalles['Cantidad'] ?></h3>
                         <?php
                         $productId = $detalles['ID_productos'];
-                        $idVe = $detalles['Id_Detalle_orden_Venta'];
+                        $idVe = $detalles['Orden_Ventas_Id_Orden_Venta'];
                         $total = $productos->tot($idVe, $productId);
                         ?>
                         <h3 class="te">$<?php echo $total ?></h3>

@@ -31,7 +31,7 @@ class Pedidos{
     {
         try{
         $conexion = $this->conexion->conectar();
-        $query = $conexion->prepare('SELECT ov.Id_Orden_Venta,ov.Fecha,ov.Costo_Total,ov.Estatus,p.Nombre,p.precio_de_Venta,p.ID_productos,i.Id_Imagen, i.imagen,dov.Id_Detalle_orden_Venta, dov.Cantidad FROM orden_ventas ov 
+        $query = $conexion->prepare('SELECT ov.Id_Orden_Venta,ov.Fecha,ov.Costo_Total,ov.Estatus,p.Nombre,p.precio_de_Venta,p.ID_productos,i.Id_Imagen, i.imagen,dov.Orden_Ventas_Id_Orden_Venta, dov.Cantidad FROM orden_ventas ov 
         inner join detalle_de_orden_de_ventas dov on dov.Orden_Ventas_Id_Orden_Venta = ov.Id_Orden_Venta 
         inner join productos p on dov.Productos_ID_Productos = p.ID_Productos
         inner join imagenes i on p.ID_Productos = i.producto_ID_Producto where ov.Id_Orden_Venta = ?;');
