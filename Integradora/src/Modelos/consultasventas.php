@@ -64,6 +64,53 @@ class Ventas{
             $this->conexion = null;
         } 
     }
+    public function ordenventa(){
+        $IDOV = 0;
+        $conexion = $this->conexion->conectar();
+        $cons = $conexion->prepare('SELECT MAX(Id_Orden_Venta) as ID FROM orden_ventas');
+        $cons->execute();
+        $res = $cons->fetchall(PDO::FETCH_ASSOC);
+        foreach($res as $ov)
+        {
+            $IDOV = $ov['ID'];
+                        if($IDOV == 0){
+                            $IDOV=1;
+                        }
+        }
+        $sql = $conexion->prepare("SELECT Id_Orden_Venta FROM orden_ventas WHERE Id_Orden_Venta = ?");
+        $sql->execute([$IDOV]);
+        $res = $sql->rowCount();
+        if($res>0){
+            $IDOV++;
+        }
+        $sql = $conexion->prepare("INSERT INTO orden_ventas VALUES(?,NOW(),0,'','REALIZADO',1,'')");
+        $sql->execute([$IDOV]);
+        return $IDOV;
+    }
+    public function insertarventas($Ov)
+    {
+        try {
+            $conexion = $this->conexion->conectar();
+            $conexion->beginTransaction();
+
+            if (isset($_SESSION['Ventas'])) {
+                foreach ($_SESSION['Ventas'] as $venta) {
+                    $cant = $venta['cantidad'];
+                    $productosID = $venta['productoID'];
+                    $query = $conexion->prepare('INSERT INTO detalle_de_orden_de_ventas (Cantidad, Productos_ID_Productos, Orden_Ventas_Id_Orden_Venta) VALUES (?, ?, ?)');
+                    $query->execute([$cant, $productosID, $Ov]);
+                }
+                $conexion->commit();
+            }
+
+        } catch (PDOException $e) {
+            $conexion->rollBack();
+            echo 'Fallo la conexión' . $e->getMessage();
+            return 0;
+        } finally {
+            $this->conexion = null;
+        }
+    }
     public function avisos(){
         echo '<div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 bg-danger  d-flex justify-content-center mt-3" style="border-radius: 10px;margin:0 auto;">
         <h5 class="msj mt-2">Debe llenar todos los campos</h5></div>';
@@ -104,6 +151,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['agregar'])) {
         'total' => $total,
     );
     }
+    header('Location: ../../public/views/registroventas.php');
+    exit;
+}
+else if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['confirmar']))
+{
+    if (isset($_SESSION['Ventas'])) {
+        $Orden = $cons -> ordenventa();
+        echo $Orden;
+        $cons->insertarventas($Orden);  
+    }
+    else
+    {  
+    }
+    session_unset();
     header('Location: ../../public/views/registroventas.php');
     exit;
 }

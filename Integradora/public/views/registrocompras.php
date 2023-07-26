@@ -146,16 +146,12 @@
       </select>
       </div>
        <br/>
-      <h5 class="text">Producto</h5>
+      <h5 class="te">Producto</h5>
       <div class="input-group mb-3 mt-3">
         <input type="text" class="form-control tex" placeholder="Producto" aria-label="Recipient's username" aria-describedby="button-addon2">
         <button class="btn btn-outline-secondary tex" type="button" id="button-addon2">Buscar</button>
       </div>
-      <div class="mb-3">
-        <h5 class="text">Descripcion del producto</h5>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled></textarea>
-      </div>
-      <h5 class="text">Cantidad</h5>
+      <h5 class="te">Cantidad</h5>
       <div>
       <input type="number" class="form-control tex" placeholder="Cantidad" aria-label="Recipient's username" aria-describedby="button-addon2">
       </div>

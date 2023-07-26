@@ -210,7 +210,9 @@ if (isset($_GET['categoria'])) {
                 <br>
                 <br>
                 <div class="d-flex flex-row-reverse col-12">
-                    <button class="btn btn-outline-dark tex">Aceptar</button>
+                <form action="../../src/Modelos/consultasventas.php" method="post">
+                    <button class="btn btn-outline-dark tex" name="confirmar">Aceptar</button>
+                </form>
                 </div>
                 </br>
                 <div class="d-flex flex-row-reverse col-12">
