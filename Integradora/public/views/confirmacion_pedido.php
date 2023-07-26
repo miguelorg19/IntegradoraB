@@ -104,9 +104,5 @@ else{
     $datos['ok'] = false;
     header('location:catalogo.php');
 }
-
-
 echo json_encode($datos);
-
-
 ?>

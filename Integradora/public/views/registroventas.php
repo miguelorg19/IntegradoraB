@@ -1,11 +1,19 @@
 <?php
 require_once __DIR__ . '/../../src/Modelos/consultasventas.php';
 require_once __DIR__ . '/../../src/Modelos/registroven.php';
-use src\Config\Compras;
-$productos = new Compras();
+use src\Config\Ventas;
+$res='';
+
+$productos = new Ventas();
+if (isset($_SESSION['resultado'])) {
+  $res = $_SESSION['resultado'];
+}
+
 if (isset($_GET['categoria'])) {
   $categoriaSeleccionada = $_GET['categoria'];
-  $resultadoConsulta = $productos->consultarprod($categoriaSeleccionada);}
+  $resultado = $productos->consultarprod($categoriaSeleccionada);
+  $res = false;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,6 +34,12 @@ if (isset($_GET['categoria'])) {
     <style>
       .con{
         margin-left:1%;
+      }
+      .msj{
+        font-size: 1rem;
+        text-color:gray;
+        font-family: 'Inter', sans-serif;
+        font-weight: bold;
       }
       .cont{
         background-color:#f4f4f4;
@@ -95,7 +109,7 @@ if (isset($_GET['categoria'])) {
             <ul class="navbar-nav">
               <li class="nav-item">
               <a href="usuario.php"><img src="../imagenes/usuario.png" width="40" height="40"></a>
-              <img src="../imagenes/carrito.png" width="40" height="40">
+              <a href="carritodecompras.php"><img src="../imagenes/carrito.png" width="40" height="40"></a>
               </li>
         </div>      
         </div>
@@ -103,6 +117,7 @@ if (isset($_GET['categoria'])) {
 </header>
  <div class="container-fluid conts row justify-content-around">
       <div class="col-sm-12 col-md-12 col-lg-7 col-xl-7 cont mt-4">
+
       <h1 class="text">Registro Ventas</h1>
       <br/>
       <h5 class="te">Categoria</h5>
@@ -121,48 +136,58 @@ if (isset($_GET['categoria'])) {
       </div>
        <br/>
       <h5 class="te">Producto</h5>
+      <form action="../../src/Modelos/consultasventas.php" method="post">
        <div class="input-group mb-3 mt-3">
-       <select class="form-select form-select-md tex" aria-label=".form-select-md example" id="producto">
-        <option selected>Seleccione el producto</option>
-                <?php 
-                foreach ($resultadoConsulta as $producto) { ?>
-                   <option value="<?php $producto['Prod']?>"><?php echo $producto['Prod'].'  '.$producto['Color'] ?></option>
-                <?php } ?>
+        <select class="form-select form-select-md tex" aria-label=".form-select-md example" name="producto" id="producto">
+            <option selected>Seleccione el producto</option>
+            <?php 
+            foreach ($resultado as $producto) { 
+                $ex = $producto['Existencias']?>
+                <option value="<?php echo $producto['ID_productos'] ?>"><?php echo $producto['Prod'].',  '.$producto['Color'].',  Precio:$'.$producto['Precio_de_Venta'].', Existencias:' .$producto['Existencias'] ?></option>
+            <?php } ?>
         </select>
     </div>
-      <div class="mb-3">
-        <h5>Descripcion del producto</h5>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled></textarea>
-      </div>
       <h5 class="te">Cantidad</h5>
       <div>
-      <input type="number" class="form-control tex" placeholder="Cantidad" aria-label="Recipient's username" aria-describedby="button-addon2">
+      <input type="number" class="form-control tex" placeholder="Cantidad" aria-label="Recipient's username" aria-describedby="button-addon2" name="cantidad">
       </div>
+      <?php if($res == true){
+      $productos -> avisos();
+      }?>
       <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 d-flex justify-content-center mt-3">
-        <button type="submit" class="btn btn-outline-dark btn-md tex">Agregar</button>
+        <button type="submit" class="btn btn-outline-dark btn-md tex" value="Agregar" name="agregar">Agregar</button>
+        </form>
       </div>
-      </div>
-      <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 cont mt-4">
-                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 cont table-responsive mt-4">
+      <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 cont table-responsive mt-4">
                 <table class="table table-hover tex">
                     <thead>
                       <tr>
                         <th scope="col">#Producto</th>
                         <th scope="col">Nombre del producto </th>
+                        <th scope="col">Cantidad</th>
                         <th scope="col">Fecha</th>
                         <th scope="col">Total</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Cuaderno</td>
-                        <td>22/07/2023</td>
-                        <td>$220.50</td>
-                      </tr>
+                    <?php
+                      if (isset($_SESSION['Ventas'])) {
+                          foreach ($_SESSION['Ventas'] as $index => $producto) {
+                              echo "<tr>";
+                              echo "<th scope='row'>" . ($index + 1) . "</th>";
+                              echo "<td>" . htmlspecialchars($producto['nombre']) . "</td>";
+                              echo "<td>" . htmlspecialchars($producto['cantidad']) . "</td>";
+                              echo "<td>" . htmlspecialchars($producto['fecha']) . "</td>";
+                              echo "<td>$" . htmlspecialchars($producto['totalven']) . "</td>";
+                              echo "</tr>";
+                          }
+                      }
+                      ?>
                     </tbody>
               </table>
               </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 cont mt-4">
                 <div class="mt-3">
                 <h6 class="te">Metodo de pago:</h6>
                 <input type="text" class="form-control tex" placeholder="Efectivo" aria-label="Recipient's username" aria-describedby="button-addon2" disabled>
@@ -172,6 +197,13 @@ if (isset($_GET['categoria'])) {
                     <input type="text" class="form-control tex" aria-label="Amount (to the nearest dollar)" placeholder="Pago con">
                     <span class="input-group-text tex">.00</span>
                 </div>
+                <br>
+                <h5 class="te">Total:</h5>
+                <?php
+                      if (isset($_SESSION['Ventas'])) {
+                        foreach($_SESSION['Ventas'] as $producto)?>
+                <h6 class="tex">$<?php echo $producto['total']?></h6>
+                      <?php }?>
                 <br>
                 <h5 class="te">Cambio: </h5>
                 <h6 class="tex">$200.00</h6>

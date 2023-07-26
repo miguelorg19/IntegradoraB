@@ -5,7 +5,12 @@ use src\Config\Pedidos;
 use src\Config\Imagenes;
 $productos = new Pedidos();
 $imagenes = new Imagenes();
-$id = $_GET['id'];
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+} else {
+    header("Location: pedidos.php");
+    exit(); 
+}
 $datos = $productos->detallesorden($id);
 ?>
 <!DOCTYPE html>

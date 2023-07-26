@@ -113,9 +113,9 @@ $datos = $productos->orden();
               <td>$<?php echo $productos['Costo_Total'];?></td>
               <td><?php echo $productos['Estatus'];?></td>
               <td>
-              <a class="btn btn-dark btn-sm" href="detallespedido.php?id=<?php echo $productos['Id_Orden_Venta']?>">Ver pedido</a>
+              <a class="btn btn-dark btn-sm" href="detallespedido.php?id=<?php echo $productos['Id_Orden_Venta']?>"><i class="bi bi-eye"></i></a>
               </td>
-              <td><button class="btn btn-success btn-sm">Completado</button> <button class="btn btn-danger btn-sm btn2">Cancelar pedido</button></td>
+              <td><button class="btn btn-success btn-sm"><i class="bi bi-check-lg"></i></button> <button class="btn btn-danger btn-sm btn2"><i class="bi bi-trash"></i></button></td>
             </tr>
             <?php } ?>
           </tbody>
