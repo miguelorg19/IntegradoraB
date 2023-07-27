@@ -1,6 +1,6 @@
 <?php
 
-require_once (__DIR__ . '/../../src/Modelos/graficadiaria.php');
+require_once(__DIR__ . '/../../src/Modelos/graficadiaria.php');
 
 $graficadiaria = new src\Modelos\Graficadiaria();
 setlocale(LC_TIME, 'es_ES.UTF-8');
@@ -27,7 +27,7 @@ foreach ($datosSemana as $fecha => $datos) {
     $nombreDia = date('l', strtotime($fecha));
     $nombreDiaEspanol = $nombreDias[$nombreDia];
 
-    $labels[] = $nombreDiaEspanol; 
+    $labels[] = $nombreDiaEspanol;
     $gananciasSemana[] = $datos['ganancia'];
 }
 
@@ -44,11 +44,11 @@ if ($resultados) {
     $costoTotal = $graficadiaria->calcularCostoTotal($fechaConsulta);
     $gananciaTotal = $graficadiaria->calcularGananciaTotal($fechaConsulta);
 } else {
-    
+
     $labels = [];
     $data = [];
 
-    
+
     $totalVentaDiario = 0;
     $costoTotal = 0;
     $gananciaTotal = 0;
@@ -72,7 +72,7 @@ if ($resultados) {
 
         .container {
             margin-top: 4%;
-        
+
         }
 
 
@@ -133,9 +133,32 @@ if ($resultados) {
 
                 <div id="Nav-Items">
                     <ul>
-                        <li><a href="">Inicio</a></li>
-                        <li><a href="">Filtro</a></li>
-                        <li><a href="">Categorias</a></li>
+                        <li>
+                            <a class="dropdown-item" href="papemaxinicio.php">Inicio</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="catalogo.php">Catalogo</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="registroventas.php">Registro de ventas</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="registrocompras.php">Registro de compras</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="ventasdiarias.php">Ventas diarias</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="reportemensual.php">Ventas mensuales</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="pedidos.php">Pedidos</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="agregarproducto.php">Agregar producto</a>
+                        </li>
+                        <li><a href="cerrar_sesion.php">Cerrar Sesion</a>
+                        </li>
                         <li>
                             <form action="" role="search" id="Buscador2">
                                 <input type="text" placeholder="Buscar" id="Buscador">
@@ -164,7 +187,7 @@ if ($resultados) {
                 <div class="info-productos col ms-5">
                     <?php foreach ($orden['productos'] as $producto) { ?>
                         <div class="productos mb-2">
-                            <p class="mb-0"><?php echo $producto['Cantidad']; ?> <?php echo ' '?><?php echo $producto['nombre']; ?> $<?php echo $producto['precio_de_venta']; ?></p>
+                            <p class="mb-0"><?php echo $producto['Cantidad']; ?> <?php echo ' ' ?><?php echo $producto['nombre']; ?> $<?php echo $producto['precio_de_venta']; ?></p>
                         </div>
                     <?php } ?>
 
@@ -188,12 +211,12 @@ if ($resultados) {
         </div>
 
         <canvas id="grafica" width="50%" height="10%"></canvas>
-         
-   
+
+
 
 
         <div class="info-venta mt-4 text-center">
-        <h2>Informe del dia: <?php echo ucfirst($dia_actual_en_espanol); ?></h2>
+            <h2>Informe del dia: <?php echo ucfirst($dia_actual_en_espanol); ?></h2>
             <h4>Venta: <?php echo $totalVentaDiario; ?></h4>
             <h4>Costo: <?php echo $costoTotal; ?></h4>
             <h4>Ganancia: <?php echo $gananciaTotal; ?></h4>
@@ -206,43 +229,43 @@ if ($resultados) {
 
 
     <script>
-  // Obtiene el elemento canvas
-    var canvas = document.getElementById("grafica");
+        // Obtiene el elemento canvas
+        var canvas = document.getElementById("grafica");
 
-    // Crea la grÃ¡fica
-    var ctx = canvas.getContext("2d");
-    var chart = new Chart(ctx, {
-        type: "bar",
-        data: {
-            labels: <?php echo json_encode($labels); ?>,
-            datasets: [{
-                label: "Ganancias",
-                data: <?php echo json_encode($gananciasSemana); ?>,
-                backgroundColor: "rgba(0, 123, 255, 0.5)",
-                borderColor: "rgba(0, 123, 255, 1)",
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                x: {
-                    display: true,
-                    title: {
+        // Crea la grÃ¡fica
+        var ctx = canvas.getContext("2d");
+        var chart = new Chart(ctx, {
+            type: "bar",
+            data: {
+                labels: <?php echo json_encode($labels); ?>,
+                datasets: [{
+                    label: "Ganancias",
+                    data: <?php echo json_encode($gananciasSemana); ?>,
+                    backgroundColor: "rgba(0, 123, 255, 0.5)",
+                    borderColor: "rgba(0, 123, 255, 1)",
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
                         display: true,
-                        text: 'Fecha'
-                    }
-                },
-                y: {
-                    beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: 'Ganancias por dia de semana'
+                        title: {
+                            display: true,
+                            text: 'Fecha'
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Ganancias por dia de semana'
+                        }
                     }
                 }
             }
-        }
-    });
-</script>
+        });
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 

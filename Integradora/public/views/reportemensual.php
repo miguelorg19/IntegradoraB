@@ -157,9 +157,32 @@ $totalPerdido = ($beneficioTotal < 0) ? abs($beneficioTotal) : 0;
 
                 <div id="Nav-Items">
                     <ul>
-                        <li><a href="">Inicio</a></li>
-                        <li><a href="">Filtro</a></li>
-                        <li><a href="">Categorias</a></li>
+                        <li>
+                            <a class="dropdown-item" href="papemaxinicio.php">Inicio</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="catalogo.php">Catalogo</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="registroventas.php">Registro de ventas</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="registrocompras.php">Registro de compras</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="ventasdiarias.php">Ventas diarias</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="reportemensual.php">Ventas mensuales</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="pedidos.php">Pedidos</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="agregarproducto.php">Agregar producto</a>
+                        </li>
+                        <li><a href="cerrar_sesion.php">Cerrar Sesion</a>
+                        </li>
                         <li>
                             <form action="" role="search" id="Buscador2">
                                 <input type="text" placeholder="Buscar" id="Buscador">
