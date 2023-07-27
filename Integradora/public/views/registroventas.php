@@ -1,9 +1,8 @@
 <?php
 require_once __DIR__ . '/../../src/Modelos/consultasventas.php';
-require_once __DIR__ . '/../../src/Modelos/registroven.php';
 use src\Config\Ventas;
 $res='';
-
+$Pago = 0;
 $productos = new Ventas();
 if (isset($_SESSION['resultado'])) {
   $res = $_SESSION['resultado'];
@@ -13,6 +12,9 @@ if (isset($_GET['categoria'])) {
   $categoriaSeleccionada = $_GET['categoria'];
   $resultado = $productos->consultarprod($categoriaSeleccionada);
   $res = false;
+}
+if (isset($_GET['PagoTotal'])) {
+  $Pago = $_GET['PagoTotal'];
 }
 ?>
 <!DOCTYPE html>
@@ -143,7 +145,7 @@ if (isset($_GET['categoria'])) {
             <?php 
             foreach ($resultado as $producto) { 
                 $ex = $producto['Existencias']?>
-                <option value="<?php echo $producto['ID_productos'] ?>"><?php echo $producto['Prod'].',  '.$producto['Color'].',  Precio:$'.$producto['Precio_de_Venta'].', Existencias:' .$producto['Existencias'] ?></option>
+                <option value="<?php echo $producto['ID_productos'] ?>"><?php echo $producto['Prod'].' '.$producto['Color'].',  Precio:$'.$producto['Precio_de_Venta'].', Existencias:' .$producto['Existencias'] ?></option>
             <?php } ?>
         </select>
     </div>
@@ -193,9 +195,12 @@ if (isset($_GET['categoria'])) {
                 <input type="text" class="form-control tex" placeholder="Efectivo" aria-label="Recipient's username" aria-describedby="button-addon2" disabled>
                 <br>
                 <div class="input-group input-group-md mb-3 mt-3">
+                <form action="registroventas.php" class="input-group">
                     <span class="input-group-text tex">$</span>
-                    <input type="text" class="form-control tex" aria-label="Amount (to the nearest dollar)" placeholder="Pago con">
+                    <input type="text" class="form-control tex" aria-label="Amount (to the nearest dollar)" placeholder="Pago con" name="PagoTotal">
                     <span class="input-group-text tex">.00</span>
+                    <button class="btn btn-outline-dark tex" name="confirmar">Calcular</button>
+                  </form>
                 </div>
                 <br>
                 <h5 class="te">Total:</h5>
@@ -206,12 +211,19 @@ if (isset($_GET['categoria'])) {
                       <?php }?>
                 <br>
                 <h5 class="te">Cambio: </h5>
-                <h6 class="tex">$200.00</h6>
+                <?php
+                      if (isset($_SESSION['Ventas'])) {
+                        foreach($_SESSION['Ventas'] as $producto)?>
+                <h6 class="tex">$<?php if ($Pago > $producto['total']){echo $Pago - $producto['total'];} else{echo 'Ingrese un monto mayor a su total';} ?></h6>
+                      <?php }?>
                 <br>
                 <br>
                 <div class="d-flex flex-row-reverse col-12">
                 <form action="../../src/Modelos/consultasventas.php" method="post">
-                    <button class="btn btn-outline-dark tex" name="confirmar">Aceptar</button>
+                    <button class="btn btn-outline-danger tex" name="cancelar">Cancelar</button>
+                </form>
+                <form action="../../src/Modelos/consultasventas.php" method="post">
+                    <button class="btn btn-outline-dark tex" name="confirmar" style="margin-right:3px;">Aceptar</button>
                 </form>
                 </div>
                 </br>

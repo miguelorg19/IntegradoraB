@@ -22,16 +22,6 @@ class Ventas{
             echo 'Fallo la conexion' . $e->getMessage();
         } 
     }
-    public function existencias($id) {
-        try {
-            $conexion = $this->conexion->conectar();
-            $query = $conexion->prepare('SELECT Existencias FROM productos WHERE ID_productos = ?');
-            $query->execute([$id]);// Cambio fetchAll() por fetch()
-            return $query;
-        } catch (PDOException $e) {
-            echo 'Fallo la conexion' . $e->getMessage();
-        }
-    }
     public function producto($id) {
         try {
             $conexion = $this->conexion->conectar();
@@ -91,8 +81,6 @@ class Ventas{
     {
         try {
             $conexion = $this->conexion->conectar();
-            $conexion->beginTransaction();
-
             if (isset($_SESSION['Ventas'])) {
                 foreach ($_SESSION['Ventas'] as $venta) {
                     $cant = $venta['cantidad'];
@@ -104,7 +92,6 @@ class Ventas{
             }
 
         } catch (PDOException $e) {
-            $conexion->rollBack();
             echo 'Fallo la conexión' . $e->getMessage();
             return 0;
         } finally {
@@ -112,7 +99,7 @@ class Ventas{
         }
     }
     public function avisos(){
-        echo '<div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 bg-danger  d-flex justify-content-center mt-3" style="border-radius: 10px;margin:0 auto;">
+        echo '<div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 bg-danger bg-opacity-50 d-flex justify-content-center mt-3" style="border-radius: 10px; margin:0 auto;">
         <h5 class="msj mt-2">Debe llenar todos los campos</h5></div>';
     }
 }
@@ -164,6 +151,12 @@ else if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['confirmar']))
     else
     {  
     }
+    session_unset();
+    header('Location: ../../public/views/registroventas.php');
+    exit;
+}
+else if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['cancelar']))
+{
     session_unset();
     header('Location: ../../public/views/registroventas.php');
     exit;
