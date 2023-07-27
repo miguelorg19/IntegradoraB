@@ -2,12 +2,18 @@
 require_once __DIR__ . '/../../src/Modelos/consultascompras.php';
 use src\Config\Compras;
 $res='';
-
+$num ='';
 $productos = new Compras();
-if (isset($_SESSION['resultado'])) {
-  $res = $_SESSION['resultado'];
+if (isset($_SESSION['vacio'])) {
+  $res = $_SESSION['vacio'];
 }
-
+if (isset($_SESSION['numeros'])) {
+  $num = $_SESSION['numeros'];
+}
+if (isset($_SESSION['vacio']))
+{
+  $vac = $_SESSION['vacio'];
+}
 if (isset($_GET['categoria'])) {
   $categoriaSeleccionada = $_GET['categoria'];
   $resultado = $productos->consultarprod($categoriaSeleccionada);
@@ -81,7 +87,7 @@ if (isset($_GET['categoria'])) {
                   <a class="dropdown-item" href="">Inicio</a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="">Catalogo</a>
+                  <a class="dropdown-item" href="catalogo.php">Catalogo</a>
                 </li>
                 <li>
                   <a class="dropdown-item" href="registroventas.php">Registro de ventas</a>
@@ -124,23 +130,23 @@ if (isset($_GET['categoria'])) {
             </div>
             <div class="modal-body">
             <form action="../../src/Modelos/consultascompras.php" method="post" enctype="multipart/form-data">
-            <input type="text" class="form-control tex" aria-label="Amount (to the nearest dollar)" placeholder="Nombre(Obligatorio)">
-            <input type="number" class="form-control tex mt-2" aria-label="Amount (to the nearest dollar)" placeholder="Costo(Obligatorio)">
-            <input type="number" class="form-control tex mt-2" aria-label="Amount (to the nearest dollar)" placeholder="Precio de venta(Obligatorio)">
-            <input type="number" class="form-control tex mt-2" aria-label="Amount (to the nearest dollar)" placeholder="Cantidad(Obligatorio)">
+            <input type="text" class="form-control tex" aria-label="Amount (to the nearest dollar)" placeholder="Nombre(Obligatorio)" name="nombre">
+            <input type="number" class="form-control tex mt-2" aria-label="Amount (to the nearest dollar)" placeholder="Costo(Obligatorio)" name="costo" step="any">
+            <input type="number" class="form-control tex mt-2" aria-label="Amount (to the nearest dollar)" placeholder="Precio de venta(Obligatorio)" name="precio" step="any">
+            <input type="number" class="form-control tex mt-2" aria-label="Amount (to the nearest dollar)" placeholder="Cantidad(Obligatorio)" name="cantidad">
             <div class="mt-2">
-              <textarea class="form-control" placeholder="Descripcion del producto" id="exampleFormControlTextarea1" rows="3"></textarea>
+              <textarea class="form-control" placeholder="Descripcion del producto" id="exampleFormControlTextarea1" rows="3" name="descripcion"></textarea>
             </div>
             <h2>Detalles</h2>
-            <input type="text" class="form-control tex mt-2" aria-label="Amount (to the nearest dollar)" placeholder="Marca(Obligatorio)">
-            <input type="number" class="form-control tex mt-2" aria-label="Amount (to the nearest dollar)" placeholder="Tamaño(Opcional)">
-            <input type="text" class="form-control tex mt-2" aria-label="Amount (to the nearest dollar)" placeholder="Color(Opcional)">
-            <input type="number" class="form-control tex mt-2" aria-label="Amount (to the nearest dollar)" placeholder="Cantidad por paquete(Obligatorio)">
+            <input type="text" class="form-control tex mt-2" aria-label="Amount (to the nearest dollar)" placeholder="Marca(Obligatorio)" name="marca">
+            <input type="number" class="form-control tex mt-2" aria-label="Amount (to the nearest dollar)" placeholder="Tamaño(Opcional)" name="tamaño">
+            <input type="text" class="form-control tex mt-2" aria-label="Amount (to the nearest dollar)" placeholder="Color(Opcional)" name="color">
+            <input type="number" class="form-control tex mt-2" aria-label="Amount (to the nearest dollar)" placeholder="Cantidad por paquete(Obligatorio)" name="cantidadpaq">
 
             <div class="input-group mt-3">
               <span class="input-group-text tex" id="inputGroup-sizing-default">Categoria</span>
-              <select class="form-select form-select-md tex" aria-label=".form-select-md example">
-                <option selected>Seleccione</option>
+              <select class="form-select form-select-md tex" name="categoria" aria-label=".form-select-md example">
+                <option selected>Seleccione(Obligatorio)</option>
                 <option value="1">Escritura</option>
                 <option value="2">Papel</option>
                 <option value="3">Cuadernos</option>
@@ -194,9 +200,6 @@ if (isset($_GET['categoria'])) {
       <div>
       <input type="number" class="form-control tex" placeholder="Cantidad" aria-label="Recipient's username" aria-describedby="button-addon2" name="cantidad">
       </div>
-      <?php if($res == true){
-      $productos -> avisos();
-      }?>
       <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 d-flex justify-content-center mt-3">
         <button type="submit" class="btn btn-outline-dark btn-md tex" value="Agregar" name="agregar">Agregar</button>
         </form>
@@ -230,7 +233,9 @@ if (isset($_GET['categoria'])) {
           </tbody>
     </table>
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 d-flex justify-content-center mt-3">
-    <button type="submit" class="btn btn-dark btn-md">Aceptar</button>
+    <form action="../../src/Modelos/consultascompras.php" method="post">
+    <button class="btn btn-outline-dark tex" name="confirmar" style="margin-right:3px;">Aceptar</button>
+    </form>
     </div>
     
     </div>

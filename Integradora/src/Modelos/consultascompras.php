@@ -54,7 +54,7 @@ class Compras{
             return '';
         }
     }
-    public function nuevoprod($Nombre,$Descripcion,$Existencias,$Precio_De_Venta,$Costo){
+    public function nuevoprod($Nombre,$Descripcion,$Existencias,$Precio_De_Venta,$Costo, $Categoria){
         $IDP = 0;
         $conexion = $this->conexion->conectar();
         $cons = $conexion->prepare('SELECT MAX(ID_productos) as ID FROM productos');
@@ -74,21 +74,21 @@ class Compras{
             $IDP++;
         }
         $sql = $conexion->prepare("INSERT INTO productos VALUES(?,?,?,?,?,'',?,'',?,'ACTIVO')");
-        $sql->execute([$IDP,$Nombre,$Descripcion,$Existencias,$Precio_De_Venta,$Costo]);
-        return $IDOC;
+        $sql->execute([$IDP,$Nombre,$Descripcion,$Existencias,$Precio_De_Venta,$Categoria,$Costo]);
+        return $IDP;
     }
     
     public function newimg($idpr,$nombre)
     {
         $conexion = $this->conexion->conectar();
-        $cons = $conexion->prepare("INSERT INTO imagenes VALUES(?,'',?)");
-        $cons = execute([$nombre, $idpr]);
+        $cons = $conexion->prepare("INSERT INTO imagenes(Imagen, producto_ID_Producto) VALUES(?,?)");
+        $cons->execute([$nombre, $idpr]);
     }
     public function detalles($idpr,$marca, $cantidapac,$tamaño, $color)
     {
         $conexion = $this->conexion->conectar();
-        $cons = $conexion->prepare("INSERT INTO detalle_productos VALUES(?,?,?,?,?)");
-        $cons = execute([$marca,$cantidapac,$tamaño,$color,$idpr]);
+        $cons = $conexion->prepare("INSERT INTO detalle_productos(Marca, Cantidad, Tamaño, Color, producto_ID_Producto)  VALUES(?,?,?,?,?)");
+        $cons->execute([$marca,$cantidapac,$tamaño,$color,$idpr]);
     }
     public function ordencompra(){
         $IDOC = 0;
@@ -103,13 +103,13 @@ class Compras{
                             $IDOC=1;
                         }
         }
-        $sql = $conexion->prepare("SELECT Id_Orden_Venta FROM orden_ventas WHERE Id_Orden_Venta = ?");
+        $sql = $conexion->prepare("SELECT Id_Orden_Compra FROM orden_de_compras WHERE Id_Orden_Compra = ?");
         $sql->execute([$IDOC]);
         $res = $sql->rowCount();
         if($res>0){
             $IDOC++;
         }
-        $sql = $conexion->prepare("INSERT INTO orden_ventas VALUES(?,NOW(),0,'','REALIZADO',1,'')");
+        $sql = $conexion->prepare("INSERT INTO orden_de_compras VALUES(?,NOW(),0)");
         $sql->execute([$IDOC]);
         return $IDOC;
     }
@@ -143,7 +143,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['agregar'])) {
     $cantidad = $_POST['cantidad'];
     if(empty($productoId) || empty($cantidad))
     {
-        $_SESSION['resultado'] = true;
+        $_SESSION['com'] = true;
         header('location: ../../public/views/registrocompras.php');
         exit;
     }
@@ -168,10 +168,81 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['agregar'])) {
         'fecha' => $fecha,
         'totalven' =>$totalven,
         'total' => $total,
-    );
-    session_unset();
+        'costo' => $preciocon
+        );
     header('location: ../../public/views/registrocompras.php');
     exit();
     }
 
 }
+else if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['confirmar'])) {
+    if (isset($_SESSION['Compras'])) {
+        $Orden = $cons -> ordencompra();
+        echo $Orden;
+        $cons->insertarcompras($Orden);  
+    }
+    else
+    {  
+    }
+    unset($_SESSION['Compras']);
+    unset($_SESSION['Total']);
+    header('Location: ../../public/views/registrocompras.php');
+    exit;
+}
+else if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['guardar'])){
+    $nombre = $_POST['nombre'];
+    $costo = $_POST['costo'];
+    $precio = $_POST['precio'];
+    $cantidad = $_POST['cantidad'];
+    $desc = $_POST['descripcion'];
+    $marca = $_POST['marca'];
+    $tamaño = $_POST['tamaño'];
+    $color = $_POST['color'];
+    $cant = $_POST['cantidadpaq'];
+    $cate = $_POST['categoria'];
+    $img = $_FILES['img'];
+    if (empty($nombre) || empty($costo) || empty($precio) || empty($cantidad) || empty($marca) || empty($cant) || empty($cate) || empty($img)) {
+        $_SESSION['vacio'] = true;
+        header('location: ../../public/views/registrocompras.php');
+    } else if (!is_numeric($costo) || !is_numeric($precio) || !is_numeric($cantidad) || !is_numeric($cant)) {
+        $_SESSION['numeros'] = true;
+        header('location: ../../public/views/registrocompras.php');
+    }    
+    else{
+            $IDNP = $cons->nuevoprod($nombre,$desc,$cantidad,$precio,$costo,$cate);
+            $directorio = '../../public/Productos/';
+            $extension = pathinfo($img['name'], PATHINFO_EXTENSION);
+            $nuevonombre = 'producto_'.$IDNP.'.'.$extension;
+            $rutaimagen = $directorio . $nuevonombre;
+            if (move_uploaded_file($img['tmp_name'], $rutaimagen)) {
+               echo "Imagen Subida";
+            } else {
+            }
+            $cons ->newimg($IDNP, $nuevonombre);
+            $cons -> detalles($IDNP, $marca, $cant, $tamaño, $color);
+
+            $nombreProducto = $nombre;
+            $fecha = date("Y-m-d");
+            $preciocon = $cons->calculartot($IDNP);
+             $totalven =  $preciocon * $cantidad;
+            if (isset($_SESSION['total'])) {
+            $total = $_SESSION['total'];
+            } else {
+            $total = 0;
+            }
+            $total += $totalven;
+
+        $_SESSION['total'] = $total;
+        $_SESSION['Compras'][]= array(
+        'productoID' => $IDNP,
+        'cantidad' => $cantidad,
+        'nombre' => $nombreProducto,
+        'fecha' => $fecha,
+        'totalven' =>$totalven,
+        'total' => $total,
+        'costo' => $preciocon
+        );
+        header('Location: ../../public/views/registrocompras.php');
+        exit;
+    }
+    }

@@ -18,9 +18,9 @@ class Productos
     {
         try{
         $conexion = $this->conexion->conectar();
-        $query = $conexion->query('SELECT p.ID_Productos, p.Nombre AS Prod, p.Descripcion, p.Existencias, p.Precio_de_Venta, ct.Nombre AS Cat
+        $query = $conexion->query("SELECT p.ID_Productos, p.Nombre AS Prod, p.Descripcion, p.Existencias, p.Precio_de_Venta, i.Imagen, p.ESTADO, ct.Nombre AS Cat
         FROM productos AS p
-        INNER JOIN categorias AS ct ON p.CATEGORIAS_ID_CATEGORIAS = ct.ID_CATEGORIAS  order by p.ID_PRODUCTOS ASC');
+        INNER JOIN categorias AS ct ON p.CATEGORIAS_ID_CATEGORIAS = ct.ID_CATEGORIAS inner join imagenes i on ID_Productos = producto_ID_Producto WHERE p.ESTADO = 'ACTIVO' order by p.ID_PRODUCTOS ASC");
         $productos = $query->fetchAll(\PDO::FETCH_ASSOC);
         return $productos;
         }
@@ -49,7 +49,7 @@ class Productos
     {
         try{
         $conexion = $this->conexion->conectar();
-        $del = $conexion->prepare('DELETE FROM productos WHERE ID_PRODUCTOS = ?');
+        $del = $conexion->prepare("UPDATE productos SET ESTADO = 'BAJA' WHERE ID_PRODUCTOS = ?");
         $del->execute([$id]);
         }
                 catch (PDOException $e)
