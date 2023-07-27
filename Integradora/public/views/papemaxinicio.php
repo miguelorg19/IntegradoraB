@@ -225,7 +225,7 @@ $imagenes = $inicioModelo->obtenerImagenesAleatorias();
                             </div>
                         <?php
                         } else {
-                            
+
                             echo '<div class="col text-center">No hay productos disponibles</div>';
                         }
                         ?>
@@ -386,108 +386,34 @@ $imagenes = $inicioModelo->obtenerImagenesAleatorias();
 
 
     <!-- PRODUCTOS -->
-    <div class="containerproductos mx-auto ">
-        <div class="row">
+    <!-- PRODUCTOS -->
+    <div class="containerproductos mx-auto">
+    <div class="row">
+        <?php
+        $imagenesConPrecio = $inicioModelo->obtenerImagenesAleatorias();
+        if ($imagenesConPrecio) {
+            foreach ($imagenesConPrecio as $imagenConPrecio) {
+                $imagenProducto = $imagenConPrecio['Imagen'];
+                $precioProducto = $imagenConPrecio['Precio'];
+                $nombreProducto = $imagenConPrecio['Nombre'];
 
-            <div class="col-6 col-sm-6 col-md-4 col-lg-3 producto">
-                <div class="card">
-                    <img src="../imagenes/cuadernoscribeplus.jpeg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Nombre Del Producto.</h5>
-                        <p class="card-text">Precio.</p>
-                        <a href="#" class="btn btn-dark">Añadir</a>
-                    </div>
-                </div>
-            </div>
-
-
-
-            <div class="col-6 col-sm-6 col-md-4 col-lg-3 producto">
-                <div class="card">
-                    <img src="../imagenes/boloigrafo.jpeg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Nombre Del Producto.</h5>
-                        <p class="card-text">Precio.</p>
-                        <a href="#" class="btn btn-dark">Añadir</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-6 col-sm-6 col-md-4 col-lg-3 producto">
-                <div class="card">
-                    <img src="../imagenes/corrector.jpeg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Nombre Del Producto.</h5>
-                        <p class="card-text">Precio.</p>
-                        <a href="#" class="btn btn-dark">Añadir</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-6 col-sm-6 col-md-4 col-lg-3 producto">
-                <div class="card">
-                    <img src="../imagenes/cuadernoscribeplus.jpeg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Nombre Del Producto.</h5>
-                        <p class="card-text">Precio.</p>
-                        <a href="#" class="btn btn-dark">Añadir</a>
-                    </div>
-                </div>
-            </div>
-
-
-
-        </div>
-
-        <div class="row mt-5">
-            <div class="col-6 col-sm-6 col-md-4 col-lg-3 producto">
-                <div class="card">
-                    <img src="../imagenes/cuadernoscribeplus.jpeg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Nombre Del Producto.</h5>
-                        <p class="card-text">Precio.</p>
-                        <a href="#" class="btn btn-dark">Añadir</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-6 col-sm-6 col-md-4 col-lg-3 producto">
-                <div class="card">
-                    <img src="../imagenes/boloigrafo.jpeg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Nombre Del Producto.</h5>
-                        <p class="card-text">Precio.</p>
-                        <a href="#" class="btn btn-dark">Añadir</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-6 col-sm-6 col-md-4 col-lg-3 producto">
-                <div class="card">
-                    <img src="../imagenes/corrector.jpeg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Nombre Del Producto.</h5>
-                        <p class="card-text">Precio.</p>
-                        <a href="#" class="btn btn-dark">Añadir</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-6 col-sm-6 col-md-4 col-lg-3 producto">
-                <div class="card">
-                    <img src="../imagenes/cuadernoscribeplus.jpeg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Nombre Del Producto.</h5>
-                        <p class="card-text">Precio.</p>
-                        <a href="#" class="btn btn-dark">Añadir</a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
+                echo '<div class="col-6 col-sm-6 col-md-4 col-lg-3 producto">';
+                echo '<div class="card">';
+                echo '<img src="' . $imagenProducto . '" class="card-img-top" alt="...">';
+                echo '<div class="card-body">';
+                echo '<h5 class="card-title">' . $nombreProducto . '</h5>'; // Aquí mostramos el nombre del producto
+                echo '<p class="card-text">' . $precioProducto . '</p>';
+                echo '<a href="#" class="btn btn-dark">Añadir</a>';
+                echo '</div>';
+                echo '</div>';
+                echo '</div>';
+            }
+        } else {
+            echo '<p>No hay productos disponibles.</p>';
+        }
+        ?>
     </div>
-
-
+</div>
 
     <!-- CONTACTANOS -->
     <div class=" container-fluid bg-dark text-white py-3 contactanoscontainer">
