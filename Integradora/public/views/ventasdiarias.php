@@ -104,73 +104,62 @@ if ($resultados) {
 <body>
     <!-- BARRA DE NAVEGACION -->
     <div class="navcont">
-        <nav>
-            <!--Menu-->
+    <nav>
+      <!--Menu-->
 
-            <label for="Nav-MenuBtn">
-                <img src="../imagenes/menu.png" role="button" alt="" id="menu">
-            </label>
+      <label for="Nav-MenuBtn">
+        <img src="../imagenes/menu.png" role="button" alt="" id="menu">
+      </label>
 
-            <input type="checkbox" id="Nav-MenuBtn">
+      <input type="checkbox" id="Nav-MenuBtn">
+      <!--Contenedor Del Usuario Y Carrito De Compras-->
+      <div id="Contenedor-UC">
+        <a href="usuario.php"><img src="../imagenes/usuario.png" alt="" id="usuario"></a>
+        <a href="carrito.php"><img src="../imagenes/carrito.png" alt="" id="carrito"></a>
+      </div>
+      <!--Menu Desplegado-->
+      <div id="Menu-Desplegado">
+        <div id="Contenedor-Menu-Desplegado">
+          <h3>Jacky Papeleria</h3>
+          <label for="Nav-MenuBtn">
+            <img src="../imagenes/cerca.png" role="button" alt="" id="Cerrar">
+          </label>
+        </div>
 
-            <form action="" role="search" id="Buscador1">
-                <input type="text" placeholder="Buscar" id="Buscador">
-                <img role="button" src="../imagenes/busqueda.png" id="Buscar" alt="">
-            </form>
-            <!--Contenedor Del Usuario Y Carrito De Compras-->
-            <div id="Contenedor-UC">
-                <a href=""><img src="../imagenes/usuario.png" alt="" id="usuario"></a>
-                <a href=""><img src="../imagenes/carrito.png" alt="" id="carrito"></a>
-            </div>
-            <!--Menu Desplegado-->
-            <div id="Menu-Desplegado">
-                <div id="Contenedor-Menu-Desplegado">
-                    <h3>Jacky Papeleria</h3>
-                    <label for="Nav-MenuBtn">
-                        <img src="../imagenes/cerca.png" role="button" alt="" id="Cerrar">
-                    </label>
-                </div>
+        <div id="Nav-Items">
+          <ul>
+            <li>
+              <a href="papemaxinicio.php">Inicio</a>
+            </li>
+            <li>
+              <a href="catalogo.php">Catalogo</a>
+            </li>
+            <li>
+              <a href="registroventas.php">Registro de ventas</a>
+            </li>
+            <li>
+              <a href="registrocompras.php">Registro de compras</a>
+            </li>
+            <li>
+              <a href="ventasdiarias.php">Ventas diarias</a>
+            </li>
+            <li>
+              <a href="reportemensual.php">Ventas mensuales</a>
+            </li>
+            <li>
+              <a href="pedidos.php">Pedidos</a>
+            </li>
+            <li>
+              <a href="agregarproducto.php">Agregar producto</a>
+            </li>
+            <li><a href="cerrar_sesion.php">Cerrar Sesion</a>
+            </li>
 
-                <div id="Nav-Items">
-                    <ul>
-                        <li>
-                            <a class="dropdown-item" href="papemaxinicio.php">Inicio</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="catalogo.php">Catalogo</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="registroventas.php">Registro de ventas</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="registrocompras.php">Registro de compras</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="ventasdiarias.php">Ventas diarias</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="reportemensual.php">Ventas mensuales</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="pedidos.php">Pedidos</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="agregarproducto.php">Agregar producto</a>
-                        </li>
-                        <li><a href="cerrar_sesion.php">Cerrar Sesion</a>
-                        </li>
-                        <li>
-                            <form action="" role="search" id="Buscador2">
-                                <input type="text" placeholder="Buscar" id="Buscador">
-                                <img role="button" src="../imagenes/busqueda.png" id="Buscar" alt="">
-                            </form>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </div>
-
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
 
     <h2 class="ventastxt text-center">Ventas diarias</h2>
 
