@@ -1,3 +1,26 @@
+<?php
+require_once __DIR__ . '/../../src/Modelos/consultascompras.php';
+use src\Config\Compras;
+$res='';
+$num ='';
+$productos = new Compras();
+if (isset($_SESSION['vacio'])) {
+  $res = $_SESSION['vacio'];
+}
+if (isset($_SESSION['numeros'])) {
+  $num = $_SESSION['numeros'];
+}
+if (isset($_SESSION['vacio']))
+{
+  $vac = $_SESSION['vacio'];
+}
+if (isset($_GET['categoria'])) {
+  $categoriaSeleccionada = $_GET['categoria'];
+  $resultado = $productos->consultarprod($categoriaSeleccionada);
+  $res = false;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,10 +56,18 @@
             font-family: 'Inter', sans-serif;
             font-weight: bold;
         }
-        .text{
+        .tex{
+          font-size: .9rem;
+            text-color:gray;
             font-family: 'Inter', sans-serif;
             font-weight: bold;
         }
+        .text{
+            font-family: 'Inter', sans-serif;
+            font-weight: bold;
+            font-size:2rem
+        }
+
     </style>
 </head>
 <body>
@@ -50,13 +81,13 @@
         <div class="collapse navbar-collapse col-lg-11 col-sm-6 col-md-6" id="menu">
             <ul class="navbar-nav d-flex justify-content-center">
               <li class="nav-item">
-              <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#"><img src="public/imagenes/menu.png" width="40" height="40"></a>
+              <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#"><img src="../imagenes/menu.png" width="40" height="40"></a>
               <ul class="dropdown-menu bg-light">
                 <li>
                   <a class="dropdown-item" href="">Inicio</a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="">Catalogo</a>
+                  <a class="dropdown-item" href="catalogo.php">Catalogo</a>
                 </li>
                 <li>
                   <a class="dropdown-item" href="registroventas.php">Registro de ventas</a>
@@ -76,73 +107,137 @@
         <div class="collapse navbar-collapse col-lg-1 col-sm-6 col-md-6 d-flex justify-content-end con" id="menu">
             <ul class="navbar-nav">
               <li class="nav-item">
-              <a href="usuario.php"><img src="public/imagenes/usuario.png" width="40" height="40"></a>
-              <img src="public/imagenes/carrito.png" width="40" height="40">
+              <a href="usuario.php"><img src="../imagenes/usuario.png" width="40" height="40"></a>
+              <img src="../imagenes/carrito.png" width="40" height="40">
               </li>
         </div>      
         </div>
   </nav>
 </header>
  <div class="container-fluid conts row justify-content-around">
-      <div class="col-sm-12 col-md-12 col-lg-7 col-xl-7 cont mt-4">
+      <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 cont mt-4">
+      <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 row">
+      <div class="col-sm-6 col-md-6 col-lg-9 col-xl-9">
       <h1 class="text">Registro Compras</h1>
+      </div>
+      <div class="col-sm-6 col-md-6 col-lg-3 col-xl-3 ">
+      <button type="submit" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">Nuevo producto</button>
+      <div class="modal modal-dialog-scrollable" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="ti">Agregar producto</h1>
+            </div>
+            <div class="modal-body">
+            <form action="../../src/Modelos/consultascompras.php" method="post" enctype="multipart/form-data">
+            <input type="text" class="form-control tex" aria-label="Amount (to the nearest dollar)" placeholder="Nombre(Obligatorio)" name="nombre">
+            <input type="number" class="form-control tex mt-2" aria-label="Amount (to the nearest dollar)" placeholder="Costo(Obligatorio)" name="costo" step="any">
+            <input type="number" class="form-control tex mt-2" aria-label="Amount (to the nearest dollar)" placeholder="Precio de venta(Obligatorio)" name="precio" step="any">
+            <input type="number" class="form-control tex mt-2" aria-label="Amount (to the nearest dollar)" placeholder="Cantidad(Obligatorio)" name="cantidad">
+            <div class="mt-2">
+              <textarea class="form-control" placeholder="Descripcion del producto" id="exampleFormControlTextarea1" rows="3" name="descripcion"></textarea>
+            </div>
+            <h2>Detalles</h2>
+            <input type="text" class="form-control tex mt-2" aria-label="Amount (to the nearest dollar)" placeholder="Marca(Obligatorio)" name="marca">
+            <input type="number" class="form-control tex mt-2" aria-label="Amount (to the nearest dollar)" placeholder="Tamaño(Opcional)" name="tamaño">
+            <input type="text" class="form-control tex mt-2" aria-label="Amount (to the nearest dollar)" placeholder="Color(Opcional)" name="color">
+            <input type="number" class="form-control tex mt-2" aria-label="Amount (to the nearest dollar)" placeholder="Cantidad por paquete(Obligatorio)" name="cantidadpaq">
+
+            <div class="input-group mt-3">
+              <span class="input-group-text tex" id="inputGroup-sizing-default">Categoria</span>
+              <select class="form-select form-select-md tex" name="categoria" aria-label=".form-select-md example">
+                <option selected>Seleccione(Obligatorio)</option>
+                <option value="1">Escritura</option>
+                <option value="2">Papel</option>
+                <option value="3">Cuadernos</option>
+                <option value="4">Archivo</option>
+                <option value="5">Escolares</option>
+              </select>
+              </div>
+              <h6 class="mt-2">Imagen(Obligatorio)</h6>
+              <input type="file" name="img"  accept=".jpg, .jpeg, .png">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+              <button type="submit" class="btn btn-success" name="guardar">Guardar</button>
+            </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      </div>
       <br/>
       <h5 class="te">Categoria</h5>
-      <div class="input-group mt-3">
-      <span class="input-group-text tex" id="inputGroup-sizing-default">Categoria</span>
-      <select class="form-select form-select-md tex" aria-label=".form-select-md example">
+      <div class="input-group mt-3 ">
+      <form action="registrocompras.php" class="input-group">
+      <select class="form-select form-select-md tex" aria-label=".form-select-md example" name="categoria" id="categoria">
         <option selected>Seleccione</option>
-        <option value="1">Escritura</option>
-        <option value="2">Papel</option>
-        <option value="3">Cuadernos</option>
-        <option value="4">Archivo</option>
-        <option value="5">Escolares</option>
+        <option value="Escritura">Escritura</option>
+        <option value="Papel">Papel</option>
+        <option value="Cuadernos">Cuadernos</option>
+        <option value="Archivo">Archivo</option>
+        <option value="Escolares">Escolares</option>
       </select>
+      <button type="submit" class="input-group-text tex" id="inputGroup-sizing-default">Buscar</button>
+      </form>
       </div>
-       <br/>
-      <h5 class="text">Producto</h5>
-      <div class="input-group mb-3 mt-3">
-        <input type="text" class="form-control tex" placeholder="Producto" aria-label="Recipient's username" aria-describedby="button-addon2">
-        <button class="btn btn-outline-secondary tex" type="button" id="button-addon2">Buscar</button>
-      </div>
-      <h5>Total</h5>
-      <div class="input-group input-group-md mb-3 mt-3">
-        <span class="input-group-text tex">$</span>
-        <input type="text" class="form-control tex" aria-label="Amount (to the nearest dollar)" placeholder="Total gastado">
-        <span class="input-group-text tex">.00</span>
-      </div>
-      <div class="mb-3">
-        <h5 class="text">Descripcion del producto</h5>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled></textarea>
-      </div>
-      <h5 class="text">Cantidad</h5>
+      </br>
+      <h5 class="te">Producto</h5>
+      <form action="../../src/Modelos/consultascompras.php" method="post">
+       <div class="input-group mb-3 mt-3">
+        <select class="form-select form-select-md tex" aria-label=".form-select-md example" name="producto" id="producto">
+            <option selected>Seleccione el producto</option>
+            <?php 
+            foreach ($resultado as $producto) { 
+                $ex = $producto['Existencias']?>
+                <option value="<?php echo $producto['ID_productos'] ?>"><?php echo $producto['Prod'].',  '.$producto['Color'].',  Precio:$'.$producto['Precio_de_Venta'].', Existencias:' .$producto['Existencias'] ?></option>
+            <?php } ?>
+        </select>
+    </div>
+            </br>
+      <h5 class="te">Cantidad</h5>
       <div>
-      <input type="number" class="form-control tex" placeholder="Cantidad" aria-label="Recipient's username" aria-describedby="button-addon2">
+      <input type="number" class="form-control tex" placeholder="Cantidad" aria-label="Recipient's username" aria-describedby="button-addon2" name="cantidad">
       </div>
       <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 d-flex justify-content-center mt-3">
-        <button type="submit" class="btn btn-outline-dark btn-md text">Agregar</button>
+        <button type="submit" class="btn btn-outline-dark btn-md tex" value="Agregar" name="agregar">Agregar</button>
+        </form>
       </div>
       </div>
-      <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 cont table-responsive mt-4">
+      <div class="col-sm-12 col-md-12 col-lg-5 col-xl-5 cont table-responsive mt-4">
       <table class="table table-hover">
           <thead>
             <tr>
               <th scope="col">#Producto</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Cantidad</th>
               <th scope="col">Fecha</th>
               <th scope="col">Total</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>22/07/2023</td>
-              <td>$220.50</td>
-            </tr>
+          <?php
+                      if (isset($_SESSION['Compras'])) {
+                          foreach ($_SESSION['Compras'] as $index => $producto) {
+                              echo "<tr>";
+                              echo "<th scope='row'>" . ($index + 1) . "</th>";
+                              echo "<td>" . htmlspecialchars($producto['nombre']) . "</td>";
+                              echo "<td>" . htmlspecialchars($producto['cantidad']) . "</td>";
+                              echo "<td>" . htmlspecialchars($producto['fecha']) . "</td>";
+                              echo "<td>$" . htmlspecialchars($producto['totalven']) . "</td>";
+                              echo "</tr>";
+                          }
+                      }
+                      ?>
           </tbody>
     </table>
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 d-flex justify-content-center mt-3">
-    <button type="submit" class="btn btn-dark btn-md text">Aceptar</button>
+    <form action="../../src/Modelos/consultascompras.php" method="post">
+    <button class="btn btn-outline-dark tex" name="confirmar" style="margin-right:3px;">Aceptar</button>
+    </form>
     </div>
+    
     </div>
  </div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
