@@ -94,7 +94,7 @@
             <h5>Seleccione una imagen</h5>
             </div>
             <div class="d-flex justify-content-center mt-2">
-              <input type="file" name="hidden">
+            <input type="file" name="img"  accept=".jpg, .jpeg, .png">
             </div>
           </form>
         </div>
