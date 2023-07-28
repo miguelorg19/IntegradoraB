@@ -1,42 +1,47 @@
 <?php
+namespace src\Modelos;
+require __DIR__ . '/../../vendor/autoload.php';
+use pdo;
 class Usuario {
-    private $db;
+    private $conexion;
 
-    public function __construct($db) {
-        $this->db = $db;
-        session_start(); 
+    public function __construct() {
+        $conexion_instancia = new \src\Config\Conexion();
+        $this->conexion = $conexion_instancia->conectar();
     }
 
     
-    public function iniciarSesion($correo, $contraseña) {
-        $query = "SELECT * FROM usuarios WHERE Correo = :correo";
-        $stmt = $this->db->prepare($query);
-        $stmt->bindParam(':correo', $correo);
+    public function iniciarSesion($email, $password) {
+        $consulta = "SELECT * FROM usuarios WHERE Correo = :email";
+        $stmt = $this->conexion->prepare($consulta);
+        $stmt->bindParam(':email', $email);
         $stmt->execute();
-
-        if ($stmt->rowCount() > 0) {
+        
+        if ($stmt->rowCount() === 1) {
             $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
-            if (password_verify($contraseña, $usuario['contrasenia'])) {
-                $_SESSION['usuario_id'] = $usuario['ID_Usuario'];
-                $_SESSION['usuario_correo'] = $usuario['Correo'];
-                $_SESSION['usuario_nombre'] = $usuario['Nombre'];
-                $_SESSION['usuario_rol'] = $usuario['Rol'];
+            $hashContraseñaAlmacenada = $usuario["Contrasenia"];
+    
+            if (password_verify($password, $hashContraseñaAlmacenada)) {
+                session_start();
+                $_SESSION['ID_USUARIO'] = $usuario['ID_Usuario'];
+                $_SESSION['NOMBRE_USUARIO'] = $usuario['Nombre'];
+                $_SESSION['ApellidoP'] = $usuario['Apellido_Paterno'];
+                $_SESSION['ApellidoM'] = $usuario['Apellido_Materno'];
+                $_SESSION['Telefono'] = $usuario['Telefono'];
+                $_SESSION['Correo'] = $usuario['Correo'];
+                $_SESSION['ROL'] = $usuario['Rol'];
+                
+                echo 'Conexión exitosa';
+    
                 return true;
+            } else {
+                echo 'Contraseña incorrecta';
             }
+        } else {
+            echo 'El usuario no existe';
         }
-        echo '<div class="alert alert-danger" role="alert">
-        Error de conexión: Correo o Contraseña incorrecta
-        </div>';
+        
         return false;
-    }
-
-    public function sesionIniciada() {
-        return isset($_SESSION['usuario_id']);
-    }
-
-    public function cerrarSesion() {
-        session_unset();
-        session_destroy();
     }
     
 }

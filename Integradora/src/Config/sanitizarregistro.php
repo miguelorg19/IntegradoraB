@@ -1,4 +1,5 @@
 <?php
+namespace src\Config;
 class sanitizarreg{
     public function sancorreo($correo){
         $correo = filter_var($correo, FILTER_SANITIZE_EMAIL);
