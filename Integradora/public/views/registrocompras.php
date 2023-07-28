@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__. '/../../src/Modelos/consultascompras.php';
-
+require_once '../../src/Modelos/imagenes.php';
+use src\Config\Imagenes;
+$imagenes = new Imagenes();
 use src\Config\Compras;
 $res='';
 $num ='';
@@ -16,10 +18,6 @@ if (isset($_SESSION['ID_USUARIO'])) {
 } 
 else {
   header("location:login.php");
-}
-if($idUsuario != 1)
-{
-  header("location:papemaxinicio.php");
 }
 
 $productos = new Compras();
@@ -88,7 +86,9 @@ if (isset($_GET['categoria'])) {
             font-weight: bold;
             font-size:2rem
         }
-
+        .usuario{
+            margin-left: 100%;
+        }
     </style>
 </head>
 <body>
@@ -113,7 +113,8 @@ if (isset($_GET['categoria'])) {
               $img = '../imagenes/usuario.png';
             }
             ?>
-        <a href="usuario.php"><img src="<?php echo $img ?>" alt="" id="usuario"></a>
+        
+        <a href="usuario.php"><img src="<?php echo $img ?>" alt="" id="usuario" class="usuario"></a>
        
       </div>
       <!--Menu Desplegado-->

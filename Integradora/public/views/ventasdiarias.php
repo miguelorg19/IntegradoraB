@@ -1,7 +1,9 @@
 <?php
 
 require_once(__DIR__ . '/../../src/Modelos/graficadiaria.php');
-
+require_once '../../src/Modelos/imagenes.php';
+use src\Config\Imagenes;
+$imagenes = new Imagenes();
 $graficadiaria = new src\Modelos\Graficadiaria();
 setlocale(LC_TIME, 'es_ES.UTF-8');
 date_default_timezone_set('America/Monterrey');
@@ -20,10 +22,6 @@ else {
   header("location:login.php");
 }
 
-if($idUsuario != 1)
-{
-  header("location:papemaxinicio.php");
-}
 
 $fecha_actual = date('Y-m-d');
 $dia_actual_en_espanol = $graficadiaria->obtenerDiaSemanaEnEspanol($fecha_actual);
@@ -117,7 +115,7 @@ if ($resultados) {
       background-blend-mode: normal;
       box-shadow: 0px 2px 10px rgba(100, 100, 100, 0.5);
     }
-    @media (max-width: 1100px) {
+    @media (max-width: 1300px) {
   .desc-venta {
     width:auto;
     margin-left: auto;
@@ -150,7 +148,17 @@ if ($resultados) {
       <input type="checkbox" id="Nav-MenuBtn">
       <!--Contenedor Del Usuario Y Carrito De Compras-->
       <div id="Contenedor-UC">
-        <a href="usuario.php"><img src="../imagenes/usuario.png" alt="" id="usuario"></a>
+      <?php 
+            $foto = $imagenes->verfoto($idUsuario);
+            if(!empty($foto)){
+              $url = $foto;
+              $img = $imagenes->obtenerimaus($url);
+            }
+            else{
+              $img = '../imagenes/usuario.png';
+            }
+            ?>
+        <a href="usuario.php"><img src="<?php echo $img?>" alt="" id="usuario"></a>
        
       </div>
       <!--Menu Desplegado-->
