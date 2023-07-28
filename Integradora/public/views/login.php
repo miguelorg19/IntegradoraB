@@ -1,25 +1,47 @@
 <?php
-require '../../src/Config/conexion.php';
-require '../../src/Modelos/sesionlogin.php';
-use Src\Config\Conexion;
 
+require '../../src/Config/conexion.php';
+use src\Config\Conexion;
 $db = new Conexion();
 $con = $db->conectar();
 
-if (isset($_POST['submit'])) {
-    $correo = $_POST['correo'];
-    $contraseña = $_POST['contraseña'];
+if(isset($_POST['correo']) && isset($_POST['contraseña'])){
 
-    $usuario = new \src\Modelos\Usuario();
-    $resultado = $usuario->iniciarSesion($correo, $contraseña);
+$correo = $_POST['correo'];
+$contraseña = $_POST['contraseña'];
 
-    if ($resultado === true) {
-        header('Location: ../../public/views/catalogo.php');
-        exit();
-    } else {
-        echo "<p>Ocurrio un error.</p>";
+$query = $con->prepare("SELECT * FROM usuarios WHERE Correo = :correo LIMIT 1");
+
+$query->execute(array(":correo"=>$correo));
+
+
+
+$reg = $query->rowCount();
+
+if($reg = $query->fetchALL(PDO::FETCH_ASSOC)){
+
+    foreach($reg as $usuario){
+
+        if(password_verify($contraseña, $usuario['Contrasenia'])){
+            session_start();
+
+            $_SESSION['ID_USUARIO'] = $usuario['ID_Usuario'];
+            $_SESSION['NOMBRE_USUARIO'] = $usuario['Nombre'];
+            
+            header("location:catalogo.php");
+            exit;
+        }
+
     }
 }
+else{
+    header("location:login.php");
+}
+    
+
+
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -52,13 +74,13 @@ if (isset($_POST['submit'])) {
         
             <h2>Inicio De Sesión</h2>
 
-            <form action="<?php $_SERVER['PHP_SELF']; ?>" method="post" id="form">
-                <input type="email" class="form-control mb-4 mt-4" placeholder="Correo" name="correo">
+            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" id="form">
+                <input type="text" class="form-control mb-4 mt-4" placeholder="Correo" name="correo">
                 <input type="password" class="form-control mb-4" placeholder="Contraseña" name="contraseña">
                
                 
                     <div id="ContBtn">
-                        <button type="submit" id="ingresar" name="submit">Ingresar</button>
+                        <button type="submit" id="ingresar">Ingresar</button>
                     </div>
         
                 

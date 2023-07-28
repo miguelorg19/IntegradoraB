@@ -173,6 +173,20 @@ class Actualizacion {
             $this->conexion = null;
         }
     }
-
+    
+    public function guardarimg($imgname, $idUs, $imgtmp)
+    {
+        $directorio = '../../public/Usuarios/';
+        $extension = pathinfo($imgname, PATHINFO_EXTENSION);
+        $nuevonombre = 'usuario_'. $idUs . '.' . $extension;
+        $ruta = $directorio. $nuevonombre;
+        if(move_uploaded_file($imgtmp, $ruta)){
+        echo 'Imagen subida ';
+        }
+        else{
+        }
+        $sql = $conexion->prepare("UPDATE usuarios set Foto = ? where ID_Usuario = ?");
+        $sql = execute([$nuevonombre, $idUs]);
+    }
 }
 ?>

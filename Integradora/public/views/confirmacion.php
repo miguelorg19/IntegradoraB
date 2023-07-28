@@ -4,12 +4,19 @@ require_once '../../src/Config/conexion.php';
 use src\Config\Conexion;
 session_start();
 
-if(!isset($_SESSION['NOMBRE_USUARIO'])){
-
-  header("location:login.php");
-
+if(isset($_SESSION['NOMBRE_USUARIO'])){
+    $nombreus = $_SESSION['NOMBRE_USUARIO'];
 }
-
+else
+{
+    header("location:login.php");
+}
+if (isset($_SESSION['ID_USUARIO'])) {
+    $idUsuario = $_SESSION['ID_USUARIO'];
+  } 
+  else {
+    header("location:login.php");
+}
 $contador = 0;
 
 
@@ -229,7 +236,17 @@ if($productos != null){
             <input type="checkbox" id="Nav-MenuBtn">
             <!--Contenedor Del Usuario Y Carrito De Compras-->
             <div id="Contenedor-UC">
-                <a href=""><img src="../imagenes/usuario.png" alt="" id="usuario"></a>
+            <?php 
+            $foto = $imagenes->verfoto($idUsuario);
+            if(!empty($foto)){
+              $url = $foto;
+              $img = $imagenes->obtenerimaus($url);
+            }
+            else{
+              $img = '../imagenes/usuario.png';
+            }
+            ?>
+                <a href="usuario.php"><img src="<?php echo $img ?>" id="usuario"></a>
                 <div id="ContCart">
                     <a href=""><img src="../imagenes/carrito.png" alt="" id="carrito"></a>
                     <span id="num_cart" class="badge bg-primary"><?php echo $num_cart; ?></span>

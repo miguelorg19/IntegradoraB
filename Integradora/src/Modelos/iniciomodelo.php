@@ -8,6 +8,24 @@ use PDOException;
 
 class Inciomodelo
 {
+    public function obtenerProductos()
+    {
+        $conexion = new Conexion();
+        $gbd = $conexion->conectar();
+    
+        try {
+            $consulta = "SELECT * FROM productos";
+            $statement = $gbd->prepare($consulta);
+            $statement->execute();
+    
+            $productos = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $productos;
+        } catch (PDOException $e) {
+            echo 'Error al obtener los productos: ' . $e->getMessage();
+            return array(); 
+        }
+    }
+
     public function obtenerPrimerProductoAleatorio()
     {
         $conexion = new Conexion();
@@ -45,39 +63,39 @@ class Inciomodelo
         }
     }
 
-    public function obtenerImagenesAleatorias($cantidad = 5)
-{
-    $conexion = new Conexion();
-    $gbd = $conexion->conectar();
-
-    try {
-       
-        $consulta = "SELECT i.Imagen
-                     FROM imagenes i
-                     JOIN productos p ON i.producto_ID_Producto = p.ID_Productos
-                     ORDER BY RAND()
-                     LIMIT :cantidad";
-
-        
-        $statement = $gbd->prepare($consulta);
-        $statement->bindParam(':cantidad', $cantidad, PDO::PARAM_INT);
-        $statement->execute();
-
-   
-        $nombresArchivos = $statement->fetchAll(PDO::FETCH_COLUMN);
-
-        
-        $rutaBase = '../../public/Productos/';
-        $rutasImagenes = array_map(function ($nombreArchivo) use ($rutaBase) {
-            return $rutaBase . $nombreArchivo;
-        }, $nombresArchivos);
-
+    public function obtenerImagenesAleatorias($cantidad = 4)
+    {
+        $conexion = new Conexion();
+        $gbd = $conexion->conectar();
     
-        return $rutasImagenes;
-    } catch (PDOException $e) {
-        echo 'Error al obtener imágenes: ' . $e->getMessage();
-        return [];
+        try {
+            $consulta = "SELECT i.Imagen, p.precio_de_venta, p.Nombre
+                         FROM imagenes i
+                         JOIN productos p ON i.producto_ID_Producto = p.ID_Productos
+                         ORDER BY RAND()
+                         LIMIT :cantidad";
+    
+            $statement = $gbd->prepare($consulta);
+            $statement->bindParam(':cantidad', $cantidad, PDO::PARAM_INT);
+            $statement->execute();
+    
+            $productos = $statement->fetchAll(PDO::FETCH_ASSOC);
+    
+            $rutaBase = '../../public/Productos/';
+            $rutasImagenes = array_map(function ($producto) use ($rutaBase) {
+                return [
+                    'Imagen' => $rutaBase . $producto['Imagen'],
+                    'Precio' => $producto['precio_de_venta'],
+                    'Nombre' => $producto['Nombre']
+                ];
+            }, $productos);
+    
+            return $rutasImagenes;
+        } catch (PDOException $e) {
+            echo 'Error al obtener imágenes: ' . $e->getMessage();
+            return [];
+        }
     }
-}
+    
 }
 ?>

@@ -2,8 +2,28 @@
 
 use src\Config\Conexion;
 use src\Modelos\Graficamensual;
-
+require_once '../../src/Modelos/imagenes.php';
+use src\Config\Imagenes;
+$imagenes = new Imagenes();
 require_once '../../src/Modelos/graficamensual.php';
+session_start();
+if(isset($_SESSION['NOMBRE_USUARIO'])){
+    $nombreus = $_SESSION['NOMBRE_USUARIO'];
+}
+else
+{
+    header("location:login.php");
+}
+if (isset($_SESSION['ID_USUARIO'])) {
+    $idUsuario = $_SESSION['ID_USUARIO'];
+  } 
+  else {
+    header("location:login.php");
+}
+if($idUsuario != 1)
+{
+  header("location:papemaxinicio.php");
+}
 
 $modelo = new Graficamensual();
 
@@ -15,20 +35,31 @@ if (isset($_POST['mes'])) {
     $mesSeleccionado = date('n');
 }
 
-// Obtener los datos de ganancias por semanas para el mes seleccionado
+
 $datos = $modelo->obtenerGananciasPorMes($mesSeleccionado);
 
-// Preparar los datos para la gráfica
+$semanasGanancias = [];
+
+foreach ($datos as $dato) {
+  
+    $numeroSemana = date('W', strtotime($dato['Fecha']));
+
+
+    if (isset($semanasGanancias[$numeroSemana])) {
+        $semanasGanancias[$numeroSemana] += $dato['Ganancias'];
+    } else {
+        $semanasGanancias[$numeroSemana] = $dato['Ganancias'];
+    }
+}
+
+
 $semanas = [];
 $ganancias = [];
 
-foreach ($datos as $dato) {
-    // Obtener el número de semana del registro actual
-    $numeroSemana = date('W', strtotime($dato['Fecha']));
 
-    // Usar el número de semana como etiqueta en la gráfica
+foreach ($semanasGanancias as $numeroSemana => $gananciaSemana) {
     $semanas[] = "Semana " . $numeroSemana;
-    $ganancias[] = $dato['Ganancias'];
+    $ganancias[] = $gananciaSemana;
 }
 
 $totalIngresos = 0;
@@ -120,6 +151,22 @@ $totalPerdido = ($beneficioTotal < 0) ? abs($beneficioTotal) : 0;
         .grafica .chartjs-render-monitor {
             font-size: 6px;
         }
+
+        @media (min-width: 1100px) {
+            .grafica-container {
+                width: 35rem;
+                height: 30rem;
+            }
+        }
+
+        
+        @media (max-width: 1100px) {
+            .grafica-container {
+                width: 100%;
+                height: 20rem;
+            }
+        }
+
     </style>
 </head>
 
@@ -128,73 +175,69 @@ $totalPerdido = ($beneficioTotal < 0) ? abs($beneficioTotal) : 0;
     <!-- BARRA DE NAVEGACION -->
 
     <div class="navcont">
-        <nav>
-            <!--Menu-->
+    <nav>
+      <!--Menu-->
 
-            <label for="Nav-MenuBtn">
-                <img src="../imagenes/menu.png" role="button" alt="" id="menu">
-            </label>
+      <label for="Nav-MenuBtn">
+        <img src="../imagenes/menu.png" role="button" alt="" id="menu">
+      </label>
 
-            <input type="checkbox" id="Nav-MenuBtn">
+      <input type="checkbox" id="Nav-MenuBtn">
+      <?php 
+            $foto = $imagenes->verfoto($idUsuario);
+            if(!empty($foto)){
+              $url = $foto;
+              $img = $imagenes->obtenerimaus($url);
+            }
+            else{
+              $img = '../imagenes/usuario.png';
+            }
+            ?>
+      <div id="Contenedor-UC">
+        <a href="usuario.php"><img src="<?php echo $img ?>" alt="" id="usuario"></a>
+        <a href="carrito.php"><img src="../imagenes/carrito.png" alt="" id="carrito"></a>
+      </div>
+      <!--Menu Desplegado-->
+      <div id="Menu-Desplegado">
+        <div id="Contenedor-Menu-Desplegado">
+          <h3>Jacky Papeleria</h3>
+          <label for="Nav-MenuBtn">
+            <img src="../imagenes/cerca.png" role="button" alt="" id="Cerrar">
+          </label>
+        </div>
 
-            <form action="" role="search" id="Buscador1">
-                <input type="text" placeholder="Buscar" id="Buscador">
-                <img role="button" src="../imagenes/busqueda.png" id="Buscar" alt="">
-            </form>
-            <!--Contenedor Del Usuario Y Carrito De Compras-->
-            <div id="Contenedor-UC">
-                <a href="usuario.php"><img src="../imagenes/usuario.png" alt="" id="usuario"></a>
-                <a href="carrito.php"><img src="../imagenes/carrito.png" alt="" id="carrito"></a>
-            </div>
-            <!--Menu Desplegado-->
-            <div id="Menu-Desplegado">
-                <div id="Contenedor-Menu-Desplegado">
-                    <h3>Jacky Papeleria</h3>
-                    <label for="Nav-MenuBtn">
-                        <img src="../imagenes/cerca.png" role="button" alt="" id="Cerrar">
-                    </label>
-                </div>
+        <div id="Nav-Items">
+          <ul>
+            <li>
+              <a href="papemaxinicio.php">Inicio</a>
+            </li>
+            <li>
+              <a href="catalogo.php">Catalogo</a>
+            </li>
+            <li>
+              <a href="registroventas.php">Registro de ventas</a>
+            </li>
+            <li>
+              <a href="registrocompras.php">Registro de compras</a>
+            </li>
+            <li>
+              <a href="ventasdiarias.php">Ventas diarias</a>
+            </li>
+            <li>
+              <a href="reportemensual.php">Ventas mensuales</a>
+            </li>
+            <li>
+              <a href="pedidos.php">Pedidos</a>
+            </li>
+        
+            <li><a href="cerrar_sesion.php">Cerrar Sesion</a>
+            </li>
 
-                <div id="Nav-Items">
-                    <ul>
-                        <li>
-                            <a class="dropdown-item" href="papemaxinicio.php">Inicio</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="catalogo.php">Catalogo</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="registroventas.php">Registro de ventas</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="registrocompras.php">Registro de compras</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="ventasdiarias.php">Ventas diarias</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="reportemensual.php">Ventas mensuales</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="pedidos.php">Pedidos</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="agregarproducto.php">Agregar producto</a>
-                        </li>
-                        <li><a href="cerrar_sesion.php">Cerrar Sesion</a>
-                        </li>
-                        <li>
-                            <form action="" role="search" id="Buscador2">
-                                <input type="text" placeholder="Buscar" id="Buscador">
-                                <img role="button" src="../imagenes/busqueda.png" id="Buscar" alt="">
-                            </form>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </div>
-
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
 
 
     <div class="containers mt-3 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 row ">

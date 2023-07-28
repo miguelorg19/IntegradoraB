@@ -86,16 +86,16 @@ use src\Modelos\Registro;
                 <input type="text" name="ApP"class="form-control text-center input mt-3" placeholder="Apellido Paterno"> 
                 <input type="text" name="ApM"class="form-control text-center input mt-3" placeholder="Apellido Materno"> 
                 <input type="text" name="Telefono"class="form-control text-center input mt-3" placeholder="Telefono">
-                <input type="email" name="Correo"class="form-control text-center input mt-3" placeholder="Correo Electronico"> 
-                <input type="password" class="form-control text-center input mt-3" placeholder="Contraseña" name="Contra"> 
-                <input type="password" name="Contraseña"class="form-control text-center input mt-3" placeholder="Confirmar contraseña">  
+                <input type="text" name="Correo"class="form-control text-center input mt-3" placeholder="Correo Electronico"> 
+                <input type="text" class="form-control text-center input mt-3" placeholder="Contraseña"> 
+                <input type="text" name="Contraseña"class="form-control text-center input mt-3" placeholder="Confirmar contraseña">  
                 </div>
                 <div class="d-flex justify-content-center mt-3">
                 <button type="submit" class="btn btn-dark ContBtn col-lg-9" name="agregar">Unete</button>
                 </div>
                 <div class="mt-4 d-flex justify-content-center">
                 <p class="ya">Ya eres miembro?</p>
-                <a href="../../public/views/login.html" class="ini text">
+                <a href="../Productos/index.html" class="ini text">
                 Iniciar Sesion
                 </a>
                 </div>

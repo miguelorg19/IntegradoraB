@@ -68,7 +68,15 @@ if(isset($_POST['correo'])){
     }
 }
 }
-
+if(!empty($_FILES['img'])){
+    header('Location: ../../public/views/usuario.php');
+    if(isset($_FILES['img'])){
+        $img = $_FILES["img"];
+        $imgname = $img['name'];
+        $imgtmp = $img['tmp_name'];
+        $actualiza->guardarimg($imgname, $idUsuario, $img);
+    }
+}
 if(isset($_POST['listo'])){
    echo '<meta http-equiv="refresh" content="1;url=/../../public/views/catalogo.php">';
 }

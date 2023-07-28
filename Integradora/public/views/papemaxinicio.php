@@ -3,7 +3,23 @@ require_once '../../src/Modelos/enviocorreoinicio.php';
 require_once '../../src/Modelos/iniciomodelo.php';
 
 use src\Modelos\Inciomodelo;
-
+require_once '../../src/Modelos/imagenes.php';
+use src\Config\Imagenes;
+session_start();
+if(isset($_SESSION['NOMBRE_USUARIO'])){
+    $nombreus = $_SESSION['NOMBRE_USUARIO'];
+}
+else
+{
+    header("location:login.php");
+}
+if (isset($_SESSION['ID_USUARIO'])) {
+    $idUsuario = $_SESSION['ID_USUARIO'];
+  } 
+  else {
+    header("location:login.php");
+}
+$imagen = new Imagenes();
 $inicioModelo = new Inciomodelo();
 $imagenes = $inicioModelo->obtenerImagenesAleatorias();
 ?>
@@ -37,14 +53,21 @@ $imagenes = $inicioModelo->obtenerImagenesAleatorias();
 
         }
 
+        .card-img-top {
+            height: 200px;
+
+            object-fit: cover;
+
+        }
 
         .card {
             background-color: #f4f4f4;
+            height: 350px;
             box-shadow: 0px 5px 5px mediumslateblue;
         }
 
         .containerproductos {
-
+            margin-top: 12%;
             width: 80%;
         }
 
@@ -52,7 +75,14 @@ $imagenes = $inicioModelo->obtenerImagenesAleatorias();
             font-family: 'Brush Script MT';
         }
 
-        .containerproductos,
+
+        .carouselcontainer {
+            background: white;
+            background-blend-mode: normal;
+            box-shadow: 0px 2px 10px rgba(100, 100, 100, 0.5);
+            border-radius: 3px;
+        }
+
         .carouselcontainer,
         .contactanoscontainer {
             margin-top: 10%;
@@ -62,6 +92,44 @@ $imagenes = $inicioModelo->obtenerImagenesAleatorias();
         .logocontainer {
             margin-top: 8%;
         }
+
+        .img-container {
+            position: relative;
+            height: 200px;
+
+            overflow: hidden;
+        }
+
+
+        .img-container img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+
+        }
+
+
+        .card-body .btn {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        @media (max-width: 1100px) {
+        .card {
+            height: 400px; 
+        }
+
+        .card-body .btn {
+            bottom: 20px; 
+        }
+    }
+
     </style>
 </head>
 
@@ -78,14 +146,19 @@ $imagenes = $inicioModelo->obtenerImagenesAleatorias();
 
             <input type="checkbox" id="Nav-MenuBtn">
 
-            <form action="" role="search" id="Buscador1">
-                <input type="text" placeholder="Buscar" id="Buscador">
-                <img role="button" src="../imagenes/busqueda.png" id="Buscar" alt="">
-            </form>
-            <!--Contenedor Del Usuario Y Carrito De Compras-->
+            <?php 
+            $foto = $imagen->verfoto($idUsuario);
+            if(!empty($foto)){
+              $url = $foto;
+              $img = $imagen->obtenerimaus($url);
+            }
+            else{
+              $img = '../imagenes/usuario.png';
+            }
+            ?>
             <div id="Contenedor-UC">
-                <a href="usuario.php"><img src="../imagenes/usuario.png" alt="" id="usuario"></a>
-                <a href="carrito.php"><img src="../imagenes/carrito.png" alt="" id="carrito"></a>
+                <a href="usuario.php"><img src="<?php echo $img ?>" alt="" id="usuario"></a>
+                <a href="carritodecompras.php"><img src="../imagenes/carrito.png" alt="" id="carrito"></a>
             </div>
             <!--Menu Desplegado-->
             <div id="Menu-Desplegado">
@@ -104,32 +177,21 @@ $imagenes = $inicioModelo->obtenerImagenesAleatorias();
                         <li>
                             <a class="dropdown-item" href="catalogo.php">Catalogo</a>
                         </li>
-                        <li>
-                            <a class="dropdown-item" href="registroventas.php">Registro de ventas</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="registrocompras.php">Registro de compras</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="ventasdiarias.php">Ventas diarias</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="reportemensual.php">Ventas mensuales</a>
-                        </li>
+                        <?php if($idUsuario == 1)
+                            {
+                            echo '<li><a href="registroventas.php">Registrar Ventas</a></li>'.
+                            '<li><a href="registrocompras.php">Registrar compras</a></li>'.
+                            '<li><a href="ventasdiarias.php">Ventas diarias</a></li>'.
+                            '<li><a href="reportemensual.php">Ventas mensuales</a></li>';
+                            }?>
                         <li>
                             <a class="dropdown-item" href="pedidos.php">Pedidos</a>
                         </li>
-                        <li>
-                            <a class="dropdown-item" href="agregarproducto.php">Agregar producto</a>
-                        </li>
+                        
+                        
                         <li><a href="cerrar_sesion.php">Cerrar Sesion</a>
                         </li>
-                        <li>
-                            <form action="" role="search" id="Buscador2">
-                                <input type="text" placeholder="Buscar" id="Buscador">
-                                <img role="button" src="../imagenes/busqueda.png" id="Buscar" alt="">
-                            </form>
-                        </li>
+                      
                     </ul>
                 </div>
             </div>
@@ -225,7 +287,7 @@ $imagenes = $inicioModelo->obtenerImagenesAleatorias();
                             </div>
                         <?php
                         } else {
-                            
+
                             echo '<div class="col text-center">No hay productos disponibles</div>';
                         }
                         ?>
@@ -386,108 +448,66 @@ $imagenes = $inicioModelo->obtenerImagenesAleatorias();
 
 
     <!-- PRODUCTOS -->
-    <div class="containerproductos mx-auto ">
+    <!-- PRODUCTOS -->
+    <div class="containerproductos mx-auto">
         <div class="row">
-
-            <div class="col-6 col-sm-6 col-md-4 col-lg-3 producto">
-                <div class="card">
-                    <img src="../imagenes/cuadernoscribeplus.jpeg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Nombre Del Producto.</h5>
-                        <p class="card-text">Precio.</p>
-                        <a href="#" class="btn btn-dark">Añadir</a>
+            <?php
+            $imagenesConPrecio = $inicioModelo->obtenerImagenesAleatorias();
+            if ($imagenesConPrecio) {
+                foreach ($imagenesConPrecio as $imagenConPrecio) {
+                    $imagenProducto = $imagenConPrecio['Imagen'];
+                    $precioProducto = $imagenConPrecio['Precio'];
+                    $nombreProducto = $imagenConPrecio['Nombre'];
+            ?>
+                    <div class="col-6 col-sm-6 col-md-4 col-lg-3 producto">
+                        <div class="card">
+                            <div class="img-container">
+                                <img src="<?= $imagenProducto; ?>" class="card-img-top" alt="...">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title"><?= $nombreProducto; ?></h5>
+                                <p class="card-text"><?= '$'.$precioProducto; ?></p>
+                                <a href="catalogo.php" class="btn btn-dark">Ver catalogo</a>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-
-
-
-            <div class="col-6 col-sm-6 col-md-4 col-lg-3 producto">
-                <div class="card">
-                    <img src="../imagenes/boloigrafo.jpeg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Nombre Del Producto.</h5>
-                        <p class="card-text">Precio.</p>
-                        <a href="#" class="btn btn-dark">Añadir</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-6 col-sm-6 col-md-4 col-lg-3 producto">
-                <div class="card">
-                    <img src="../imagenes/corrector.jpeg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Nombre Del Producto.</h5>
-                        <p class="card-text">Precio.</p>
-                        <a href="#" class="btn btn-dark">Añadir</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-6 col-sm-6 col-md-4 col-lg-3 producto">
-                <div class="card">
-                    <img src="../imagenes/cuadernoscribeplus.jpeg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Nombre Del Producto.</h5>
-                        <p class="card-text">Precio.</p>
-                        <a href="#" class="btn btn-dark">Añadir</a>
-                    </div>
-                </div>
-            </div>
-
-
-
+            <?php
+                }
+            } else {
+                echo '<p>No hay productos disponibles.</p>';
+            }
+            ?>
         </div>
 
         <div class="row mt-5">
-            <div class="col-6 col-sm-6 col-md-4 col-lg-3 producto">
-                <div class="card">
-                    <img src="../imagenes/cuadernoscribeplus.jpeg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Nombre Del Producto.</h5>
-                        <p class="card-text">Precio.</p>
-                        <a href="#" class="btn btn-dark">Añadir</a>
+            <?php
+            $imagenesConPrecio = $inicioModelo->obtenerImagenesAleatorias();
+            if ($imagenesConPrecio) {
+                foreach ($imagenesConPrecio as $imagenConPrecio) {
+                    $imagenProducto = $imagenConPrecio['Imagen'];
+                    $precioProducto = $imagenConPrecio['Precio'];
+                    $nombreProducto = $imagenConPrecio['Nombre'];
+            ?>
+                    <div class="col-6 col-sm-6 col-md-4 col-lg-3 producto">
+                        <div class="card">
+                            <div class="img-container">
+                                <img src="<?= $imagenProducto; ?>" class="card-img-top" alt="...">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title"><?= $nombreProducto; ?></h5>
+                                <p class="card-text"><?='$'.$precioProducto; ?></p>
+                                <a href="catalogo.php" class="btn btn-dark">Ver catalogo</a>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="col-6 col-sm-6 col-md-4 col-lg-3 producto">
-                <div class="card">
-                    <img src="../imagenes/boloigrafo.jpeg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Nombre Del Producto.</h5>
-                        <p class="card-text">Precio.</p>
-                        <a href="#" class="btn btn-dark">Añadir</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-6 col-sm-6 col-md-4 col-lg-3 producto">
-                <div class="card">
-                    <img src="../imagenes/corrector.jpeg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Nombre Del Producto.</h5>
-                        <p class="card-text">Precio.</p>
-                        <a href="#" class="btn btn-dark">Añadir</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-6 col-sm-6 col-md-4 col-lg-3 producto">
-                <div class="card">
-                    <img src="../imagenes/cuadernoscribeplus.jpeg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Nombre Del Producto.</h5>
-                        <p class="card-text">Precio.</p>
-                        <a href="#" class="btn btn-dark">Añadir</a>
-                    </div>
-                </div>
-            </div>
-
+            <?php
+                }
+            } else {
+                echo '<p>No hay productos disponibles.</p>';
+            }
+            ?>
         </div>
     </div>
-
-
 
     <!-- CONTACTANOS -->
     <div class=" container-fluid bg-dark text-white py-3 contactanoscontainer">
