@@ -119,9 +119,6 @@ $imagenes = $inicioModelo->obtenerImagenesAleatorias();
                         <li>
                             <a class="dropdown-item" href="pedidos.php">Pedidos</a>
                         </li>
-                        <li>
-                            <a class="dropdown-item" href="agregarproducto.php">Agregar producto</a>
-                        </li>
                         <li><a href="cerrar_sesion.php">Cerrar Sesion</a>
                         </li>
                         <li>
