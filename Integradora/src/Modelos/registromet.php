@@ -3,7 +3,7 @@ namespace src\Config;
 require __DIR__ . '/../Config/conexion.php';
 require __DIR__ . '/../../vendor/autoload.php';
 require __DIR__ . '/../Config/validacionregistro.php';
-require __DIR__ . '/../Config/sanitizacionregistro.php';
+require __DIR__ . '/../Config/sanitizarregistro.php';
 use src\Config\validacionesr;
 use src\Config\sanitizarreg;
 use src\Config\Conexion;
