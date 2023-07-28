@@ -171,12 +171,7 @@ $imagenes = $inicioModelo->obtenerImagenesAleatorias();
                         
                         <li><a href="cerrar_sesion.php">Cerrar Sesion</a>
                         </li>
-                        <li>
-                            <form action="" role="search" id="Buscador2">
-                                <input type="text" placeholder="Buscar" id="Buscador">
-                                <img role="button" src="../imagenes/busqueda.png" id="Buscar" alt="">
-                            </form>
-                        </li>
+                      
                     </ul>
                 </div>
             </div>

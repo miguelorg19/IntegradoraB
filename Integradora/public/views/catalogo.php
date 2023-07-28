@@ -243,7 +243,7 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
     .filter-content {
       display: none;
       position: absolute;
-      background: #fff;
+      background: #293133;
       border: 1px solid #ccc;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       padding: 10px;
