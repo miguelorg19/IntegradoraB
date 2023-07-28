@@ -18,17 +18,28 @@ if (isset($_POST['mes'])) {
 // Obtener los datos de ganancias por semanas para el mes seleccionado
 $datos = $modelo->obtenerGananciasPorMes($mesSeleccionado);
 
-// Preparar los datos para la gráfica
-$semanas = [];
-$ganancias = [];
+$semanasGanancias = [];
 
 foreach ($datos as $dato) {
     // Obtener el número de semana del registro actual
     $numeroSemana = date('W', strtotime($dato['Fecha']));
 
-    // Usar el número de semana como etiqueta en la gráfica
+    // Verificar si ya existe una entrada para esta semana y sumar las ganancias
+    if (isset($semanasGanancias[$numeroSemana])) {
+        $semanasGanancias[$numeroSemana] += $dato['Ganancias'];
+    } else {
+        $semanasGanancias[$numeroSemana] = $dato['Ganancias'];
+    }
+}
+
+// Preparar los datos para la gráfica
+$semanas = [];
+$ganancias = [];
+
+// Recorrer el arreglo de semanas y ganancias y agregar los datos a los arreglos para la gráfica
+foreach ($semanasGanancias as $numeroSemana => $gananciaSemana) {
     $semanas[] = "Semana " . $numeroSemana;
-    $ganancias[] = $dato['Ganancias'];
+    $ganancias[] = $gananciaSemana;
 }
 
 $totalIngresos = 0;
