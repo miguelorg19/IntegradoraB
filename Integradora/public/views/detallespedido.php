@@ -1,3 +1,18 @@
+<?php
+require_once '../../src/Modelos/consultaspedidos.php';
+require_once '../../src/Modelos/imagenes.php';
+use src\Config\Pedidos;
+use src\Config\Imagenes;
+$productos = new Pedidos();
+$imagenes = new Imagenes();
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+} else {
+    header("Location: pedidos.php");
+    exit(); 
+}
+$datos = $productos->detallesorden($id);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,8 +38,8 @@
             box-shadow: 0px .3rem .3rem gray;
         }
         .imgs{
-            width:8.9rem;
-            height:8.9rem;
+            width:9.2rem;
+            height:9.2rem;
             filter: brightness(1.1);
             mix-blend-mode: multiply;
         }
@@ -58,7 +73,7 @@
                 <div class="collapse navbar-collapse col-lg-11 col-sm-6 col-md-6" id="menu">
                     <ul class="navbar-nav d-flex justify-content-center">
                     <li class="nav-item">
-                    <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#"><img src="public/imagenes/menu.png" width="40" height="40"></a>
+                    <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#"><img src="../imagenes/menu.png" width="40" height="40"></a>
                     <ul class="dropdown-menu bg-light">
                         <li>
                         <a class="dropdown-item" href="">Inicio</a>
@@ -90,35 +105,36 @@
                 <div class="collapse navbar-collapse col-lg-1 col-sm-6 col-md-6 d-flex justify-content-end con" id="menu">
                     <ul class="navbar-nav">
                     <li class="nav-item">
-                    <a href="usuario.php"><img src="public/imagenes/usuario.png" width="40" height="40"></a>
-                    <img src="public/imagenes/carrito.png" width="40" height="40">
+                    <a href="usuario.php"><img src="../imagenes/usuario.png" width="40" height="40"></a>
+                    <img src="../imagenes/carrito.png" width="40" height="40">
                     </li>
                 </div>      
                 </div>
         </nav>
         </header>
         <div class="container col-8 mt-4 row conss d-flex justify-content-center">
-            <h1 class="text">Detalles del pedido</h1>
-            <hr>
-            <div class="col-xl-4 col-lg-4 col-md-8 col-sm-12 col-12 conn">
-                <img src="public/imagenes/libreta.jpg" class="imgs img-thumbnail"></img>
+                <h1 class="text">Detalles del pedido</h1>
+                <hr>
+                <?php 
+                foreach ($datos as $detalles) { ?>
+                    <div class="col-xl-4 col-lg-4 col-md-8 col-sm-12 col-12 conn">
+                        <?php                 $productimg = $detalles['imagen'];
+                        $img = $imagenes->obtenerimag($productimg)?>
+                        <img src='<?php echo $img?>' class="imgs img-thumbnail">
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12 col-12 conn2">
+                        <h3 class="te"><?php echo $detalles['Nombre'] ?></h3>
+                        <h3 class="te"><?php echo $detalles['Cantidad'] ?></h3>
+                        <?php
+                        $productId = $detalles['ID_productos'];
+                        $idVe = $detalles['Orden_Ventas_Id_Orden_Venta'];
+                        $total = $productos->tot($idVe, $productId);
+                        ?>
+                        <h3 class="te">$<?php echo $total ?></h3>
+                    </div>
+                    <hr class="mt-2">
+                <?php } ?>
             </div>
-            <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12 col-12 conn2">
-                <h3 class="te">Cuaderno escribe Raya 100 hojas</h3>
-                <h3 class="te">Cantidad:3</h3>
-                <h3 class="te">Total:$50</h3>
-            </div>
-            <hr class="mt-2">
-            <div class="col-xl-4 col-lg-4 col-md-8 col-sm-12 col-12 conn">
-                <img src="public/imagenes/borra.png" class="imgs img-thumbnail"></img>
-            </div>
-            <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12 col-12 conn2">
-                <h3 class="te">Cuaderno escribe Raya 100 hojas</h3>
-                <h3 class="te">Cantidad:3</h3>
-                <h3 class="te">Total:$50</h3>
-            </div>
-            <hr class="mt-2">
-        </div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
 </body>

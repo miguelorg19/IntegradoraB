@@ -1,3 +1,11 @@
+<?php
+require_once __DIR__ . '/../../src/Modelos/consultaspedidos.php';
+
+use src\Config\Pedidos;
+$productos = new Pedidos();
+$datos = $productos->orden();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,7 +59,7 @@
         <div class="collapse navbar-collapse col-lg-11 col-sm-6 col-md-6 " id="menu" >
             <ul class="navbar-nav d-flex justify-content-center">
               <li class="nav-item">
-              <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#"><img src="public/imagenes/menu.png" width="40" height="40"></a>
+              <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#"><img src="../imagenes/menu.png" width="40" height="40"></a>
               <ul class="dropdown-menu bg-light">
                 <li>
                   <a class="dropdown-item" href="">Inicio</a>
@@ -77,8 +85,8 @@
         <div class="collapse navbar-collapse col-lg-1 col-sm-6 col-md-6 d-flex justify-content-end con" id="menu">
             <ul class="navbar-nav">
               <li class="nav-item">
-              <a href="usuario.php"><img src="public/imagenes/usuario.png" width="40" height="40"></a>
-              <img src="public/imagenes/carrito.png" width="40" height="40">
+              <a href="usuario.php"><img src="../imagenes/usuario.png" width="40" height="40"></a>
+              <img src="../imagenes/carrito.png" width="40" height="40">
               </li>
         </div>      
         </div>
@@ -97,16 +105,19 @@
             </tr>
           </thead>
           <tbody>
+          <?php foreach($datos as $productos) {
+             ?>
             <tr>
-              <th scope="row">1</th>
-              <td>22/07/2023</td>
-              <td>$220.60</td>
-              <td>Pendiente</td>
+              <th scope="row"><?php echo $productos['Id_Orden_Venta'];?></th>
+              <td><?php echo $productos['Fecha'];?></td>
+              <td>$<?php echo $productos['Costo_Total'];?></td>
+              <td><?php echo $productos['Estatus'];?></td>
               <td>
-              <a class="btn btn-dark btn-sm" href="detallespedido.php">Ver pedido</a>
+              <a class="btn btn-dark btn-sm" href="detallespedido.php?id=<?php echo $productos['Id_Orden_Venta']?>"><i class="bi bi-eye"></i></a>
               </td>
-              <td><button class="btn btn-success btn-sm">Completado</button> <button class="btn btn-danger btn-sm btn2">Cancelar pedido</button></td>
+              <td><button class="btn btn-success btn-sm"><i class="bi bi-check-lg"></i></button> <button class="btn btn-danger btn-sm btn2"><i class="bi bi-trash"></i></button></td>
             </tr>
+            <?php } ?>
           </tbody>
     </table>
     </form>

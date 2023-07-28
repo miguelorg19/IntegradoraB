@@ -1,12 +1,3 @@
-<?php
-session_start();
-if (isset($_SESSION['ID_USUARIO'])) {
-  $idUsuario = $_SESSION['ID_USUARIO'];
-} else {
-  header('Location: /../Integradora/public/views/login.php');
-  exit();
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,7 +49,7 @@ if (isset($_SESSION['ID_USUARIO'])) {
         <div class="collapse navbar-collapse col-lg-11 col-sm-6 col-md-6" id="menu">
             <ul class="navbar-nav d-flex justify-content-center">
               <li class="nav-item">
-              <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#"><img src="public/imagenes/menu.png" width="40" height="40"></a>
+              <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#"><img src="../imagenes/menu.png" width="40" height="40"></a>
               <ul class="dropdown-menu bg-light">
                 <li>
                   <a class="dropdown-item" href="">Inicio</a>
@@ -87,7 +78,7 @@ if (isset($_SESSION['ID_USUARIO'])) {
         <div class="collapse navbar-collapse col-lg-1 col-sm-6 col-md-6 d-flex justify-content-end con" id="menu">
             <ul class="navbar-nav">
               <li class="nav-item">
-              <img src="public/imagenes/carrito.png" width="40" height="40">
+              <img src="../imagenes/carrito.png" width="40" height="40">
               </li>
         </div>      
         </div>
@@ -97,7 +88,7 @@ if (isset($_SESSION['ID_USUARIO'])) {
         <div class="col-xl-8 col-lg-8 col-md-6 col-sm-12 col-12 d-flex justify-content-center conss">
           <form action="" method="post" enctype="multipart/form-data">
             <div  class="d-flex justify-content-center">
-            <img src="public/imagenes/usuarioimg.png" width="200px" height="200px">
+            <img src="../imagenes/usuarioimg.png" width="200px" height="200px">
             </div>
             <div class="d-flex justify-content-center">
             <h5>Seleccione una imagen</h5>
@@ -108,16 +99,16 @@ if (isset($_SESSION['ID_USUARIO'])) {
           </form>
         </div>
         <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12 conss">
-        <form action="../../src/Modelos/actualizar.php" method="post">
-        <input type="text" class="form-control tex" placeholder="Nombre" value="<?php echo $_SESSION['NOMBRE_USUARIO']?>" aria-label="Recipient's username" name="Nombre" aria-describedby="button-addon2">
-        <input type="text" class="form-control tex mt-3" placeholder="Apellido Paterno" value="<?php echo $_SESSION['ApellidoP']?>" name="ApeP" aria-label="Recipient's username" aria-describedby="button-addon2">
-        <input type="text" class="form-control tex mt-3" value="<?php echo $_SESSION['ApellidoM']?>" name="ApeM" aria-label="Recipient's username" aria-describedby="button-addon2">
-        <input type="text" class="form-control tex mt-3" value="<?php echo $_SESSION['Telefono']?>" name="telefono" aria-label="Recipient's username" aria-describedby="button-addon2">
-        <input type="email" class="form-control tex mt-3" value="<?php echo $_SESSION['Correo']?>" name="correo" aria-label="Recipient's username" aria-describedby="button-addon2">
+        <form>
+        <input type="text" class="form-control tex" placeholder="Nombre" aria-label="Recipient's username" aria-describedby="button-addon2">
+        <input type="text" class="form-control tex mt-3" placeholder="Apellido Paterno" aria-label="Recipient's username" aria-describedby="button-addon2">
+        <input type="text" class="form-control tex mt-3" placeholder="Apellido Materno" aria-label="Recipient's username" aria-describedby="button-addon2">
+        <input type="text" class="form-control tex mt-3" placeholder="Telefono" aria-label="Recipient's username" aria-describedby="button-addon2">
+        <input type="text" class="form-control tex mt-3" placeholder="Correo electronico" aria-label="Recipient's username" aria-describedby="button-addon2">
         </div>
         <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12  d-flex justify-content-end">
-        <button type="submit" name="guardar" class="btn btn-dark text" style="margin-right:2%">Actualizar</button>
-        <button type="submit" name="listo" class="btn btn-success text" style="margin-right:1.5%">Guardar</button>
+        <button type="submit" class="btn btn-dark text" style="margin-right:2%">Actualizar</button>
+        <button type="submit" class="btn btn-success text" style="margin-right:1.5%">Guardar</button>
         </form>
         </div>
         <div>
