@@ -380,7 +380,17 @@ if($productos != null){
         <input type="checkbox" id="Nav-MenuBtn">
         <!--Contenedor Del Usuario Y Carrito De Compras-->
         <div id="Contenedor-UC">
-        <a href=""><img src="../imagenes/usuario.png" alt="" id="usuario"></a>
+        <?php 
+            $foto = $imagenes->verfoto(1);
+            if(!empty($foto)){
+              $url = $foto;
+              $img = $imagenes->obtenerimaus($url);
+            }
+            else{
+              $img = '../imagenes/usuarioimg.png';
+            }
+        ?>
+        <a href=""><img src="<?php echo $img  ?>" id="usuario"></a>
         <div id="ContCart">
             <a href=""><img src="../imagenes/carrito.png" alt="" id="carrito"></a>
             <span id="num_cart" class="badge bg-primary"><?php echo $num_cart; ?></span>

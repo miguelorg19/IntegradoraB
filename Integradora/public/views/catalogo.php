@@ -12,10 +12,6 @@ $imagenes = new Imagenes();
 
 session_start();
 
-if (!isset($_SESSION['NOMBRE_USUARIO'])) {
-
-  header("location:login.php");
-}
 
 $num_cart = 0;
 if (isset($_SESSION['carrito']['productos'])) {
