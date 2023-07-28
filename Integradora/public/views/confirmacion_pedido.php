@@ -64,7 +64,7 @@ if(isset($_POST['total']) && isset($_POST['action'])){
                     
 
 
-                    $sql = $con->prepare("INSERT INTO orden_ventas VALUES(:id,NOW(),:tot,'','PENDIENTE',:id_us)");
+                    $sql = $con->prepare("INSERT INTO orden_ventas VALUES(:id,NOW(),:tot,'','PENDIENTE',:id_us,'')");
                     $sql->execute(array("id"=>$ID_ORDENVENTA,"tot"=>$total,"id_us"=>$ID_USUARIO));
             
                 foreach($productos as $clave => $cantidad){

@@ -1,6 +1,7 @@
 <?php
 
-require '../../src/Config/conexion.php';
+require_once '../../src/Config/conexion.php';
+use Src\Config\Conexion;
 
 session_start();
 
@@ -54,7 +55,7 @@ function agregar($id, $cantidad){
             $db = new Conexion();
             $con = $db->conectar();
 
-            $sql = $con->prepare("SELECT Precio_de_Venta FROM Productos WHERE ID_Productos = :id");
+            $sql = $con->prepare("SELECT Precio_de_Venta FROM productos WHERE ID_Productos = :id");
             $sql->execute(array('id'=>$id));
             $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 
