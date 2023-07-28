@@ -15,16 +15,16 @@ if (isset($_POST['mes'])) {
     $mesSeleccionado = date('n');
 }
 
-// Obtener los datos de ganancias por semanas para el mes seleccionado
+
 $datos = $modelo->obtenerGananciasPorMes($mesSeleccionado);
 
 $semanasGanancias = [];
 
 foreach ($datos as $dato) {
-    // Obtener el número de semana del registro actual
+  
     $numeroSemana = date('W', strtotime($dato['Fecha']));
 
-    // Verificar si ya existe una entrada para esta semana y sumar las ganancias
+
     if (isset($semanasGanancias[$numeroSemana])) {
         $semanasGanancias[$numeroSemana] += $dato['Ganancias'];
     } else {
@@ -32,11 +32,11 @@ foreach ($datos as $dato) {
     }
 }
 
-// Preparar los datos para la gráfica
+
 $semanas = [];
 $ganancias = [];
 
-// Recorrer el arreglo de semanas y ganancias y agregar los datos a los arreglos para la gráfica
+
 foreach ($semanasGanancias as $numeroSemana => $gananciaSemana) {
     $semanas[] = "Semana " . $numeroSemana;
     $ganancias[] = $gananciaSemana;
@@ -131,6 +131,22 @@ $totalPerdido = ($beneficioTotal < 0) ? abs($beneficioTotal) : 0;
         .grafica .chartjs-render-monitor {
             font-size: 6px;
         }
+
+        @media (min-width: 1100px) {
+            .grafica-container {
+                width: 35rem;
+                height: 30rem;
+            }
+        }
+
+        
+        @media (max-width: 1100px) {
+            .grafica-container {
+                width: 100%;
+                height: 20rem;
+            }
+        }
+
     </style>
 </head>
 
