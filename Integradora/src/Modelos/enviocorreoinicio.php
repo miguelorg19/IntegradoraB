@@ -20,21 +20,18 @@ class EnvioCorreo
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'jakiepapeleria@gmail.com';
-            $mail->Password = 'lgdyyjwcnbhhaqmz';
+            $mail->Username = 'edsonalgarate@gmail.com';
+            $mail->Password = 'ledtdnyujjgdkbia';
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
 
-            $mail->setFrom($email,$nombre); // DirecciÃ³n de correo y nombre del remitente
-            $mail->addAddress('jakiepapeleria@gmail.com', 'jakie');
-            $mail->isHTML(true);
-           $cuerpoMensaje = "<p>Nombre: {$nombre}</p>
-                             <p>Correo electrónico: {$email}</p>
-                             <p>Mensaje: {$mensaje}</p>";
-
+            $mail->setFrom($email, $nombre); // Dirección de correo y nombre del remitente
+            $mail->addAddress('edsonalgarate@gmail.com', 'emith');
             $mail->isHTML(true);
             $mail->Subject = $asunto;
-            $mail->Body = $cuerpoMensaje;            // Enviar el correo
+            $mail->Body = $mensaje;
+
+            // Enviar el correo
             $rta = $mail->send();
 
             $mail->clearAllRecipients();
