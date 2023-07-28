@@ -1,7 +1,7 @@
 <?php
 namespace src\Config;
 require __DIR__ . '/../../vendor/autoload.php';
-require_once ('conexion.php');
+require_once 'conexion.php';
 use PDO;
 use PDOException;
 session_start();
@@ -20,7 +20,7 @@ class validacionesr{
                 $_SESSION['Mensaje']= '<div class="alert alert-danger"">
                 Campo correo electronico vació.
                 </div>';
-                header('Location:  ../../Integradora/public/views/registro.php');
+                header('Location:  ../../public/views/usuario.php');
                 return false;
             }
 
@@ -30,7 +30,7 @@ class validacionesr{
                 $_SESSION['Mensaje']= '<div class="alert alert-danger" role="alert">
                 El correo electrónico no tiene un formato válido.
                 </div>';
-                header('Location:  ../../public/views/registro.php');
+                header('Location:  ../../public/views/usuario.php');
                 return false;
             }
 
@@ -38,17 +38,9 @@ class validacionesr{
                 $_SESSION['Mensaje']= '<div class="alert alert-danger">
                 El correo electronico ya esta registrado.
                 </div>';
-                header('Location:  ../../public/views/registro.php');
+                header('Location:  ../../public/views/usuario.php');
                 return false;
             }
-
-            if (!filter_var($correo, FILTER_VALIDATE_EMAIL) || strpos($correo, '@gmail.com') === false) {
-                $_SESSION['Mensaje']= '<div class="alert alert-danger">
-                    El correo electrónico no tiene un formato válido, solo formato @gmail.com
-                    </div>';
-                    header('Location:  ../../public/views/registro.php');
-                    return false;
-                }
 
             return true;
         }
@@ -76,7 +68,7 @@ public function nombres($nombre) {
         $_SESSION['Mensaje']= '<div class="alert alert-danger">
         Campo nombre vacío.
         </div>';
-        header('Location:  ../../public/views/registro.php');
+        header('Location:  ../../public/views/usuario.php');
         return false;
     }
 
@@ -84,7 +76,7 @@ public function nombres($nombre) {
         $_SESSION['Mensaje']= '<div class="alert alert-danger">
         El nombre solo puede contener letras y espacios.
         </div>';
-        header('Location:  ../../public/views/registro.php');
+        header('Location:  ../../public/views/usuario.php');
         return false;
     }
 
@@ -96,7 +88,7 @@ public function apellidosP($apellido) {
         $_SESSION['Mensaje']= '<div class="alert alert-danger">
         Campo apellido paterno vacío.
         </div>';
-        header('Location:  ../../public/views/registro.php');
+        header('Location:  ../../public/views/usuario.php');
         return false;
     }
 
@@ -106,7 +98,7 @@ public function apellidosP($apellido) {
         $_SESSION['Mensaje']='<div class="alert alert-danger">
         El apellido debe tener entre 3 y 50 caracteres.
         </div>';
-        header('Location:  ../../public/views/registro.php');
+        header('Location:  ../../public/views/usuario.php');
         return false;
     }
 
@@ -114,7 +106,7 @@ public function apellidosP($apellido) {
         $_SESSION['Mensaje']='<div class="alert alert-danger">
         El apellido paterno solo puede contener letras y espacios.
         </div>';
-        header('Location:  ../Integradora/public/views/registro.php');
+        header('Location:  ../../public/views/usuario.php');
         return false;
     }
 
@@ -132,7 +124,7 @@ public function apellidosM($apellido) {
         $_SESSION['Mensaje']= '<div class="alert alert-danger">
         El apellido materno debe tener entre 3 y 50 caracteres.
         </div>';
-        header('Location:  ../../public/views/registro.php');
+        header('Location:  ../../public/views/usuario.php');
         return false;
     }
 
@@ -140,7 +132,7 @@ public function apellidosM($apellido) {
         $_SESSION['Mensaje']= '<div class="alert alert-danger">
         El apellido solo puede contener letras y espacios.
         </div>';
-        header('Location:  ../../public/views/registro.php');
+        header('Location:  ../../public/views/usuario.php');
         return false;
     }
 
@@ -150,7 +142,7 @@ public function apellidosM($apellido) {
 public function telefonos(&$telefono) {
     if (empty($telefono)) {
         $_SESSION['Mensaje']='<div class="alert alert-danger">Campo telefono vacío.</div>';
-        header('Location:  ../../public/views/registro.php');
+        header('Location:  ../../public/views/usuario.php');
         return false;
     }
 
@@ -158,8 +150,8 @@ public function telefonos(&$telefono) {
     $telefono = preg_replace('/[^0-9]/', '', $telefono);
 
     if(strlen($telefono) !== 10) {
-        $_SESSION['Mensaje']='<div class="alert alert-danger">Campo telefono solo puede contener 10 caracteres</div>';
-        header('Location:  ../../public/views/registro.php');
+        $_SESSION['Mensaje']='<div class="alert alert-danger">Campo telefono solo puede contener 10 caracteres numericos</div>';
+        header('Location:  ../../public/views/usuario.php');
         return false;
     }
 
@@ -169,28 +161,29 @@ public function telefonos(&$telefono) {
 public function contras($contras, $contrasConfirmacion) {
     if (empty($contras)) {
         $_SESSION['Mensaje']= '<div class="alert alert-danger">Debes ingresar una contraseña.</div>';
-        header('Location:  ../../public/views/registro.php');
+        header('Location:  ../../public/views/usuario.php');
         return false;
     }
 
     if (empty($contrasConfirmacion)) {
         $_SESSION['Mensaje']='<div class="alert alert-danger">Debes confirmar la contraseña.</div>';
-        header('Location:  ../../public/views/registro.php');
+        header('Location:  ../../public/views/usuario.php');
         return false;
     }
 
     if ($contras !== $contrasConfirmacion) {
         $_SESSION['Mensaje']='<div class="alert alert-danger">Las contraseñas no coinciden.</div>';
-        header('Location:  ../../public/views/registro.php');
+        header('Location:  ../../public/views/usuario.php');
         return false;
     }
 
     if(strlen($contras)>3){
         $_SESSION['Mensaje']='<div class="alert alert-danger">La contraseña debe contener al menos 3 caracteres</div>';
-        header('Location:  ../../public/views/registro.php');
+        header('Location:  ../../public/views/usuario.php');
     }
     
     return true;
 }
+
 }
 ?>
