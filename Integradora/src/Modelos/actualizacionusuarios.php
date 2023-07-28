@@ -33,7 +33,9 @@ class Actualizacion {
             $stmt->execute();
 
             if ($stmt->rowCount() > 0) {
+                ob_start();
                 header('Location: ../../public/views/usuario.php');
+                ob_flush();
                 echo 'Se actualizó el correo correctamente.';   
                 return true;
             } else {
@@ -42,6 +44,9 @@ class Actualizacion {
             }
         } catch (PDOException $e) {
             return false;
+        }
+        finally{
+            $this->conexion = null;
         }
     }
 
@@ -59,7 +64,9 @@ class Actualizacion {
             $stmt->execute();
 
             if ($stmt->rowCount() > 0) {
+                ob_start();
                 header('Location: ../../public/views/usuario.php');
+                ob_flush();
                 echo 'Se actualizó el nombre correctamente.';
                 return true;
             } else {
@@ -69,13 +76,15 @@ class Actualizacion {
         } catch (PDOException $e) {
             return false;
         }
+        finally{
+            $this->conexion = null;
+        }
     }
 
     public function actualizarapellidoP($idUsuario, $nuevoApellido){
         if (empty($nuevoApellido)) {
             return false;
-        }
-    
+        }  
         try {
             $consulta = "UPDATE usuarios SET Apellido_Paterno = :apellido WHERE ID_Usuario = :idUsuario";
             $stmt = $this->conexion->prepare($consulta);
@@ -85,7 +94,9 @@ class Actualizacion {
             $stmt->execute();
 
             if ($stmt->rowCount() > 0) {
+                ob_start();
                 header('Location: ../../public/views/usuario.php');
+                ob_flush();
                 echo 'Se actualizó el apellido correctamente.';
                 return true;
             } else {
@@ -94,6 +105,9 @@ class Actualizacion {
             }
         } catch (PDOException $e) {
             return false;
+        }
+        finally{
+            $this->conexion = null;
         }
     }
 
@@ -111,7 +125,9 @@ class Actualizacion {
             $stmt->execute();
 
             if ($stmt->rowCount() > 0) {
+                ob_start();
                 header('Location: ../../public/views/usuario.php');
+                ob_flush();
                 echo 'Se actualizó el apellido correctamente.';
                 return true;
             } else {
@@ -120,6 +136,9 @@ class Actualizacion {
             }
         } catch (PDOException $e) {
             return false;
+        }
+        finally{
+            $this->conexion = null;
         }
     }
 
@@ -138,7 +157,9 @@ class Actualizacion {
             $stmt->execute();
     
             if ($stmt->rowCount() > 0) {
+                ob_start();
                 header('Location: ../../public/views/usuario.php');
+                ob_flush();
                 echo 'Se actualizó el telefono correctamente.';
                 return true;
             } else {
@@ -147,6 +168,9 @@ class Actualizacion {
             }
         } catch (PDOException $e) {
             return false;
+        }
+        finally{
+            $this->conexion = null;
         }
     }
 
