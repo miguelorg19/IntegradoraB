@@ -1,5 +1,14 @@
 <?php
 namespace src\Config;
+require __DIR__ . '/../Config/conexion.php';
+require __DIR__ . '/../../vendor/autoload.php';
+require __DIR__ . '/../Config/validacionregistro.php';
+require __DIR__ . '/../Config/sanitizarregistro.php';
+
+use sanitizarreg as GlobalSanitizarreg;
+use src\Config\validacionesr;
+use src\Config\sanitizarreg;
+use src\Config\Conexion;
 require_once (__DIR__ . '/../Config/conexion.php');
 class Registro
 {
@@ -57,27 +66,56 @@ $registro = new Registro();
 
 // Verificar si se envió el formulario y procesar los datos
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Obtener los datos del formulario
+    session_start();
     $nombre = $_POST["nombre"];
-    $apellidoPat = $_POST["ApP"];
+    $apellidoPat = $_POST["ApeP"];
     $apellidoMat = $_POST["ApM"];
     $telefono = $_POST["Telefono"];
     $correo = $_POST["Correo"];
     $contraseña = $_POST["Contraseña"];
+    $contraseña2 = $_POST['Contra'];
+    $validar = new validacionesr();
+    $san = new Sanitizarreg();
+    $_SESSION['nombre']=$_POST["nombre"];
+    $_SESSION['ApP']=$_POST["ApP"];
+    $_SESSION['ApM']=$_POST["ApM"];
+    $_SESSION['Tel']=$_POST['Telefono'];
+    $_SESSION['Correo']=$_POST['Correo'];
 
+    $nombreValido = $validar->nombres($nombre);
+    $apellidoPatValido = $validar->apellidosP($apellidoPat);
+    $apellidoMatValido = $validar->apellidosM($apellidoMat);
+    $telefonoValido = $validar->telefonos($telefono);
+    $correoValido = $validar->correos($correo);
+    $contraseñaValida = $validar->contras($contraseña,$contraseña2);
+
+    if ($nombreValido && $apellidoPatValido && $apellidoMatValido && $telefonoValido && $correoValido && $contraseñaValida) {
+        $nombreSanitizado = $san->sannombre($nombre);
+        $apellidoPatSanitizado = $san->sanapellidos($apellidoPat);
+        $apellidoMatSanitizado = $san->sanapellidos($apellidoMat);
+        $telefonoSanitizado = $san->santelefonos($telefono);
+        $correoSanitizado = $san->sancorreo($correo);
+
+        if($nombreSanitizado && $apellidoPatSanitizado && $apellidoMatSanitizado && $telefonoSanitizado && $correoSanitizado){
+          $registro = new Registro();
+            $registro->Registro($nombre, $apellidoPat, $apellidoMat, $telefonoSanitizado, $correoSanitizado, $contraseña);
+            session_unset();
+            session_destroy();
+            $_SESSION['Mensaje'] = '<div class="alert alert-success" role="alert">Registro exitoso</div>';
+            header('Location:  /../Integradora/public/views/login.php');
+            return true;  
+        }
+
+        return false;
+    }
         extract($_POST);
         if (empty($nombre) || empty($apellidoPat) || empty($apellidoMat) || empty($telefono) || empty($correo) || empty($contraseña)) {
+         
             echo 'Faltan campos por llenar';
             header('Location:  /../../public/views/registro.php');
             exit;
         }
-        else{
-        $obj = new Registro();
-        $obj->Registro($nombre, $apellidoPat, $apellidoMat, $telefono,$correo,$contraseña);
-        echo 'registro exitoso';
-        header('Location: /../../public/views/usuario.php');
-        $obj -> cerrarConexion();
-        exit;
-        }
-}
+
+    }
+
 ?>

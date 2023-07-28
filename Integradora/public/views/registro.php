@@ -2,7 +2,10 @@
 require_once '../../vendor/autoload.php';
 use src\Config\Conexion;
 use src\Modelos\Registro;
+session_start();
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -69,7 +72,7 @@ use src\Modelos\Registro;
      </style>
 </head>
 <body>
-    <nav class="navbar bg-black barra"></nav>
+<nav class="navbar bg-black barra"></nav>
     <div class="container justify-content-center">
     <div class="mt-4 d-flex justify-content-center"><img src="../imagenes/jakiepape.png" class="imglogo img-fluid"></div>
     <div class="container d-flex justify-content-center mt-4">
@@ -79,23 +82,32 @@ use src\Modelos\Registro;
                 <h4 class="text">Registrar</h4>
                 
                 <div class="col-lg-6 col-sm-6 col-md-6 col-xl-6 mt-1"><p class="te">Crea tu perfil para acceder a la variedad de productos que ofrecemos en PAPEMAX</p></div>
-                </div>
+                <?php
+                    if (isset($_SESSION['Mensaje'])) {
+                        echo $_SESSION['Mensaje'];
+                        unset($_SESSION['Mensaje']);
+                    }
+                    ?>   
+            </div>
                 <div class="d-flex justify-content-center mt-2">
                 <form action="../../src/Modelos/registromet.php" method="post">
-                <input type="text" name="nombre" class="form-control text-center input " placeholder="Nombre"> 
-                <input type="text" name="ApP"class="form-control text-center input mt-3" placeholder="Apellido Paterno"> 
-                <input type="text" name="ApM"class="form-control text-center input mt-3" placeholder="Apellido Materno"> 
-                <input type="text" name="Telefono"class="form-control text-center input mt-3" placeholder="Telefono">
-                <input type="text" name="Correo"class="form-control text-center input mt-3" placeholder="Correo Electronico"> 
-                <input type="text" class="form-control text-center input mt-3" placeholder="Contraseña"> 
-                <input type="text" name="Contraseña"class="form-control text-center input mt-3" placeholder="Confirmar contraseña">  
-                </div>
-                <div class="d-flex justify-content-center mt-3">
+                <input type="text" name="nombre" class="form-control text-center input " placeholder="Nombre" value="<?php if (isset($_SESSION['nombre'])){echo $_SESSION['nombre'];}?>"require> 
+                <input type="text" name="ApP" class="form-control text-center input mt-3" placeholder="Apellido Paterno" value="<?php if (isset($_SESSION['ApP'])){echo $_SESSION['ApP'];}?>"require> 
+                <input type="text" name="ApM"class="form-control text-center input mt-3" placeholder="Apellido Materno" value="<?php if (isset($_SESSION['ApM'])){echo $_SESSION['ApM'];}?>"requiere> 
+                <input type="Tel" name="Telefono"class="form-control text-center input mt-3" placeholder="Telefono" value="<?php if (isset($_SESSION['Tel'])){echo $_SESSION['Tel'];}?>"require>
+                <input type="email" name="Correo"class="form-control text-center input mt-3" placeholder="Correo Electronico" value="<?php if (isset($_SESSION['Correo'])){echo $_SESSION['Correo'];}?>"require>  <div class="form-group">
+    <input type="password" name="Contra" id="validationServer06" class="form-control text-center input mt-3" placeholder="Contraseña" required>
+    <div class="invalid-feedback"> Por favor, ingresa una contraseña válida.</div> 
+<div class="form-group">
+    <input type="password" name="Contraseña" id="validationServer07" class="form-control text-center input mt-3" placeholder="Confirmar contraseña" required>
+    <div class="invalid-feedback">Las contraseñas no coinciden.</div>
+</div> 
+<div class="d-flex justify-content-center mt-3">
                 <button type="submit" class="btn btn-dark ContBtn col-lg-9" name="agregar">Unete</button>
                 </div>
                 <div class="mt-4 d-flex justify-content-center">
                 <p class="ya">Ya eres miembro?</p>
-                <a href="../Productos/index.html" class="ini text">
+                <a href="../../public/views/login.php" class="ini text">
                 Iniciar Sesion
                 </a>
                 </div>
