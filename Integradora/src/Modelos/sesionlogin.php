@@ -9,7 +9,7 @@ class Usuario {
 
     
     public function iniciarSesion($email, $password) {
-        $consulta = "SELECT ID_Usuario, Nombre, Rol, Contrasenia FROM usuarios WHERE Correo = :email";
+        $consulta = "SELECT * FROM usuarios WHERE Correo = :email";
         $stmt = $this->conexion->prepare($consulta);
         $stmt->bindParam(':email', $email);
         $stmt->execute();
@@ -22,6 +22,10 @@ class Usuario {
                 session_start();
                 $_SESSION['ID_USUARIO'] = $usuario['ID_Usuario'];
                 $_SESSION['NOMBRE_USUARIO'] = $usuario['Nombre'];
+                $_SESSION['ApellidoP'] = $usuario['Apellido_Paterno'];
+                $_SESSION['ApellidoM'] = $usuario['Apellido_Materno'];
+                $_SESSION['Telefono'] = $usuario['Telefono'];
+                $_SESSION['Correo'] = $usuario['Correo'];
                 $_SESSION['ROL'] = $usuario['Rol'];
                 
                 echo 'Conexión exitosa';
