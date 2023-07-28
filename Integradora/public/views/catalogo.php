@@ -270,7 +270,7 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
     #toggle-filter:checked+.filter-content {
       display: flex;
       flex-direction: column;
-      background-color: #f4f4f4;
+      background-color: #293133;
       box-shadow: 0px 2px 10px rgba(100, 100, 100, 0.5);
       height: auto;
       padding: 15px;
