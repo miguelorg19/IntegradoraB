@@ -103,6 +103,17 @@ $imagenes = $inicioModelo->obtenerImagenesAleatorias();
             left: 50%;
             transform: translateX(-50%);
         }
+
+        @media (max-width: 1100px) {
+        .card {
+            height: 400px; 
+        }
+
+        .card-body .btn {
+            bottom: 20px; 
+        }
+    }
+
     </style>
 </head>
 
@@ -445,7 +456,7 @@ $imagenes = $inicioModelo->obtenerImagenesAleatorias();
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title"><?= $nombreProducto; ?></h5>
-                                <p class="card-text"><?= $precioProducto; ?></p>
+                                <p class="card-text"><?= '$'.$precioProducto; ?></p>
                                 <a href="catalogo.php" class="btn btn-dark">Ver catalogo</a>
                             </div>
                         </div>
@@ -474,7 +485,7 @@ $imagenes = $inicioModelo->obtenerImagenesAleatorias();
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title"><?= $nombreProducto; ?></h5>
-                                <p class="card-text"><?= $precioProducto; ?></p>
+                                <p class="card-text"><?='$'.$precioProducto; ?></p>
                                 <a href="catalogo.php" class="btn btn-dark">Ver catalogo</a>
                             </div>
                         </div>
