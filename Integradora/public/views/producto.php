@@ -219,7 +219,7 @@ $sql = null;
             }
             ?>
                 <a href="usuario.php"><img src="<?php echo $img ?>" width="40" height="40"></a>
-                <a href="carritodecompras.php"><img src="../imagenes/carrito.png" width="40" height="40"></a>
+                <span class="badge bg-primary" id="num_cart"><?php echo $num_cart; ?></span><a href="carritodecompras.php"><img src="../imagenes/carrito.png" width="40" height="40"></a>
                 </div>
               </li>
             </div>    
