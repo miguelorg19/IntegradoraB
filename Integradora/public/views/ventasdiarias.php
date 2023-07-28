@@ -5,6 +5,25 @@ require_once(__DIR__ . '/../../src/Modelos/graficadiaria.php');
 $graficadiaria = new src\Modelos\Graficadiaria();
 setlocale(LC_TIME, 'es_ES.UTF-8');
 date_default_timezone_set('America/Monterrey');
+session_start();
+if(isset($_SESSION['NOMBRE_USUARIO'])){
+  $nombreus = $_SESSION['NOMBRE_USUARIO'];
+}
+else
+{
+  header("location:login.php");
+}
+if (isset($_SESSION['ID_USUARIO'])) {
+  $idUsuario = $_SESSION['ID_USUARIO'];
+} 
+else {
+  header("location:login.php");
+}
+
+if($idUsuario != 1)
+{
+  header("location:papemaxinicio.php");
+}
 
 $fecha_actual = date('Y-m-d');
 $dia_actual_en_espanol = $graficadiaria->obtenerDiaSemanaEnEspanol($fecha_actual);

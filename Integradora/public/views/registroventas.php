@@ -1,11 +1,32 @@
 <?php
 require_once __DIR__ . '/../../src/Modelos/consultasventas.php';
-
+require_once '../../src/Modelos/imagenes.php';
+use src\Config\Imagenes;
 use src\Config\Ventas;
-
 $res = '';
 $Pago = 0;
+$imagenes = new Imagenes();
 $productos = new Ventas();
+session_start();
+if(isset($_SESSION['NOMBRE_USUARIO'])){
+  $nombreus = $_SESSION['NOMBRE_USUARIO'];
+}
+else
+{
+  header("location:login.php");
+}
+if (isset($_SESSION['ID_USUARIO'])) {
+  $idUsuario = $_SESSION['ID_USUARIO'];
+} 
+else {
+  header("location:login.php");
+}
+if($idUsuario != 1)
+{
+  header("location:papemaxinicio.php");
+}
+
+
 if (isset($_SESSION['resultado'])) {
   $res = $_SESSION['resultado'];
 }
@@ -95,7 +116,17 @@ if (isset($_GET['PagoTotal'])) {
       <input type="checkbox" id="Nav-MenuBtn">
       <!--Contenedor Del Usuario Y Carrito De Compras-->
       <div id="Contenedor-UC">
-        <a href="usuario.php"><img src="../imagenes/usuario.png" alt="" id="usuario"></a>
+      <?php 
+            $foto = $imagenes->verfoto($idUsuario);
+            if(!empty($foto)){
+              $url = $foto;
+              $img = $imagenes->obtenerimaus($url);
+            }
+            else{
+              $img = '../imagenes/usuario.png';
+            }
+            ?>
+        <a href="usuario.php"><img src="<?php echo $img ?>" alt="" id="usuario"></a>
      
       </div>
       <!--Menu Desplegado-->

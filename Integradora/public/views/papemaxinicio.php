@@ -3,7 +3,23 @@ require_once '../../src/Modelos/enviocorreoinicio.php';
 require_once '../../src/Modelos/iniciomodelo.php';
 
 use src\Modelos\Inciomodelo;
-
+require_once '../../src/Modelos/imagenes.php';
+use src\Config\Imagenes;
+session_start();
+if(isset($_SESSION['NOMBRE_USUARIO'])){
+    $nombreus = $_SESSION['NOMBRE_USUARIO'];
+}
+else
+{
+    header("location:login.php");
+}
+if (isset($_SESSION['ID_USUARIO'])) {
+    $idUsuario = $_SESSION['ID_USUARIO'];
+  } 
+  else {
+    header("location:login.php");
+}
+$imagen = new Imagenes();
 $inicioModelo = new Inciomodelo();
 $imagenes = $inicioModelo->obtenerImagenesAleatorias();
 ?>
@@ -130,9 +146,18 @@ $imagenes = $inicioModelo->obtenerImagenesAleatorias();
 
             <input type="checkbox" id="Nav-MenuBtn">
 
-            <!--Contenedor Del Usuario Y Carrito De Compras-->
+            <?php 
+            $foto = $imagen->verfoto($idUsuario);
+            if(!empty($foto)){
+              $url = $foto;
+              $img = $imagen->obtenerimaus($url);
+            }
+            else{
+              $img = '../imagenes/usuario.png';
+            }
+            ?>
             <div id="Contenedor-UC">
-                <a href="usuario.php"><img src="../imagenes/usuario.png" alt="" id="usuario"></a>
+                <a href="usuario.php"><img src="<?php echo $img ?>" alt="" id="usuario"></a>
                 <a href="carritodecompras.php"><img src="../imagenes/carrito.png" alt="" id="carrito"></a>
             </div>
             <!--Menu Desplegado-->
@@ -152,18 +177,13 @@ $imagenes = $inicioModelo->obtenerImagenesAleatorias();
                         <li>
                             <a class="dropdown-item" href="catalogo.php">Catalogo</a>
                         </li>
-                        <li>
-                            <a class="dropdown-item" href="registroventas.php">Registro de ventas</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="registrocompras.php">Registro de compras</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="ventasdiarias.php">Ventas diarias</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="reportemensual.php">Ventas mensuales</a>
-                        </li>
+                        <?php if($idUsuario == 1)
+                            {
+                            echo '<li><a href="registroventas.php">Registrar Ventas</a></li>'.
+                            '<li><a href="registrocompras.php">Registrar compras</a></li>'.
+                            '<li><a href="ventasdiarias.php">Ventas diarias</a></li>'.
+                            '<li><a href="reportemensual.php">Ventas mensuales</a></li>';
+                            }?>
                         <li>
                             <a class="dropdown-item" href="pedidos.php">Pedidos</a>
                         </li>

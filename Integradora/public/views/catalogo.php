@@ -11,12 +11,19 @@ use src\Config\Imagenes;
 $imagenes = new Imagenes();
 
 session_start();
-
-if (!isset($_SESSION['NOMBRE_USUARIO'])) {
-
+if(isset($_SESSION['NOMBRE_USUARIO'])){
+  $nombreus = $_SESSION['NOMBRE_USUARIO'];
+}
+else
+{
   header("location:login.php");
 }
-
+if (isset($_SESSION['ID_USUARIO'])) {
+  $idUsuario = $_SESSION['ID_USUARIO'];
+} 
+else {
+  header("location:login.php");
+}
 $num_cart = 0;
 if (isset($_SESSION['carrito']['productos'])) {
   $num_cart = count($_SESSION['carrito']['productos']);
@@ -304,10 +311,17 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
     </form>
     <div id="Contenedor-UC">
       <div id="ContUs">
-
-        <a href=""><img src="../imagenes/usuario.png" id="usuario" alt=""></a>
-        <h2><?php //echo $_SESSION["Nombre"]; 
-            ?></h2>
+      <?php 
+           $foto = $imagenes->verfoto($idUsuario);
+           if(!empty($foto)){
+             $url = $foto;
+             $img = $imagenes->obtenerimaus($url);
+           }
+           else{
+             $img = '../imagenes/usuario.png';
+           }
+           ?>
+          <a href="usuario.php"><img src="<?php echo $img; ?>" id="usuario" alt=""></a>
       </div>
       <div id="ContCart">
         <a href="carritodecompras.php">
@@ -354,9 +368,14 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
                 </form>
               </div>
             </li>
-
+            <?php if($idUsuario == 1)
+            {
+            echo '<li><a href="registroventas.php">Registrar Ventas</a></li>'.
+            '<li><a href="registrocompras.php">Registrar compras</a></li>'.
+            '<li><a href="ventasdiarias.php">Ventas diarias</a></li>'.
+            '<li><a href="reportemensual.php">Ventas mensuales</a></li>';
+            }?>
             <li><a href="cerrar_sesion.php">Cerrar Sesion</a></li>
-
             <br>
 
           </ul>

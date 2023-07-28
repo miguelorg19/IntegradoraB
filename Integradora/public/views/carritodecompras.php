@@ -4,18 +4,23 @@ require_once '../../src/Config/conexion.php';
 require_once '../../src/Modelos/imagenes.php';
 use Src\Config\Conexion;
 use Src\Config\Imagenes;
-
-
 $imagenes = new Imagenes();
 
 session_start();
 
-if(!isset($_SESSION['NOMBRE_USUARIO'])){
-
-  header("location:login.php");
-
+if(isset($_SESSION['NOMBRE_USUARIO'])){
+    $nombreus = $_SESSION['NOMBRE_USUARIO'];
 }
-
+else
+{
+    header("location:login.php");
+}
+if (isset($_SESSION['ID_USUARIO'])) {
+    $idUsuario = $_SESSION['ID_USUARIO'];
+  } 
+  else {
+    header("location:login.php");
+}
 
 $num_cart = 0;
 if(isset($_SESSION['carrito']['productos'])){
@@ -380,7 +385,17 @@ if($productos != null){
         <input type="checkbox" id="Nav-MenuBtn">
         <!--Contenedor Del Usuario Y Carrito De Compras-->
         <div id="Contenedor-UC">
-        <a href="usuario.php"><img src="../imagenes/usuario.png" alt="" id="usuario"></a>
+        <?php 
+            $foto = $imagenes->verfoto($idUsuario);
+            if(!empty($foto)){
+              $url = $foto;
+              $img = $imagenes->obtenerimaus($url);
+            }
+            else{
+              $img = '../imagenes/usuario.png';
+            }
+        ?>
+        <a href=""><img src="<?php echo $img  ?>" id="usuario"></a>
         <div id="ContCart">
             <a href="carritodecompras.php"><img src="../imagenes/carrito.png" alt="" id="carrito"></a>
             <span id="num_cart" class="badge bg-primary"><?php echo $num_cart; ?></span>
@@ -497,7 +512,7 @@ if($productos != null){
                 let eliminarModal = document.getElementById('eliminarModal')
                 eliminarModal.addEventListener('show.bs.modal', function(event){
                     let boton = event.relatedTarget
-                    let id = button.getAttribute('data-bs-id')
+                    let id = boton.getAttribute('data-bs-id')
                     let botonEliminar = eliminarModal.querySelector('.modal-footer #btn-eliminar')
                     botonEliminar.value = id
 

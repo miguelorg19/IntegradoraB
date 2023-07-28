@@ -9,12 +9,20 @@ use src\Config\Productos;
 $productos = new Productos();
 $imagenes = new Imagenes();
 session_start();
-
-if(!isset($_SESSION['NOMBRE_USUARIO'])){
-
-  header("location:login.php");
-
+if(isset($_SESSION['NOMBRE_USUARIO'])){
+  $nombreus = $_SESSION['NOMBRE_USUARIO'];
 }
+else
+{
+  header("location:login.php");
+}
+if (isset($_SESSION['ID_USUARIO'])) {
+  $idUsuario = $_SESSION['ID_USUARIO'];
+} 
+else {
+  header("location:login.php");
+}
+
 
 $num_cart=0;
 if(isset($_SESSION['carrito']['productos'])){
@@ -176,18 +184,13 @@ $sql = null;
                 <li>
                   <a class="dropdown-item" href="">Catalogo</a>
                 </li>
-                <li>
-                  <a class="dropdown-item" href="registrocompras.php">Registro de Compras</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="registroventas.php">Registro de Ventas</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="">Ventas diarias</a>
-                </li>
-                  <li>
-                  <a class="dropdown-item" href="">Ventas mensuales</a>
-                </li>
+                <?php if($idUsuario == 1)
+            {
+            echo '<li><a href="registroventas.php">Registrar Ventas</a></li>'.
+            '<li><a href="registrocompras.php">Registrar compras</a></li>'.
+            '<li><a href="ventasdiarias.php">Ventas diarias</a></li>'.
+            '<li><a href="reportemensual.php">Ventas mensuales</a></li>';
+            }?>
                 <li>
                   <a class="dropdown-item" href="pedidos.php">Pedidos</a>
                 </li>
@@ -205,8 +208,18 @@ $sql = null;
                 <div class="col-xl-2 col-lg-2 col-md-2 col-sm-4 col-4 d-flex justify-content-end">
                 <ul class="navbar-nav">
                 <li class="nav-item">
-                <a href="usuario.php"><img src="../imagenes/usuario.png" width="40" height="40"></a>
-                <a href="carritodecompras.php"><img src="../imagenes/carrito.png" width="40" height="40"></a>
+                <?php 
+            $foto = $imagenes->verfoto($idUsuario);
+            if(!empty($foto)){
+              $url = $foto;
+              $img = $imagenes->obtenerimaus($url);
+            }
+            else{
+              $img = '../imagenes/usuario.png';
+            }
+            ?>
+                <a href="usuario.php"><img src="<?php echo $img ?>" width="40" height="40"></a>
+                <span class="badge bg-primary" id="num_cart"><?php echo $num_cart; ?></span><a href="carritodecompras.php"><img src="../imagenes/carrito.png" width="40" height="40"></a>
                 </div>
               </li>
             </div>    

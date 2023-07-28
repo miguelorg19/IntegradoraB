@@ -2,12 +2,20 @@
 require_once '../../src/Modelos/imagenes.php';
 use src\Config\Imagenes;
 session_start();
+if(isset($_SESSION['NOMBRE_USUARIO'])){
+  $nombreus = $_SESSION['NOMBRE_USUARIO'];
+}
+else
+{
+  header("location:login.php");
+}
 if (isset($_SESSION['ID_USUARIO'])) {
   $idUsuario = $_SESSION['ID_USUARIO'];
+} 
+else {
+  header("location:login.php");
 }
-else{
-  header('location: login.php');
-}
+
 $imagenes = new Imagenes();
 ?>
 <!DOCTYPE html>
@@ -47,6 +55,11 @@ $imagenes = new Imagenes();
             font-family: 'Inter', sans-serif;
             font-weight: bold;
             font-size: .9rem;
+        }
+        .imgus{
+          width: 200px; 
+          height: 200px;
+          border-radius: 100%;
         }
     </style>
 </head>
@@ -98,18 +111,19 @@ $imagenes = new Imagenes();
 </header>
       <div class="container mt-4 d-flex justify-content-center row pw col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
         <div class="col-xl-8 col-lg-8 col-md-6 col-sm-12 col-12 d-flex justify-content-center conss">
-          <form action="" method="post" enctype="multipart/form-data">
+        <form action="../../src/Modelos/actualizar.php" method="post">
             <div  class="d-flex justify-content-center">
-            <?php $foto = $imagenes->verfoto($idUsuario);
+            <?php 
+            $foto = $imagenes->verfoto($idUsuario);
             if(!empty($foto)){
               $url = $foto;
               $img = $imagenes->obtenerimaus($url);
             }
             else{
-              $img = '../imagenes/usuarioimg.png';
+              $img = '../imagenes/usuario.png';
             }
             ?>
-            <img src="<?php echo $img ?>" width="200px" height="200px">
+            <img src="<?php echo $img ?>" class="imgus">
             </div>
             <div class="d-flex justify-content-center">
             <h5>Seleccione una imagen</h5>
@@ -117,10 +131,8 @@ $imagenes = new Imagenes();
             <div class="d-flex justify-content-center mt-2">
             <input type="file" name="img"  accept=".jpg, .jpeg, .png">
             </div>
-          </form>
         </div>
         <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12 conss">
-        <form action="../../src/Modelos/actualizar.php" method="post">
         <input type="text" class="form-control tex" placeholder="Nombre" value="<?php echo $_SESSION['NOMBRE_USUARIO']?>" aria-label="Recipient's username" name="Nombre" aria-describedby="button-addon2">
         <input type="text" class="form-control tex mt-3" placeholder="Apellido Paterno" value="<?php echo $_SESSION['ApellidoP']?>" name="ApeP" aria-label="Recipient's username" aria-describedby="button-addon2">
         <input type="text" class="form-control tex mt-3" value="<?php echo $_SESSION['ApellidoM']?>" name="ApeM" aria-label="Recipient's username" aria-describedby="button-addon2">

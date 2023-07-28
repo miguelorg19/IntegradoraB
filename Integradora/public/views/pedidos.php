@@ -1,11 +1,26 @@
 <?php
 require_once __DIR__ . '/../../src/Modelos/consultaspedidos.php';
-
+require_once '../../src/Modelos/imagenes.php';
+use src\Config\Imagenes;
+$imagenes = new Imagenes();
 use src\Config\Pedidos;
 
 $productos = new Pedidos();
 $datos = $productos->orden();
-
+session_start();
+if(isset($_SESSION['NOMBRE_USUARIO'])){
+  $nombreus = $_SESSION['NOMBRE_USUARIO'];
+}
+else
+{
+  header("location:login.php");
+}
+if (isset($_SESSION['ID_USUARIO'])) {
+  $idUsuario = $_SESSION['ID_USUARIO'];
+} 
+else {
+  header("location:login.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -81,10 +96,19 @@ $datos = $productos->orden();
       </label>
 
       <input type="checkbox" id="Nav-MenuBtn">
-      <!--Contenedor Del Usuario Y Carrito De Compras-->
+      <?php 
+            $foto = $imagenes->verfoto($idUsuario);
+            if(!empty($foto)){
+              $url = $foto;
+              $img = $imagenes->obtenerimaus($url);
+            }
+            else{
+              $img = '../imagenes/usuario.png';
+            }
+            ?>
       <div id="Contenedor-UC">
         <a href="usuario.php"><img src="../imagenes/usuario.png" alt="" id="usuario"></a>
-
+        
       </div>
       <!--Menu Desplegado-->
       <div id="Menu-Desplegado">
@@ -103,19 +127,13 @@ $datos = $productos->orden();
             <li>
               <a href="catalogo.php">Catalogo</a>
             </li>
-            <li>
-              <a href="registroventas.php">Registro de ventas</a>
-            </li>
-            <li>
-              <a href="registrocompras.php">Registro de compras</a>
-            </li>
-            <li>
-              <a href="ventasdiarias.php">Ventas diarias</a>
-            </li>
-            <li>
-              <a href="reportemensual.php">Ventas mensuales</a>
-            </li>
-            <li>
+            <?php if($idUsuario == 1)
+            {
+            echo '<li><a href="registroventas.php">Registrar Ventas</a></li>'.
+            '<li><a href="registrocompras.php">Registrar compras</a></li>'.
+            '<li><a href="ventasdiarias.php">Ventas diarias</a></li>'.
+            '<li><a href="reportemensual.php">Ventas mensuales</a></li>';
+            }?>
               <a href="pedidos.php">Pedidos</a>
             </li>
             <li><a href="cerrar_sesion.php">Cerrar Sesion</a>

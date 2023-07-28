@@ -2,8 +2,28 @@
 
 use src\Config\Conexion;
 use src\Modelos\Graficamensual;
-
+require_once '../../src/Modelos/imagenes.php';
+use src\Config\Imagenes;
+$imagenes = new Imagenes();
 require_once '../../src/Modelos/graficamensual.php';
+session_start();
+if(isset($_SESSION['NOMBRE_USUARIO'])){
+    $nombreus = $_SESSION['NOMBRE_USUARIO'];
+}
+else
+{
+    header("location:login.php");
+}
+if (isset($_SESSION['ID_USUARIO'])) {
+    $idUsuario = $_SESSION['ID_USUARIO'];
+  } 
+  else {
+    header("location:login.php");
+}
+if($idUsuario != 1)
+{
+  header("location:papemaxinicio.php");
+}
 
 $modelo = new Graficamensual();
 
@@ -163,10 +183,19 @@ $totalPerdido = ($beneficioTotal < 0) ? abs($beneficioTotal) : 0;
       </label>
 
       <input type="checkbox" id="Nav-MenuBtn">
-      <!--Contenedor Del Usuario Y Carrito De Compras-->
+      <?php 
+            $foto = $imagenes->verfoto($idUsuario);
+            if(!empty($foto)){
+              $url = $foto;
+              $img = $imagenes->obtenerimaus($url);
+            }
+            else{
+              $img = '../imagenes/usuario.png';
+            }
+            ?>
       <div id="Contenedor-UC">
-        <a href="usuario.php"><img src="../imagenes/usuario.png" alt="" id="usuario"></a>
-        
+        <a href="usuario.php"><img src="<?php echo $img ?>" alt="" id="usuario"></a>
+        <a href="carrito.php"><img src="../imagenes/carrito.png" alt="" id="carrito"></a>
       </div>
       <!--Menu Desplegado-->
       <div id="Menu-Desplegado">
