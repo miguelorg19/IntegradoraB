@@ -5,8 +5,8 @@ use src\Config\Pedidos;
 
 $productos = new Pedidos();
 $datos = $productos->orden();
-?>
 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,11 +32,22 @@ $datos = $productos->orden();
       background-color: #f4f4f4;
       border-radius: .5rem;
       padding: 1rem;
+      border: 1px solid black;
       box-shadow: 0px .3rem .3rem gray;
-      
+
     }
 
-   
+    .contenido {
+      background-image: url('../imagenes/papeleriapedidos.jpg');
+
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
     .tex {
       font-size: 1rem;
       font-family: 'Inter', sans-serif;
@@ -59,6 +70,8 @@ $datos = $productos->orden();
 </head>
 
 <body>
+
+
   <div class="navcont">
     <nav>
       <!--Menu-->
@@ -71,7 +84,7 @@ $datos = $productos->orden();
       <!--Contenedor Del Usuario Y Carrito De Compras-->
       <div id="Contenedor-UC">
         <a href="usuario.php"><img src="../imagenes/usuario.png" alt="" id="usuario"></a>
-        
+
       </div>
       <!--Menu Desplegado-->
       <div id="Menu-Desplegado">
@@ -114,6 +127,13 @@ $datos = $productos->orden();
     </nav>
   </div>
 
+  <div class="contenido">
+
+    <img style="height: 100%; width:100%;" src="../imagenes/papeleriapedidos.jpg" alt="" id="home">
+
+  </div>
+
+
   <div class="container table-responsive d-flex justify-content-center row pw col-xl-9 col-lg-9 col-md-6 col-sm-12 col-12 esp">
     <h1 class="te">Pedidos</h1>
     <form>
@@ -137,13 +157,32 @@ $datos = $productos->orden();
               <td>
                 <a class="btn btn-dark btn-sm" href="detallespedido.php?id=<?php echo $productos['Id_Orden_Venta'] ?>"><i class="bi bi-eye"></i></a>
               </td>
-              <td><button class="btn btn-success btn-sm"><i class="bi bi-check-lg"></i></button> <button class="btn btn-danger btn-sm btn2"><i class="bi bi-trash"></i></button></td>
+              <td class="status"><?php echo $productos['Estatus']; ?></td>
+              <td>
+                <a class="btn btn-dark btn-sm" href="detallespedido.php?id=<?php echo $productos['Id_Orden_Venta'] ?>"><i class="bi bi-eye"></i></a>
+              </td>
+              <td>
+                <button class="btn btn-success btn-sm btn-success-btn" data-orden-id="<?php echo $productos['Id_Orden_Venta']; ?>">
+                  <i class="bi bi-check-lg"></i>
+                </button>
+                <?php if ($productos['Estatus'] !== 'REALIZADO') { ?>
+                  <button class="btn btn-danger btn-sm btn-delete"><i class="bi bi-trash"></i></button>
+                <?php } ?>
+              </td>
             </tr>
           <?php } ?>
         </tbody>
       </table>
     </form>
   </div>
+  
+
+
+
+
+
+
+
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
 </body>

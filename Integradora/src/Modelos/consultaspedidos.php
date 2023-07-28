@@ -10,7 +10,7 @@ class Pedidos{
 
     public function __construct()
     {
-        $this->conexion = new Conexion();
+            $this->conexion = new Conexion();
     }
     public function orden()
     {
@@ -72,4 +72,14 @@ class Pedidos{
 
     }
 
+    public function actualizarEstadoPedido($orderId, $nuevoEstado)
+    {
+        try {
+            $conexion = $this->conexion->conectar();
+            $sql = $conexion->prepare('UPDATE orden_ventas set Estatus = ? where Id_Orden_Venta = ?');
+            $sql->execute([$nuevoEstado, $orderId]);
+        } catch (PDOException $e) {
+            echo'fallo la conexion';
+        }
+    }
 }
