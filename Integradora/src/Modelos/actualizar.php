@@ -1,12 +1,12 @@
 <?php
 require_once 'actualizacionusuarios.php';
-require '../Config/sanitizarregistro.php';
-require '../Config/validacionregistro.php';
-use src\Modelos\Actualizacion;
+require __DIR__ . '/../Config/validarusuario.php';
+require __DIR__ . '/../Config/snitizarusuario.php';
 use src\Config\validacionesr;
-use src\Config\sanitizarreg;
+use src\Config\sanitizarregi;
+use src\Modelos\Actualizacion;
 $validar = new validacionesr();
-$san = new sanitizarreg();
+$san = new sanitizarregi();
 $actualiza = new Actualizacion();
 if (isset($_SESSION['ID_USUARIO'])) {
  -   $idUsuario = $_SESSION['ID_USUARIO'];
@@ -15,39 +15,62 @@ if (isset($_SESSION['ID_USUARIO'])) {
     exit();
 }
 
-if(!empty($_POST['Nombre'])){
-if(isset($_POST['Nombre']) && isset($_POST['guardar'])){
-    $nombre = $_POST["Nombre"];
-    $nombreValido = $validar->nombres($nombre);
-    if ($nombreValido){
-        $nombreSanitizado = $san->sannombre($nombre);
-        $actualiza->actualizarnombre($idUsuario,$nombre);
-    }
-}
-}
+if (isset($_POST['listo'])) {
+    header('Location: /../Integradora/public/views/catalogo.php');
+    exit();
+ }
+ 
 
-if(!empty($_POST['ApeP'])){
-    if(isset($_POST['ApeP'])){
-        $apellidoPat = $_POST["ApeP"];
-        $apellidoPatValido = $validar->apellidosP($apellidoPat);
-        if($apellidoPatValido){
-            $apellidoPatSanitizado = $san->sanapellidos($apellidoPat);
-            $actualiza->actualizarapellidoP($idUsuario,$apellidoPat);
-        }
-    }
-}
+ if (isset($_POST['guardar'])) {
 
-if(!empty($_POST['ApeM'])){
-    if(isset($_POST['ApeM'])){
-        $apellidoMat = $_POST["ApeM"];
-        $apellidoMatValido = $validar->apellidosP($apellidoMat);
-        if($apellidoMatValido){
-            $apellidoMatSanitizado = $san->sanapellidos($apellidoMat);
-            $actualiza->actualizarapellidoP($idUsuario,$apellidoMat);
-        }
-    }
-}
-
+     if (!empty($_POST['Nombre'])) {
+         $nombre = $_POST["Nombre"];
+         $nombreValido = $validar->nombres($nombre);
+         if ($nombreValido) {
+             $nombreSanitizado = $san->sannombre($nombre);
+             if ($nombreSanitizado) {
+                 $actualiza->actualizarnombre($idUsuario, $nombreSanitizado);
+                 $_SESSION['NOMBRE_USUARIO'] = $nombreSanitizado;
+             }
+         }
+     }
+ 
+     if (!empty($_POST['ApeP'])) {
+         $apellidoPat = $_POST["ApeP"];
+         $apellidoPatValido = $validar->apellidosP($apellidoPat);
+         if ($apellidoPatValido) {
+             $apellidoPatSanitizado = $san->sanapellidos($apellidoPat);
+             if ($apellidoPatSanitizado) {
+                 $actualiza->actualizarapellidoP($idUsuario, $apellidoPatSanitizado);
+                 $_SESSION['ApellidoP'] = $apellidoPatSanitizado;
+             }
+         }
+     }
+ 
+     if (!empty($_POST['ApeM'])) {
+         $apellidoMat = $_POST["ApeM"];
+         $apellidoMatValido = $validar->apellidosP($apellidoMat);
+         if ($apellidoMatValido) {
+             $apellidoMatSanitizado = $san->sanapellidos($apellidoMat);
+             if ($apellidoMatSanitizado) {
+                 $actualiza->actualizarapellidoM($idUsuario, $apellidoMatSanitizado);
+                 $_SESSION['ApellidoM'] = $apellidoMatSanitizado;
+             }
+         }
+     }
+ 
+     if (!empty($_POST['telefono'])) {
+         $telefono = $_POST["telefono"];
+         $telefonoValido = $validar->telefonos($telefono);
+         if ($telefonoValido) {
+             $telSanitizado = $san->santelefonos($telefono);
+             if ($telSanitizado) {
+                 $actualiza->actualizarTelefono($idUsuario, $telSanitizado);
+                 $_SESSION['Telefono'] = $telSanitizado;
+             }
+ 
+         }
+     }
 if(!empty($_POST['telefono'])){
 if(isset($_POST['telefono']) && isset($_POST['guardar'])){
     $telefono = $_POST["telefono"];
@@ -68,6 +91,7 @@ if(isset($_POST['correo'])){
     }
 }
 }
+
 if(!empty($_FILES['img'])){
     header('Location: ../../public/views/usuario.php');
     if(isset($_FILES['img'])){
@@ -80,4 +104,6 @@ if(!empty($_FILES['img'])){
 if(isset($_POST['listo'])){
    echo '<meta http-equiv="refresh" content="1;url=/../../public/views/catalogo.php">';
 }
+
+ }
 ?>
