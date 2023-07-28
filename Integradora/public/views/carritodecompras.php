@@ -397,9 +397,10 @@ if($productos != null){
 
             <div id="Nav-Items">
             <ul>
-                <li><a href="catalogo.php">Inicio</a></li>
-                <li><a href="">Filtro</a></li>
-                <li><a href="">Categorias</a></li>
+            <li><a href="papemaxinicio.php">Inicio</a></li>
+                <li><a href="catalogo.php">Catalogo</a></li>
+                <li><a href="pedidos.php">Pedidos</a></li>
+                <li><a href="cerrar_sesion.php">Cerrar sesion</a></li>
             </ul>
             </div>
 
