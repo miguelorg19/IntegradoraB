@@ -10,16 +10,22 @@ $productos = new Ventas();
 session_start();
 if(!isset($_SESSION['NOMBRE_USUARIO'])){
 
-  header("location:login.php");
-
-}
-if (isset($_SESSION['ID_USUARIO'])) {
-  
-  header("location:login.php");
 }
 else{
+  header("location:login.php");
+}
+if (isset($_SESSION['ID_USUARIO'])) {
   $idUsuario = $_SESSION['ID_USUARIO'];
 }
+else{
+  header("location:login.php");
+}
+if($idUsuario != 1)
+{
+  header("location:papemaxinicio.php");
+}
+
+
 if (isset($_SESSION['resultado'])) {
   $res = $_SESSION['resultado'];
 }

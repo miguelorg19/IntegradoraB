@@ -10,16 +10,17 @@ $datos = $productos->orden();
 session_start();
 if(!isset($_SESSION['NOMBRE_USUARIO'])){
 
-  header("location:login.php");
-
-}
-if (isset($_SESSION['ID_USUARIO'])) {
-  
-  header("location:login.php");
 }
 else{
+  header("location:login.php");
+}
+if (isset($_SESSION['ID_USUARIO'])) {
   $idUsuario = $_SESSION['ID_USUARIO'];
 }
+else{
+  header("location:login.php");
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -114,19 +115,13 @@ else{
             <li>
               <a href="catalogo.php">Catalogo</a>
             </li>
-            <li>
-              <a href="registroventas.php">Registro de ventas</a>
-            </li>
-            <li>
-              <a href="registrocompras.php">Registro de compras</a>
-            </li>
-            <li>
-              <a href="ventasdiarias.php">Ventas diarias</a>
-            </li>
-            <li>
-              <a href="reportemensual.php">Ventas mensuales</a>
-            </li>
-            <li>
+            <?php if($idUsuario == 1)
+            {
+            echo '<li><a href="registroventas.php">Registrar Ventas</a></li>'.
+            '<li><a href="registrocompras.php">Registrar compras</a></li>'.
+            '<li><a href="ventasdiarias.php">Ventas diarias</a></li>'.
+            '<li><a href="reportemensual.php">Ventas mensuales</a></li>';
+            }?>
               <a href="pedidos.php">Pedidos</a>
             </li>
             <li><a href="cerrar_sesion.php">Cerrar Sesion</a>

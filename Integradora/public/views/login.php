@@ -28,7 +28,7 @@ if($reg = $query->fetchALL(PDO::FETCH_ASSOC)){
             $_SESSION['ID_USUARIO'] = $usuario['ID_Usuario'];
             $_SESSION['NOMBRE_USUARIO'] = $usuario['Nombre'];
             
-            header("location:catalogo.php");
+            header("location:papemaxinicio.php");
             exit;
         }
 
