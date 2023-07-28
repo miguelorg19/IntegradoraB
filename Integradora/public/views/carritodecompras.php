@@ -516,7 +516,7 @@ if($productos != null){
                 let eliminarModal = document.getElementById('eliminarModal')
                 eliminarModal.addEventListener('show.bs.modal', function(event){
                     let boton = event.relatedTarget
-                    let id = button.getAttribute('data-bs-id')
+                    let id = boton.getAttribute('data-bs-id')
                     let botonEliminar = eliminarModal.querySelector('.modal-footer #btn-eliminar')
                     botonEliminar.value = id
 
