@@ -182,6 +182,12 @@ $sql = null;
       font-size: .9rem;
       font-family: 'Inter', sans-serif;
     }
+    #ContCart{
+        display:flex;
+        }
+        #num_cart{
+            height:3vh;
+        }
 
     .conm{
       margin-top: 5%;
@@ -210,10 +216,13 @@ $sql = null;
         $img = '../imagenes/usuario.png';
       }
       ?>
-      <div id="Contenedor-UC">
+        <div id="ContCart">
         <a href="usuario.php"><img src="<?php echo $img ?>" alt="" id="usuario"></a>
-        <a href="carritodecompras.php"><img src="../imagenes/carrito.png" alt="" id="carrito"></a>
-      </div>
+        <div id="ContCart">
+            <a href="carritodecompras.php"><img src="../imagenes/carrito.png" alt="" id="carrito"></a>
+            <span id="num_cart" class="badge bg-primary"><?php echo $num_cart; ?></span>
+        </div>    
+        </div>  
       <!--Menu Desplegado-->
       <div id="Menu-Desplegado">
         <div id="Contenedor-Menu-Desplegado">
