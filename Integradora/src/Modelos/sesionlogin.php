@@ -20,6 +20,9 @@ class Usuario {
                 $_SESSION['usuario_id'] = $usuario['ID_Usuario'];
                 $_SESSION['usuario_correo'] = $usuario['Correo'];
                 $_SESSION['usuario_nombre'] = $usuario['Nombre'];
+                $_SESSION['ApellidoP']=$usuario['Apellido_Paterno'];
+                $_SESSION['ApellidoM']=$usuario['Apellido_Materno'];
+                $_SESSION['Telefono']=$usuario['Telefono'];
                 $_SESSION['usuario_rol'] = $usuario['Rol'];
                 return true;
             }
@@ -28,15 +31,6 @@ class Usuario {
         Error de conexión: Correo o Contraseña incorrecta
         </div>';
         return false;
-    }
-
-    public function sesionIniciada() {
-        return isset($_SESSION['usuario_id']);
-    }
-
-    public function cerrarSesion() {
-        session_unset();
-        session_destroy();
     }
     
 }
