@@ -63,7 +63,7 @@ class Inciomodelo
         }
     }
 
-    public function obtenerImagenesAleatorias($cantidad = 5)
+    public function obtenerImagenesAleatorias($cantidad = 4)
     {
         $conexion = new Conexion();
         $gbd = $conexion->conectar();
