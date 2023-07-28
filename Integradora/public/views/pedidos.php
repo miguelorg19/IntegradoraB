@@ -134,6 +134,7 @@ else {
             '<li><a href="ventasdiarias.php">Ventas diarias</a></li>'.
             '<li><a href="reportemensual.php">Ventas mensuales</a></li>';
             }?>
+            <li>
               <a href="pedidos.php">Pedidos</a>
             </li>
             <li><a href="cerrar_sesion.php">Cerrar Sesion</a>

@@ -46,12 +46,15 @@ $datos = $productos->detallesorden($id);
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300&family=Noto+Sans+JP:wght@500&family=Rubik:wght@300&family=Ubuntu:ital,wght@1,500&display=swap" rel="stylesheet">
+    <link href="/public/css/menucss.css" rel="stylesheet">
     <style>
+
         .conss{
             margin: 0 auto;
             background-color: #f4f4f4;
             border-radius: .5rem;
             padding: 1rem;
+            margin-top: 10%;
             box-shadow: 0px .3rem .3rem gray;
         }
         .imgs{
@@ -80,66 +83,66 @@ $datos = $productos->detallesorden($id);
     </style> 
 </head>
 <body>
-        <header>
-            <nav class="navbar navbar-expand-md" style="background-color:black;">
-                <div class="container-fluid">
-                <button class="navbar-toggler bg-secondary col-12" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                
-                <div class="collapse navbar-collapse col-lg-11 col-sm-6 col-md-6" id="menu">
-                    <ul class="navbar-nav d-flex justify-content-center">
-                    <li class="nav-item">
-                    <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#"><img src="../imagenes/menu.png" width="40" height="40"></a>
-                    <ul class="dropdown-menu bg-light">
-                        <li>
-                        <a class="dropdown-item" href="">Inicio</a>
-                        </li>
-                        <li>
-                        <a class="dropdown-item" href="">Catalogo</a>
-                        </li>
-                        <li>
-                        <a class="dropdown-item" href="registroventas.php">Registro de ventas</a>
-                        </li>
-                        <li>
-                        <a class="dropdown-item" href="registrocompras.php">Registro de compras</a>
-                        </li>
-                        <li>
-                        <a class="dropdown-item" href="">Ventas diarias</a>
-                        </li>
-                        <li>
-                        <a class="dropdown-item" href="">Ventas mensuales</a>
-                        </li>
-                        <li>
-                        <a class="dropdown-item" href="pedidos.php">Pedidos</a>
-                        </li>
-                        <li>
-                        <a class="dropdown-item" href="agregarproducto.php">Agregar producto</a>
-                        </li>
-                    </ul>
-                        </li>
-                    </ul>
-                <div class="collapse navbar-collapse col-lg-1 col-sm-6 col-md-6 d-flex justify-content-end con" id="menu">
-                    <ul class="navbar-nav">
-                    <li class="nav-item">
-                    <?php 
-            $foto = $imagenes->verfoto($idUsuario);
-            if(!empty($foto)){
-              $url = $foto;
-              $img = $imagenes->obtenerimaus($url);
-            }
-            else{
-              $img = '../imagenes/usuario.png';
-            }
-            ?>
-                    <a href="usuario.php"><img src="<?php echo $img ?>" width="40" height="40"></a>
-                    <img src="../imagenes/carrito.png" width="40" height="40">
-                    </li>
-                </div>      
-                </div>
-        </nav>
-        </header>
-        <div class="container col-8 mt-4 row conss d-flex justify-content-center">
+<div class="navcont">
+    <nav>
+      <!--Menu-->
+
+      <label for="Nav-MenuBtn">
+        <img src="../imagenes/menu.png" role="button" alt="" id="menu">
+      </label>
+
+      <input type="checkbox" id="Nav-MenuBtn">
+
+      <?php
+      $foto = $imagenes->verfoto($idUsuario);
+      if (!empty($foto)) {
+        $url = $foto;
+        $img = $imagenes->obtenerimaus($url);
+      } else {
+        $img = '../imagenes/usuario.png';
+      }
+      ?>
+      <div id="Contenedor-UC">
+        <a href="usuario.php"><img src="<?php echo $img ?>" alt="" id="usuario"></a>
+        <a href="carritodecompras.php"><img src="../imagenes/carrito.png" alt="" id="carrito"></a>
+      </div>
+      <!--Menu Desplegado-->
+      <div id="Menu-Desplegado">
+        <div id="Contenedor-Menu-Desplegado">
+          <h3>Jacky Papeleria</h3>
+          <label for="Nav-MenuBtn">
+            <img src="../imagenes/cerca.png" role="button" alt="" id="Cerrar">
+          </label>
+        </div>
+
+        <div id="Nav-Items">
+          <ul>
+            <li>
+              <a href="papemaxinicio.php">Inicio</a>
+            </li>
+            <li>
+              <a href="catalogo.php">Catalogo</a>
+            </li>
+            <?php if ($idUsuario == 1) {
+              echo '<li><a href="registroventas.php">Registrar Ventas</a></li>' .
+                '<li><a href="registrocompras.php">Registrar compras</a></li>' .
+                '<li><a href="ventasdiarias.php">Ventas diarias</a></li>' .
+                '<li><a href="reportemensual.php">Ventas mensuales</a></li>';
+            } ?>
+            <li>
+              <a href="pedidos.php">Pedidos</a>
+            </li>
+
+
+            <li><a href="cerrar_sesion.php">Cerrar Sesion</a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+        <div class="container col-8 fff row conss d-flex justify-content-center">
                 <h1 class="text">Detalles del pedido</h1>
                 <hr>
                 <?php 
