@@ -347,9 +347,9 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
                   </select>
 
                   <label class="text-light" for="precio_min">Precio mínimo:</label>
-                  <input type="number" name="precio_min" id="precio_min" class="form-control mb-4" step="1">
+                  <input type="number" name="precio_min" id="precio_min" class="form-control mb-5" step="1">
                   <label class="text-light"  for="precio_max">Precio máximo:</label>
-                  <input type="number" name="precio_max" id="precio_max" class="form-control mb-4" step="1">
+                  <input type="number" name="precio_max" id="precio_max" class="form-control mb-5" step="1">
                   <button type="submit" class="btn filter-btn">Aplicar filtro</button>
                 </form>
               </div>
