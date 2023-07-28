@@ -6,18 +6,20 @@ $graficadiaria = new src\Modelos\Graficadiaria();
 setlocale(LC_TIME, 'es_ES.UTF-8');
 date_default_timezone_set('America/Monterrey');
 session_start();
-if(!isset($_SESSION['NOMBRE_USUARIO'])){
-
+if(isset($_SESSION['NOMBRE_USUARIO'])){
+  $nombreus = $_SESSION['NOMBRE_USUARIO'];
 }
-else{
+else
+{
   header("location:login.php");
 }
 if (isset($_SESSION['ID_USUARIO'])) {
   $idUsuario = $_SESSION['ID_USUARIO'];
-}
-else{
+} 
+else {
   header("location:login.php");
 }
+
 if($idUsuario != 1)
 {
   header("location:papemaxinicio.php");

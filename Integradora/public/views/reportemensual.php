@@ -7,17 +7,18 @@ use src\Config\Imagenes;
 $imagenes = new Imagenes();
 require_once '../../src/Modelos/graficamensual.php';
 session_start();
-if(!isset($_SESSION['NOMBRE_USUARIO'])){
-
+if(isset($_SESSION['NOMBRE_USUARIO'])){
+    $nombreus = $_SESSION['NOMBRE_USUARIO'];
 }
-else{
-  header("location:login.php");
+else
+{
+    header("location:login.php");
 }
 if (isset($_SESSION['ID_USUARIO'])) {
-  $idUsuario = $_SESSION['ID_USUARIO'];
-}
-else{
-  header("location:login.php");
+    $idUsuario = $_SESSION['ID_USUARIO'];
+  } 
+  else {
+    header("location:login.php");
 }
 if($idUsuario != 1)
 {

@@ -11,19 +11,19 @@ use src\Config\Imagenes;
 $imagenes = new Imagenes();
 
 session_start();
-if(!isset($_SESSION['NOMBRE_USUARIO'])){
-
+if(isset($_SESSION['NOMBRE_USUARIO'])){
+  $nombreus = $_SESSION['NOMBRE_USUARIO'];
 }
-else{
+else
+{
   header("location:login.php");
 }
 if (isset($_SESSION['ID_USUARIO'])) {
   $idUsuario = $_SESSION['ID_USUARIO'];
-}
-else{
+} 
+else {
   header("location:login.php");
 }
-
 $num_cart = 0;
 if (isset($_SESSION['carrito']['productos'])) {
   $num_cart = count($_SESSION['carrito']['productos']);
@@ -312,18 +312,16 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
     <div id="Contenedor-UC">
       <div id="ContUs">
       <?php 
-            $foto = $imagenes->verfoto($idUsuario);
-            if(!empty($foto)){
-              $url = $foto;
-              $img = $imagenes->obtenerimaus($url);
-            }
-            else{
-              $img = '../imagenes/usuario.png';
-            }
-            ?>
-        <a href=""><img src="<?php $img ?>" id="usuario" alt=""></a>
-        <h2><?php //echo $_SESSION["Nombre"]; 
-            ?></h2>
+           $foto = $imagenes->verfoto($idUsuario);
+           if(!empty($foto)){
+             $url = $foto;
+             $img = $imagenes->obtenerimaus($url);
+           }
+           else{
+             $img = '../imagenes/usuario.png';
+           }
+           ?>
+          <a href="usuario.php"><img src="<?php echo $img; ?>" id="usuario" alt=""></a>
       </div>
       <div id="ContCart">
         <a href="carritodecompras.php">

@@ -7,9 +7,18 @@ $productos = new Pedidos();
 
 session_start();
 
-if (!isset($_SESSION['NOMBRE_USUARIO'])) {
-
-  header("location:login.php");
+if(isset($_SESSION['NOMBRE_USUARIO'])){
+    $nombreus = $_SESSION['NOMBRE_USUARIO'];
+}
+else
+{
+    header("location:login.php");
+}
+if (isset($_SESSION['ID_USUARIO'])) {
+    $idUsuario = $_SESSION['ID_USUARIO'];
+  } 
+  else {
+    header("location:login.php");
 }
 
 $ID_USUARIO = $_SESSION['ID_USUARIO'];

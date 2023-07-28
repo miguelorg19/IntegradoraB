@@ -8,19 +8,19 @@ $imagenes = new Imagenes();
 
 session_start();
 
-if(!isset($_SESSION['NOMBRE_USUARIO'])){
-
-  header("location:login.php");
-
+if(isset($_SESSION['NOMBRE_USUARIO'])){
+    $nombreus = $_SESSION['NOMBRE_USUARIO'];
 }
-if (isset($_SESSION['ID_USUARIO'])) {
-    
+else
+{
     header("location:login.php");
 }
-else{
+if (isset($_SESSION['ID_USUARIO'])) {
     $idUsuario = $_SESSION['ID_USUARIO'];
+  } 
+  else {
+    header("location:login.php");
 }
-
 
 $num_cart = 0;
 if(isset($_SESSION['carrito']['productos'])){
@@ -385,21 +385,17 @@ if($productos != null){
         <input type="checkbox" id="Nav-MenuBtn">
         <!--Contenedor Del Usuario Y Carrito De Compras-->
         <div id="Contenedor-UC">
-<<<<<<< HEAD
         <?php 
-            $foto = $imagenes->verfoto(1);
+            $foto = $imagenes->verfoto($idUsuario);
             if(!empty($foto)){
               $url = $foto;
               $img = $imagenes->obtenerimaus($url);
             }
             else{
-              $img = '../imagenes/usuarioimg.png';
+              $img = '../imagenes/usuario.png';
             }
         ?>
         <a href=""><img src="<?php echo $img  ?>" id="usuario"></a>
-=======
-        <a href="usuario.php"><img src="../imagenes/usuario.png" alt="" id="usuario"></a>
->>>>>>> 2b3f861253bf815f2707906183dc3c39b47593ba
         <div id="ContCart">
             <a href="carritodecompras.php"><img src="../imagenes/carrito.png" alt="" id="carrito"></a>
             <span id="num_cart" class="badge bg-primary"><?php echo $num_cart; ?></span>

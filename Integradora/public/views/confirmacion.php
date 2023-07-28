@@ -4,19 +4,19 @@ require_once '../../src/Config/conexion.php';
 use src\Config\Conexion;
 session_start();
 
-if(!isset($_SESSION['NOMBRE_USUARIO'])){
-
+if(isset($_SESSION['NOMBRE_USUARIO'])){
+    $nombreus = $_SESSION['NOMBRE_USUARIO'];
 }
-else{
-  header("location:login.php");
+else
+{
+    header("location:login.php");
 }
 if (isset($_SESSION['ID_USUARIO'])) {
-  $idUsuario = $_SESSION['ID_USUARIO'];
+    $idUsuario = $_SESSION['ID_USUARIO'];
+  } 
+  else {
+    header("location:login.php");
 }
-else{
-  header("location:login.php");
-}
-
 $contador = 0;
 
 

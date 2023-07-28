@@ -6,20 +6,20 @@ use src\Modelos\Inciomodelo;
 require_once '../../src/Modelos/imagenes.php';
 use src\Config\Imagenes;
 session_start();
-if(!isset($_SESSION['NOMBRE_USUARIO'])){
-
+if(isset($_SESSION['NOMBRE_USUARIO'])){
+    $nombreus = $_SESSION['NOMBRE_USUARIO'];
 }
-else{
-  header("location:login.php");
+else
+{
+    header("location:login.php");
 }
 if (isset($_SESSION['ID_USUARIO'])) {
-  $idUsuario = $_SESSION['ID_USUARIO'];
+    $idUsuario = $_SESSION['ID_USUARIO'];
+  } 
+  else {
+    header("location:login.php");
 }
-else{
-  header("location:login.php");
-}
-
-$imagenes = new Imagenes();
+$imagen = new Imagenes();
 $inicioModelo = new Inciomodelo();
 $imagenes = $inicioModelo->obtenerImagenesAleatorias();
 ?>
@@ -147,10 +147,10 @@ $imagenes = $inicioModelo->obtenerImagenesAleatorias();
             <input type="checkbox" id="Nav-MenuBtn">
 
             <?php 
-            $foto = $imagenes->verfoto($idUsuario);
+            $foto = $imagen->verfoto($idUsuario);
             if(!empty($foto)){
               $url = $foto;
-              $img = $imagenes->obtenerimaus($url);
+              $img = $imagen->obtenerimaus($url);
             }
             else{
               $img = '../imagenes/usuario.png';
