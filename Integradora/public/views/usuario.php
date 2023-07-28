@@ -143,7 +143,7 @@ $imagenes = new Imagenes();
             </div>
         </div>
         <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12 conss">
-        <input type="text" class="form-control tex" placeholder="Nombre" value="<?php echo $_SESSION['usuario_nombre']?>" aria-label="Recipient's username" name="Nombre" aria-describedby="button-addon2">
+        <input type="text" class="form-control tex" placeholder="Nombre" value="<?php echo $_SESSION['NOMBRE_USUARIO']?>" aria-label="Recipient's username" name="Nombre" aria-describedby="button-addon2">
         <input type="text" class="form-control tex mt-3" placeholder="Apellido Paterno" value="<?php echo $_SESSION['ApellidoP']?>" name="ApeP" aria-label="Recipient's username" aria-describedby="button-addon2">
         <input type="text" class="form-control tex mt-3" value="<?php echo $_SESSION['ApellidoM']?>" name="ApeM" aria-label="Recipient's username" aria-describedby="button-addon2">
         <input type="text" class="form-control tex mt-3" value="<?php echo $_SESSION['Telefono']?>" name="telefono" aria-label="Recipient's username" aria-describedby="button-addon2">

@@ -13,7 +13,6 @@ class Usuario {
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':correo', $correo);
         $stmt->execute();
-
         if ($stmt->rowCount() > 0) {
             $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
             if (password_verify($contraseña, $usuario['contrasenia'])) {
