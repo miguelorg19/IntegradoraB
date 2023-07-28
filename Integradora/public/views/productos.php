@@ -1,8 +1,10 @@
 <?php
 require_once '../../src/Modelos/consultasproductos.php';
-
+require_once '../../src/Modelos/imagenes.php';
 use Src\Config\Productos;
+use src\Config\Imagenes;
 $productos = new Productos();
+$imagenes = new Imagenes();
 $datos= $productos->todos();
 ?>
 
@@ -126,6 +128,8 @@ $datos= $productos->todos();
         <tbody>
           <tr>
           <?php foreach ($datos as $producto) {
+               $productimg = $producto['Imagen'];
+               $img = $imagenes->obtenerimag($productimg)?>
              ?>
                 <tr>
                     <td><?php echo $producto['ID_Productos']; ?></td>
@@ -133,6 +137,7 @@ $datos= $productos->todos();
                     <td><?php echo $producto['Descripcion']; ?></td>
                     <td><?php echo $producto['Existencias']; ?></td>
                     <td>$<?php echo $producto['Precio_de_Venta']; ?></td>
+                    <td><img src="<?php echo $img ?>" width="100%" height="100%"></td>
                     <td><?php echo $producto['Cat']; ?></td>
                     <td><button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $producto['ID_Productos']; ?>"><i class="bi bi-pencil-square"></i></button></td>
                     <td><button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modaldel<?php echo $producto['ID_Productos']; ?>"><i class="bi bi-trash"></i></button></td>
@@ -148,7 +153,7 @@ $datos= $productos->todos();
                               <form action="../../src/http/actualizar_producto.php" method="POST">
                                   <input type="hidden" name="id_producto" value="<?php echo $producto['ID_Productos']; ?>">
                                   <input type="text" class="form-control tex" name="nombre" aria-label="Amount (to the nearest dollar)" placeholder="Nombre" value="<?php echo $producto['Prod']; ?>">
-                                  <input type="number" class="form-control tex mt-2" name="precio" aria-label="Amount (to the nearest dollar)" placeholder="Precio de venta" value="<?php echo $producto['Precio_de_Venta']; ?>">
+                                  <input type="number" class="form-control tex mt-2" name="precio" aria-label="Amount (to the nearest dollar)" placeholder="Precio de venta" value="<?php echo $producto['Precio_de_Venta']; ?> ">
                                   <div class="input-group mt-3">
                                       <span class="input-group-text tex" id="inputGroup-sizing-default">Categoria</span>
                                       <select class="form-select form-select-md tex" aria-label=".form-select-md example" name="categoria">

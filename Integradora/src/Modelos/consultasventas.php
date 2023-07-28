@@ -151,13 +151,15 @@ else if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['confirmar']))
     else
     {  
     }
-    session_unset();
+    unset($_SESSION['Ventas']);
+    unset($_SESSION['total']);
     header('Location: ../../public/views/registroventas.php');
     exit;
 }
 else if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['cancelar']))
 {
-    session_unset();
+    unset($_SESSION['Ventas']);
+    unset($_SESSION['total']);
     header('Location: ../../public/views/registroventas.php');
     exit;
 }
