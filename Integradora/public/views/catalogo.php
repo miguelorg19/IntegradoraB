@@ -370,6 +370,9 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
                 </form>
               </div>
             </li>
+            <li>
+              <a href="pedidos_usuario.php">Pedidos</a>
+            </li>
 
             <li><a href="cerrar_sesion.php">Cerrar Sesion</a></li>
 
