@@ -380,9 +380,9 @@ if($productos != null){
         <input type="checkbox" id="Nav-MenuBtn">
         <!--Contenedor Del Usuario Y Carrito De Compras-->
         <div id="Contenedor-UC">
-        <a href=""><img src="../imagenes/usuario.png" alt="" id="usuario"></a>
+        <a href="usuario.php"><img src="../imagenes/usuario.png" alt="" id="usuario"></a>
         <div id="ContCart">
-            <a href=""><img src="../imagenes/carrito.png" alt="" id="carrito"></a>
+            <a href="carritodecompras.php"><img src="../imagenes/carrito.png" alt="" id="carrito"></a>
             <span id="num_cart" class="badge bg-primary"><?php echo $num_cart; ?></span>
         </div>    
         </div>
