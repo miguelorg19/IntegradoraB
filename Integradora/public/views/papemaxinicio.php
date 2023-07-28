@@ -1,11 +1,6 @@
 <?php
-require_once '../../src/Modelos/enviocorreoinicio.php';
-require_once '../../src/Modelos/iniciomodelo.php';
+require '../../src/Modelos/enviocorreoinicio.php';
 
-use src\Modelos\Inciomodelo;
-
-$inicioModelo = new Inciomodelo();
-$imagenes = $inicioModelo->obtenerImagenesAleatorias();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +11,7 @@ $imagenes = $inicioModelo->obtenerImagenesAleatorias();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
-    <link href="/public/css/menucss.css" rel="stylesheet">
+    <link href="css/menucss.css" rel="stylesheet">
     <title>Inicio</title>
     <style>
         .carousel-item img {
@@ -73,31 +68,32 @@ $imagenes = $inicioModelo->obtenerImagenesAleatorias();
             <!--Menu-->
 
             <label for="Nav-MenuBtn">
-                <img src="../imagenes/menu.png" role="button" alt="" id="menu">
+                <img src="imagenes/menu.png" role="button" alt="" id="menu">
             </label>
 
             <input type="checkbox" id="Nav-MenuBtn">
 
             <form action="" role="search" id="Buscador1">
                 <input type="text" placeholder="Buscar" id="Buscador">
-                <img role="button" src="../imagenes/busqueda.png" id="Buscar" alt="">
+                <img role="button" src="imagenes/busqueda.png" id="Buscar" alt="">
             </form>
             <!--Contenedor Del Usuario Y Carrito De Compras-->
             <div id="Contenedor-UC">
-                <a href="usuario.php"><img src="../imagenes/usuario.png" alt="" id="usuario"></a>
-                <a href="carrito.php"><img src="../imagenes/carrito.png" alt="" id="carrito"></a>
+                <a href=""><img src="imagenes/usuario.png" alt="" id="usuario"></a>
+                <a href=""><img src="imagenes/carrito.png" alt="" id="carrito"></a>
             </div>
             <!--Menu Desplegado-->
             <div id="Menu-Desplegado">
                 <div id="Contenedor-Menu-Desplegado">
                     <h3>Jacky Papeleria</h3>
                     <label for="Nav-MenuBtn">
-                        <img src="../imagenes/cerca.png" role="button" alt="" id="Cerrar">
+                        <img src="imagenes/cerca.png" role="button" alt="" id="Cerrar">
                     </label>
                 </div>
 
                 <div id="Nav-Items">
                     <ul>
+<<<<<<< HEAD
                         <li>
                             <a class="dropdown-item" href="papemaxinicio.php">Inicio</a>
                         </li>
@@ -121,10 +117,15 @@ $imagenes = $inicioModelo->obtenerImagenesAleatorias();
                         </li>
                         <li><a href="cerrar_sesion.php">Cerrar Sesion</a>
                         </li>
+=======
+                        <li><a href="">Inicio</a></li>
+                        <li><a href="">Filtro</a></li>
+                        <li><a href="">Categorias</a></li>
+>>>>>>> parent of cadd874 (Merge branch 'main' of https://github.com/miguelorg19/IntegradoraB)
                         <li>
                             <form action="" role="search" id="Buscador2">
                                 <input type="text" placeholder="Buscar" id="Buscador">
-                                <img role="button" src="../imagenes/busqueda.png" id="Buscar" alt="">
+                                <img role="button" src="imagenes/busqueda.png" id="Buscar" alt="">
                             </form>
                         </li>
                     </ul>
@@ -136,7 +137,7 @@ $imagenes = $inicioModelo->obtenerImagenesAleatorias();
 
     <div class="logocontainer text-center">
 
-        <img src="../imagenes/jakiepape.png" class="img-fluid logojakie" width="280" height="150" alt="Logo de la papelería">
+        <img src="imagenes/jakiepape.png" class="img-fluid logojakie" width="280" height="150" alt="Logo de la papelería">
 
     </div>
 
@@ -151,150 +152,36 @@ $imagenes = $inicioModelo->obtenerImagenesAleatorias();
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <div class="row">
-                        <?php
-
-                        $primerProducto = $inicioModelo->obtenerPrimerProductoAleatorio();
-                        if ($primerProducto) {
-
-                            $nombreProducto = $primerProducto['Nombre'];
-                            $descripcionProducto = $primerProducto['Descripcion'];
-
-                            $imagenProducto = $inicioModelo->obtenerImagenAleatoriaPorProducto($primerProducto['ID_Productos']);
-
-
-                        ?>
-
-                            <?php
-                            $segundoProducto = $inicioModelo->obtenerPrimerProductoAleatorio();
-                            if ($segundoProducto) {
-
-                                $nombreProducto2 = $segundoProducto['Nombre'];
-                                $descripcionProducto2 = $segundoProducto['Descripcion'];
-
-                                $imagenProducto2 = $inicioModelo->obtenerImagenAleatoriaPorProducto($segundoProducto['ID_Productos']);
-                            }
-                            ?>
-
-                            <?php
-                            $tercerProducto = $inicioModelo->obtenerPrimerProductoAleatorio();
-                            if ($tercerProducto) {
-
-                                $nombreProducto3 = $tercerProducto['Nombre'];
-                                $descripcionProducto3 = $tercerProducto['Descripcion'];
-
-                                $imagenProducto3 = $inicioModelo->obtenerImagenAleatoriaPorProducto($tercerProducto['ID_Productos']);
-                            }
-                            ?>
-                            <div class="col text-center">
-                                <a href="producto.php">
-                                    <img src="<?= $imagenProducto; ?>" class="d-block w-50 mx-auto img-fluid" alt="...">
-                                </a>
-                                <div class="row">
-                                    <div class="col">
-                                        <h5 class="text-center"><?= $nombreProducto; ?></h5>
-                                        <p class="text-center"><?= $descripcionProducto; ?></p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col text-center">
-                                <a href="producto.php">
-                                    <img src="<?= $imagenProducto2; ?>" class="d-block w-50 mx-auto img-fluid" alt="...">
-                                </a>
-                                <div class="row">
-                                    <div class="col">
-                                        <h5 class="text-center"><?= $nombreProducto2; ?></h5>
-                                        <p class="text-center"><?= $descripcionProducto2; ?></p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col text-center">
-                                <a href="producto.php">
-                                    <img src="<?= $imagenProducto3; ?>" class="d-block w-50 mx-auto img-fluid" alt="...">
-                                </a>
-                                <div class="row">
-                                    <div class="col">
-                                        <h5 class="text-center"><?= $nombreProducto3; ?></h5>
-                                        <p class="text-center"><?= $descripcionProducto3; ?></p>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php
-                        } else {
-                            
-                            echo '<div class="col text-center">No hay productos disponibles</div>';
-                        }
-                        ?>
-                    </div>
-                </div>
-                <div class="carousel-item img-fluid">
-                    <div class="row">
-                        <?php
-
-                        $cuartoProducto = $inicioModelo->obtenerPrimerProductoAleatorio();
-                        if ($cuartoProducto) {
-
-                            $nombreProducto4 = $cuartoProducto['Nombre'];
-                            $descripcionProducto4 = $cuartoProducto['Descripcion'];
-
-                            $imagenProducto4 = $inicioModelo->obtenerImagenAleatoriaPorProducto($cuartoProducto['ID_Productos']);
-                        }
-                        ?>
-
-                        <?php
-                        $quintoProducto = $inicioModelo->obtenerPrimerProductoAleatorio();
-                        if ($quintoProducto) {
-
-                            $nombreProducto5 = $quintoProducto['Nombre'];
-                            $descripcionProducto5 = $quintoProducto['Descripcion'];
-
-                            $imagenProducto5 = $inicioModelo->obtenerImagenAleatoriaPorProducto($quintoProducto['ID_Productos']);
-                        }
-                        ?>
-
-                        <?php
-                        $sextoProducto = $inicioModelo->obtenerPrimerProductoAleatorio();
-                        if ($sextoProducto) {
-
-                            $nombreProducto6 = $sextoProducto['Nombre'];
-                            $descripcionProducto6 = $sextoProducto['Descripcion'];
-
-                            $imagenProducto6 = $inicioModelo->obtenerImagenAleatoriaPorProducto($sextoProducto['ID_Productos']);
-                        }
-                        ?>
                         <div class="col text-center">
-                            <a href="producto.php">
-                                <img src="<?= $imagenProducto4; ?>" class="d-block w-50 mx-auto img-fluid" alt="...">
+                            <a href="corrector.php">
+                                <img src="imagenes/corrector.jpeg" class="d-block w-50 mx-auto img-fluid" alt="...">
                             </a>
                             <div class="row">
                                 <div class="col">
-                                    <h5 class="text-center"><?= $nombreProducto4; ?></h5>
-                                    <p class="text-center"><?= $descripcionProducto4; ?></p>
+                                    <h5 class="text-center">Corrector</h5>
+                                    <p class="text-center">Descripción</p>
                                 </div>
                             </div>
                         </div>
-
                         <div class="col text-center">
-                            <a href="producto.php">
-                                <img src="<?= $imagenProducto5; ?>" class="d-block w-50 mx-auto img-fluid" alt="...">
+                            <a href="corrector.php">
+                                <img src="imagenes/corrector.jpeg" class="d-block w-50 mx-auto img-fluid" alt="...">
                             </a>
                             <div class="row">
                                 <div class="col">
-                                    <h5 class="text-center"><?= $nombreProducto5; ?></h5>
-                                    <p class="text-center"><?= $descripcionProducto5; ?></p>
+                                    <h5 class="text-center">Corrector</h5>
+                                    <p class="text-center">Descripción</p>
                                 </div>
                             </div>
                         </div>
-
                         <div class="col text-center">
-                            <a href="producto.php">
-                                <img src="<?= $imagenProducto6; ?>" class="d-block w-50 mx-auto img-fluid" alt="...">
+                            <a href="corrector.php">
+                                <img src="imagenes/corrector.jpeg" class="d-block w-50 mx-auto img-fluid" alt="...">
                             </a>
                             <div class="row">
                                 <div class="col">
-                                    <h5 class="text-center"><?= $nombreProducto6; ?></h5>
-                                    <p class="text-center"><?= $descripcionProducto6; ?></p>
+                                    <h5 class="text-center">Corrector</h5>
+                                    <p class="text-center">Descripción</p>
                                 </div>
                             </div>
                         </div>
@@ -302,75 +189,64 @@ $imagenes = $inicioModelo->obtenerImagenesAleatorias();
                 </div>
                 <div class="carousel-item img-fluid">
                     <div class="row">
-
-
-
-                        <?php
-                        $septimoProducto = $inicioModelo->obtenerPrimerProductoAleatorio();
-                        if ($septimoProducto) {
-
-                            $nombreProducto7 = $septimoProducto['Nombre'];
-                            $descripcionProducto7 = $septimoProducto['Descripcion'];
-
-                            $imagenProducto7 = $inicioModelo->obtenerImagenAleatoriaPorProducto($septimoProducto['ID_Productos']);
-                        }
-                        ?>
-
-                        <?php
-                        $ocatavoProducto = $inicioModelo->obtenerPrimerProductoAleatorio();
-                        if ($ocatavoProducto) {
-
-                            $nombreProducto8 = $ocatavoProducto['Nombre'];
-                            $descripcionProducto8 = $ocatavoProducto['Descripcion'];
-
-                            $imagenProducto8 = $inicioModelo->obtenerImagenAleatoriaPorProducto($ocatavoProducto['ID_Productos']);
-                        }
-                        ?>
-
-                        <?php
-
-                        $novenoProducto = $inicioModelo->obtenerPrimerProductoAleatorio();
-                        if ($novenoProducto) {
-
-                            $nombreProducto9 = $novenoProducto['Nombre'];
-                            $descripcionProducto9 = $novenoProducto['Descripcion'];
-
-                            $imagenProducto9 = $inicioModelo->obtenerImagenAleatoriaPorProducto($novenoProducto['ID_Productos']);
-                        }
-                        ?>
-                        <div class="col text-center">
-                            <a href="producto.php">
-                                <img src="<?= $imagenProducto7; ?>" class="d-block w-50 mx-auto img-fluid" alt="...">
+                        <div class="col">
+                            <a href="cuaderno.php">
+                                <img src="imagenes/cuadernoscribeplus.jpeg" class="d-block w-50 mx-auto img-fluid" alt="...">
                             </a>
                             <div class="row">
-                                <div class="col">
-                                    <h5 class="text-center"><?= $nombreProducto7; ?></h5>
-                                    <p class="text-center"><?= $descripcionProducto7; ?></p>
-                                </div>
+                                <h5 class="text-center">Cuaderno</h5>
+                                <p class="text-center">Descripción</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <a href="cuaderno.php">
+                                <img src="imagenes/cuadernoscribeplus.jpeg" class="d-block w-50 mx-auto img-fluid" alt="...">
+                            </a>
+                            <div class="row">
+                                <h5 class="text-center">Cuaderno</h5>
+                                <p class="text-center">Descripción</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <a href="cuaderno.php">
+                                <img src="imagenes/cuadernoscribeplus.jpeg" class="d-block w-50 mx-auto img-fluid" alt="...">
+                            </a>
+                            <div class="row">
+                                <h5 class="text-center">Cuaderno</h5>
+                                <p class="text-center">Descripción</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item img-fluid">
+                    <div class="row">
+                        <div class="col">
+                            <a href="boligrado.php">
+                                <img src="imagenes/boloigrafo.jpeg" class="d-block w-50 mx-auto img-fluid" alt="...">
+                            </a>
+                            <div class="row">
+                                <h5 class="text-center">Bolígrafo</h5>
+                                <p class="text-center">Descripción</p>
                             </div>
                         </div>
 
-                        <div class="col text-center">
-                            <a href="producto.php">
-                                <img src="<?= $imagenProducto8; ?>" class="d-block w-50 mx-auto img-fluid" alt="...">
+                        <div class="col">
+                            <a href="boligrado.php">
+                                <img src="imagenes/boloigrafo.jpeg" class="d-block w-50 mx-auto img-fluid" alt="...">
                             </a>
                             <div class="row">
-                                <div class="col">
-                                    <h5 class="text-center"><?= $nombreProducto8; ?></h5>
-                                    <p class="text-center"><?= $descripcionProducto8; ?></p>
-                                </div>
+                                <h5 class="text-center">Bolígrafo</h5>
+                                <p class="text-center">Descripción</p>
                             </div>
                         </div>
 
-                        <div class="col text-center">
-                            <a href="producto.php">
-                                <img src="<?= $imagenProducto9; ?>" class="d-block w-50 mx-auto img-fluid" alt="...">
+                        <div class="col">
+                            <a href="boligrado.php">
+                                <img src="imagenes/boloigrafo.jpeg" class="d-block w-50 mx-auto img-fluid" alt="...">
                             </a>
                             <div class="row">
-                                <div class="col">
-                                    <h5 class="text-center"><?= $nombreProducto9; ?></h5>
-                                    <p class="text-center"><?= $descripcionProducto9; ?></p>
-                                </div>
+                                <h5 class="text-center">Bolígrafo</h5>
+                                <p class="text-center">Descripción</p>
                             </div>
                         </div>
                     </div>
@@ -388,20 +264,7 @@ $imagenes = $inicioModelo->obtenerImagenesAleatorias();
 
             <div class="col-6 col-sm-6 col-md-4 col-lg-3 producto">
                 <div class="card">
-                    <img src="../imagenes/cuadernoscribeplus.jpeg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Nombre Del Producto.</h5>
-                        <p class="card-text">Precio.</p>
-                        <a href="#" class="btn btn-dark">Añadir</a>
-                    </div>
-                </div>
-            </div>
-
-
-
-            <div class="col-6 col-sm-6 col-md-4 col-lg-3 producto">
-                <div class="card">
-                    <img src="../imagenes/boloigrafo.jpeg" class="card-img-top" alt="...">
+                    <img src="imagenes/cuadernoscribeplus.jpeg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Nombre Del Producto.</h5>
                         <p class="card-text">Precio.</p>
@@ -412,7 +275,7 @@ $imagenes = $inicioModelo->obtenerImagenesAleatorias();
 
             <div class="col-6 col-sm-6 col-md-4 col-lg-3 producto">
                 <div class="card">
-                    <img src="../imagenes/corrector.jpeg" class="card-img-top" alt="...">
+                    <img src="imagenes/boloigrafo.jpeg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Nombre Del Producto.</h5>
                         <p class="card-text">Precio.</p>
@@ -423,7 +286,18 @@ $imagenes = $inicioModelo->obtenerImagenesAleatorias();
 
             <div class="col-6 col-sm-6 col-md-4 col-lg-3 producto">
                 <div class="card">
-                    <img src="../imagenes/cuadernoscribeplus.jpeg" class="card-img-top" alt="...">
+                    <img src="imagenes/corrector.jpeg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Nombre Del Producto.</h5>
+                        <p class="card-text">Precio.</p>
+                        <a href="#" class="btn btn-dark">Añadir</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 col-sm-6 col-md-4 col-lg-3 producto">
+                <div class="card">
+                    <img src="imagenes/cuadernoscribeplus.jpeg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Nombre Del Producto.</h5>
                         <p class="card-text">Precio.</p>
@@ -439,7 +313,7 @@ $imagenes = $inicioModelo->obtenerImagenesAleatorias();
         <div class="row mt-5">
             <div class="col-6 col-sm-6 col-md-4 col-lg-3 producto">
                 <div class="card">
-                    <img src="../imagenes/cuadernoscribeplus.jpeg" class="card-img-top" alt="...">
+                    <img src="imagenes/cuadernoscribeplus.jpeg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Nombre Del Producto.</h5>
                         <p class="card-text">Precio.</p>
@@ -450,7 +324,7 @@ $imagenes = $inicioModelo->obtenerImagenesAleatorias();
 
             <div class="col-6 col-sm-6 col-md-4 col-lg-3 producto">
                 <div class="card">
-                    <img src="../imagenes/boloigrafo.jpeg" class="card-img-top" alt="...">
+                    <img src="imagenes/boloigrafo.jpeg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Nombre Del Producto.</h5>
                         <p class="card-text">Precio.</p>
@@ -461,7 +335,7 @@ $imagenes = $inicioModelo->obtenerImagenesAleatorias();
 
             <div class="col-6 col-sm-6 col-md-4 col-lg-3 producto">
                 <div class="card">
-                    <img src="../imagenes/corrector.jpeg" class="card-img-top" alt="...">
+                    <img src="imagenes/corrector.jpeg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Nombre Del Producto.</h5>
                         <p class="card-text">Precio.</p>
@@ -472,7 +346,7 @@ $imagenes = $inicioModelo->obtenerImagenesAleatorias();
 
             <div class="col-6 col-sm-6 col-md-4 col-lg-3 producto">
                 <div class="card">
-                    <img src="../imagenes/cuadernoscribeplus.jpeg" class="card-img-top" alt="...">
+                    <img src="imagenes/cuadernoscribeplus.jpeg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Nombre Del Producto.</h5>
                         <p class="card-text">Precio.</p>
@@ -522,15 +396,15 @@ $imagenes = $inicioModelo->obtenerImagenesAleatorias();
                 <div class="mt-5 col-md-6 text-center">
                     <div class="d-flex flex-column mt-5">
                         <div class="ubicacion mt-5">
-                            <img src="../imagenes/ubicacion.png" alt="Icono de ubicación" width="20" height="20">
+                            <img src="imagenes/ubicacion.png" alt="Icono de ubicación" width="20" height="20">
                             Avenida del pedregal #567 col. San pedro
                         </div>
                         <div class="telefono mt-5">
-                            <img src="../imagenes/telefonologo.png" alt="Icono de teléfono" width="20" height="20">
+                            <img src="imagenes/telefonologo.png" alt="Icono de teléfono" width="20" height="20">
                             +52 8713114045
                         </div>
                         <div class="correojakie mt-5">
-                            <img src="../imagenes/correo.avif" alt="Icono de correo electrónico" width="20" height="20">
+                            <img src="imagenes/correo.avif" alt="Icono de correo electrónico" width="20" height="20">
                             jakiepape@papeleria.com
                         </div>
                     </div>
@@ -581,7 +455,7 @@ $imagenes = $inicioModelo->obtenerImagenesAleatorias();
         });
     </script>
 
-    <!-- REDIRECCION AL INICIO -->
+   <!-- REDIRECCION AL INICIO -->
     <script>
         window.onload = function() {
             window.scrollTo(0, 0);

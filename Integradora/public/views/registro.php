@@ -1,8 +1,3 @@
-<?php
-require_once '../../vendor/autoload.php';
-use src\Config\Conexion;
-use src\Modelos\Registro;
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,7 +66,7 @@ use src\Modelos\Registro;
 <body>
     <nav class="navbar bg-black barra"></nav>
     <div class="container justify-content-center">
-    <div class="mt-4 d-flex justify-content-center"><img src="../imagenes/jakiepape.png" class="imglogo img-fluid"></div>
+    <div class="mt-4 d-flex justify-content-center"><img src="public/imagenes/jakiepape.png" class="imglogo img-fluid"></div>
     <div class="container d-flex justify-content-center mt-4">
         <div class="col-lg-5 col-sm-12 col-md-8 col-xl-5 con ">
                 <br/>
@@ -81,6 +76,7 @@ use src\Modelos\Registro;
                 <div class="col-lg-6 col-sm-6 col-md-6 col-xl-6 mt-1"><p class="te">Crea tu perfil para acceder a la variedad de productos que ofrecemos en PAPEMAX</p></div>
                 </div>
                 <div class="d-flex justify-content-center mt-2">
+<<<<<<< HEAD
                 <form action="../../src/Modelos/registromet.php" method="post">
                 <input type="text" name="nombre" class="form-control text-center input " placeholder="Nombre"> 
                 <input type="text" name="ApP"class="form-control text-center input mt-3" placeholder="Apellido Paterno"> 
@@ -89,9 +85,19 @@ use src\Modelos\Registro;
                 <input type="email" name="Correo"class="form-control text-center input mt-3" placeholder="Correo Electronico"> 
                 <input type="password" class="form-control text-center input mt-3" placeholder="Contraseña" name="Contra"> 
                 <input type="password" name="Contraseña"class="form-control text-center input mt-3" placeholder="Confirmar contraseña">  
+=======
+                <form action="" method="get">
+                <input type="text" class="form-control text-center input " placeholder="Nombre"> 
+                <input type="text" class="form-control text-center input mt-3" placeholder="Apellido Paterno"> 
+                <input type="text" class="form-control text-center input mt-3" placeholder="Apellido Materno"> 
+                <input type="text" class="form-control text-center input mt-3" placeholder="Telefono">
+                <input type="text" class="form-control text-center input mt-3" placeholder="Correo Electronico"> 
+                <input type="text" class="form-control text-center input mt-3" placeholder="Contraseña"> 
+                <input type="text" class="form-control text-center input mt-3" placeholder="Confirmar contraseña">  
+>>>>>>> parent of cadd874 (Merge branch 'main' of https://github.com/miguelorg19/IntegradoraB)
                 </div>
                 <div class="d-flex justify-content-center mt-3">
-                <button type="submit" class="btn btn-dark ContBtn col-lg-9" name="agregar">Unete</button>
+                <button type="submit" class="btn btn-dark ContBtn col-lg-9">Unete</button>
                 </div>
                 <div class="mt-4 d-flex justify-content-center">
                 <p class="ya">Ya eres miembro?</p>
