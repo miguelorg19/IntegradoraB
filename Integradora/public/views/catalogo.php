@@ -244,7 +244,7 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
       display: none;
       position: absolute;
       background: #293133;
-      border: 1px solid #ccc;
+     
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       padding: 10px;
       z-index: 1;
@@ -346,7 +346,7 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
                     ?>
                   </select>
 
-                  <label for="precio_min">Precio mínimo:</label>
+                  <label class="text-color white" for="precio_min">Precio mínimo:</label>
                   <input type="number" name="precio_min" id="precio_min" class="form-control" step="1">
                   <label for="precio_max">Precio máximo:</label>
                   <input type="number" name="precio_max" id="precio_max" class="form-control" step="1">
