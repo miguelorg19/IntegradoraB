@@ -1,5 +1,12 @@
 <?php
 namespace src\Config;
+require '/../Config/conexion.php';
+require __DIR__ . '/../../vendor/autoload.php';
+require  '/../Config/validacionregistro.php';
+require '/../Config/sanitizacionregistro.php';
+use src\Config\validacionesr;
+use src\Config\sanitizarreg;
+use src\Config\Conexion;
 require_once (__DIR__ . '/../Config/conexion.php');
 class Registro
 {
@@ -52,19 +59,40 @@ class Registro
         $this->database = null;
     }
 }
-
 $registro = new Registro();
-
-// Verificar si se envió el formulario y procesar los datos
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Obtener los datos del formulario
     $nombre = $_POST["nombre"];
     $apellidoPat = $_POST["ApP"];
     $apellidoMat = $_POST["ApM"];
     $telefono = $_POST["Telefono"];
     $correo = $_POST["Correo"];
     $contraseña = $_POST["Contraseña"];
+    $contraseña2 = $_POST['Contra'];
+    $validar = new validacionesr();
+    $san = new sanitizarreg();
 
+    $nombreValido = $validar->nombres($nombre);
+    $apellidoPatValido = $validar->apellidosP($apellidoPat);
+    $apellidoMatValido = $validar->apellidosM($apellidoMat);
+    $telefonoValido = $validar->telefonos($telefono);
+    $correoValido = $validar->correos($correo);
+    $contraseñaValida = $validar->contras($contraseña,$contraseña2);
+
+    if ($nombreValido && $apellidoPatValido && $apellidoMatValido && $telefonoValido && $correoValido && $contraseñaValida) {
+        $nombreSanitizado = $san->sannombre($nombre);
+        $apellidoPatSanitizado = $san->sanapellidos($apellidoPat);
+        $apellidoMatSanitizado = $san->sanapellidos($apellidoMat);
+        $telefonoSanitizado = $san->santelefonos($telefono);
+        $correoSanitizado = $san->sancorreo($correo);
+        $contraseñaSanitizada = $contraseña2;
+
+        $registro = new Registro();
+        $registro->Registro($nombre, $apellidoPat, $apellidoMat, $telefono, $correoSanitizado, $contraseñaSanitizada);
+
+    echo '<div class="alert alert-success" role="alert">Registro exitoso</div>';
+    echo '<meta http-equiv="refresh" content="2;url=/../Integradora/public/views/login.php">';
+    return true;
+    }
         extract($_POST);
         if (empty($nombre) || empty($apellidoPat) || empty($apellidoMat) || empty($telefono) || empty($correo) || empty($contraseña)) {
             echo 'Faltan campos por llenar';
