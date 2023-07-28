@@ -105,9 +105,6 @@ $datos = $productos->orden();
             <li>
               <a href="pedidos.php">Pedidos</a>
             </li>
-            <li>
-              <a href="agregarproducto.php">Agregar producto</a>
-            </li>
             <li><a href="cerrar_sesion.php">Cerrar Sesion</a>
             </li>
 
