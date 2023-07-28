@@ -239,8 +239,8 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
     .filter-content {
       display: none;
       position: absolute;
-      background: #fff;
-      border: 1px solid #ccc;
+      background: #293133;
+     
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       padding: 10px;
       z-index: 1;
@@ -266,7 +266,7 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
     #toggle-filter:checked+.filter-content {
       display: flex;
       flex-direction: column;
-      background-color: #f4f4f4;
+      background-color: black;
       box-shadow: 0px 2px 10px rgba(100, 100, 100, 0.5);
       height: auto;
       padding: 15px;
@@ -342,10 +342,10 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
                     ?>
                   </select>
 
-                  <label for="precio_min">Precio mínimo:</label>
-                  <input type="number" name="precio_min" id="precio_min" class="form-control" step="1">
-                  <label for="precio_max">Precio máximo:</label>
-                  <input type="number" name="precio_max" id="precio_max" class="form-control" step="1">
+                  <label class="text-light" for="precio_min">Precio mínimo:</label>
+                  <input type="number" name="precio_min" id="precio_min" class="form-control mb-5" step="1">
+                  <label class="text-light"  for="precio_max">Precio máximo:</label>
+                  <input type="number" name="precio_max" id="precio_max" class="form-control mb-5" step="1">
                   <button type="submit" class="btn filter-btn">Aplicar filtro</button>
                 </form>
               </div>

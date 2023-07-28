@@ -15,20 +15,31 @@ if (isset($_POST['mes'])) {
     $mesSeleccionado = date('n');
 }
 
-// Obtener los datos de ganancias por semanas para el mes seleccionado
+
 $datos = $modelo->obtenerGananciasPorMes($mesSeleccionado);
 
-// Preparar los datos para la gráfica
+$semanasGanancias = [];
+
+foreach ($datos as $dato) {
+  
+    $numeroSemana = date('W', strtotime($dato['Fecha']));
+
+
+    if (isset($semanasGanancias[$numeroSemana])) {
+        $semanasGanancias[$numeroSemana] += $dato['Ganancias'];
+    } else {
+        $semanasGanancias[$numeroSemana] = $dato['Ganancias'];
+    }
+}
+
+
 $semanas = [];
 $ganancias = [];
 
-foreach ($datos as $dato) {
-    // Obtener el número de semana del registro actual
-    $numeroSemana = date('W', strtotime($dato['Fecha']));
 
-    // Usar el número de semana como etiqueta en la gráfica
+foreach ($semanasGanancias as $numeroSemana => $gananciaSemana) {
     $semanas[] = "Semana " . $numeroSemana;
-    $ganancias[] = $dato['Ganancias'];
+    $ganancias[] = $gananciaSemana;
 }
 
 $totalIngresos = 0;
@@ -120,6 +131,22 @@ $totalPerdido = ($beneficioTotal < 0) ? abs($beneficioTotal) : 0;
         .grafica .chartjs-render-monitor {
             font-size: 6px;
         }
+
+        @media (min-width: 1100px) {
+            .grafica-container {
+                width: 35rem;
+                height: 30rem;
+            }
+        }
+
+        
+        @media (max-width: 1100px) {
+            .grafica-container {
+                width: 100%;
+                height: 20rem;
+            }
+        }
+
     </style>
 </head>
 
@@ -182,9 +209,7 @@ $totalPerdido = ($beneficioTotal < 0) ? abs($beneficioTotal) : 0;
             <li>
               <a href="pedidos.php">Pedidos</a>
             </li>
-            <li>
-              <a href="agregarproducto.php">Agregar producto</a>
-            </li>
+        
             <li><a href="cerrar_sesion.php">Cerrar Sesion</a>
             </li>
 

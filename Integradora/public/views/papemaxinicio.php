@@ -130,14 +130,10 @@ $imagenes = $inicioModelo->obtenerImagenesAleatorias();
 
             <input type="checkbox" id="Nav-MenuBtn">
 
-            <form action="" role="search" id="Buscador1">
-                <input type="text" placeholder="Buscar" id="Buscador">
-                <img role="button" src="../imagenes/busqueda.png" id="Buscar" alt="">
-            </form>
             <!--Contenedor Del Usuario Y Carrito De Compras-->
             <div id="Contenedor-UC">
                 <a href="usuario.php"><img src="../imagenes/usuario.png" alt="" id="usuario"></a>
-                <a href="carrito.php"><img src="../imagenes/carrito.png" alt="" id="carrito"></a>
+                <a href="carritodecompras.php"><img src="../imagenes/carrito.png" alt="" id="carrito"></a>
             </div>
             <!--Menu Desplegado-->
             <div id="Menu-Desplegado">
@@ -171,17 +167,11 @@ $imagenes = $inicioModelo->obtenerImagenesAleatorias();
                         <li>
                             <a class="dropdown-item" href="pedidos.php">Pedidos</a>
                         </li>
-                        <li>
-                            <a class="dropdown-item" href="agregarproducto.php">Agregar producto</a>
-                        </li>
+                        
+                        
                         <li><a href="cerrar_sesion.php">Cerrar Sesion</a>
                         </li>
-                        <li>
-                            <form action="" role="search" id="Buscador2">
-                                <input type="text" placeholder="Buscar" id="Buscador">
-                                <img role="button" src="../imagenes/busqueda.png" id="Buscar" alt="">
-                            </form>
-                        </li>
+                      
                     </ul>
                 </div>
             </div>

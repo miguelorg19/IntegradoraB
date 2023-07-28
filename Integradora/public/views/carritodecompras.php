@@ -44,7 +44,7 @@ if($productos != null){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Carrito</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
    <style>
@@ -392,7 +392,7 @@ if($productos != null){
         ?>
         <a href=""><img src="<?php echo $img  ?>" id="usuario"></a>
         <div id="ContCart">
-            <a href=""><img src="../imagenes/carrito.png" alt="" id="carrito"></a>
+            <a href="carritodecompras.php"><img src="../imagenes/carrito.png" alt="" id="carrito"></a>
             <span id="num_cart" class="badge bg-primary"><?php echo $num_cart; ?></span>
         </div>    
         </div>
@@ -407,9 +407,10 @@ if($productos != null){
 
             <div id="Nav-Items">
             <ul>
-                <li><a href="catalogo.php">Inicio</a></li>
-                <li><a href="">Filtro</a></li>
-                <li><a href="">Categorias</a></li>
+            <li><a href="papemaxinicio.php">Inicio</a></li>
+                <li><a href="catalogo.php">Catalogo</a></li>
+                <li><a href="pedidos.php">Pedidos</a></li>
+                <li><a href="cerrar_sesion.php">Cerrar sesion</a></li>
             </ul>
             </div>
 
