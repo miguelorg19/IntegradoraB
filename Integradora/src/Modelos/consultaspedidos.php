@@ -75,6 +75,7 @@ class Pedidos{
     public function actualizarEstadoPedido($orderId, $nuevoEstado)
     {
         try {
+            echo "ID_venta: " . $orderId . ", Estatus: " . $nuevoEstado;
             $conexion = $this->conexion->conectar();
             $sql = $conexion->prepare('UPDATE orden_ventas set Estatus = ? where Id_Orden_Venta = ?');
             $sql->execute([$nuevoEstado, $orderId]);
