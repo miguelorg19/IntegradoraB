@@ -1,6 +1,6 @@
 <?php
 require_once 'actualizacionusuarios.php';
-require '../Config/sanitizacionregistro.php';
+require '../Config/sanitizarregistro.php';
 require '../Config/validacionregistro.php';
 use src\Modelos\Actualizacion;
 use src\Config\validacionesr;
@@ -70,6 +70,6 @@ if(isset($_POST['correo'])){
 }
 
 if(isset($_POST['listo'])){
-   echo '<meta http-equiv="refresh" content="1;url=/../Integradora/public/views/catalogo.php">';
+   echo '<meta http-equiv="refresh" content="1;url=/../../public/views/catalogo.php">';
 }
 ?>

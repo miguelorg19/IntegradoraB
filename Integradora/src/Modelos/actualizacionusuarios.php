@@ -7,7 +7,7 @@ session_start();
 if (isset($_SESSION['ID_USUARIO'])) {
     $idUsuario = $_SESSION['ID_USUARIO'];
 } else {
-    header('Location: /../Integradora/public/views/login.php');
+    header('Location: /../../public/views/login.php');
     exit();
 }
 

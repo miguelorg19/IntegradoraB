@@ -199,7 +199,7 @@ $sql = null;
           <div id="ContUs">
             
             <a href=""><img src="../imagenes/usuario.png" id="usuario" alt=""></a>
-            <h2><?php //echo $_SESSION["Nombre"]; ?></h2>
+            <h2><?php $_SESSION["NOMBRE_USUARIO"]; ?></h2>
           </div>
             <div id="ContCart">
                 <a href="carritodecompras.php">

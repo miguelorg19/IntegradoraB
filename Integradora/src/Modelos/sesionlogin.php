@@ -1,12 +1,13 @@
 <?php
 namespace src\Modelos;
 require __DIR__ . '/../../vendor/autoload.php';
+use pdo;
 class Usuario {
-    private $db;
+    private $conexion;
 
-    public function __construct($db) {
-        $this->db = $db;
-        session_start(); 
+    public function __construct() {
+        $conexion_instancia = new \src\Config\Conexion();
+        $this->conexion = $conexion_instancia->conectar();
     }
 
     
