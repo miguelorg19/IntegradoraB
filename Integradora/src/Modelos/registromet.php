@@ -1,9 +1,9 @@
 <?php
 namespace src\Config;
-require '/../Config/conexion.php';
+require __DIR__ . '/../Config/conexion.php';
 require __DIR__ . '/../../vendor/autoload.php';
-require  '/../Config/validacionregistro.php';
-require '/../Config/sanitizacionregistro.php';
+require __DIR__ . '/../Config/validacionregistro.php';
+require __DIR__ . '/../Config/sanitizacionregistro.php';
 use src\Config\validacionesr;
 use src\Config\sanitizarreg;
 use src\Config\Conexion;

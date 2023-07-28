@@ -1,4 +1,6 @@
 <?php
+namespace src\Modelos;
+require __DIR__ . '/../../vendor/autoload.php';
 class Usuario {
     private $db;
 
