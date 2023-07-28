@@ -11,6 +11,7 @@ if (isset($_GET['id'])) {
     header("Location: pedidos.php");
     exit(); 
 }
+
 $datos = $productos->detallesorden($id);
 ?>
 <!DOCTYPE html>
@@ -105,7 +106,17 @@ $datos = $productos->detallesorden($id);
                 <div class="collapse navbar-collapse col-lg-1 col-sm-6 col-md-6 d-flex justify-content-end con" id="menu">
                     <ul class="navbar-nav">
                     <li class="nav-item">
-                    <a href="usuario.php"><img src="../imagenes/usuario.png" width="40" height="40"></a>
+                    <?php 
+            $foto = $imagenes->verfoto($idUsuario);
+            if(!empty($foto)){
+              $url = $foto;
+              $img = $imagenes->obtenerimaus($url);
+            }
+            else{
+              $img = '../imagenes/usuario.png';
+            }
+            ?>
+                    <a href="usuario.php"><img src="<?php echo $img ?>" width="40" height="40"></a>
                     <img src="../imagenes/carrito.png" width="40" height="40">
                     </li>
                 </div>      

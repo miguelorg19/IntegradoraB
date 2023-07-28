@@ -3,7 +3,9 @@ require_once '../../src/Modelos/enviocorreoinicio.php';
 require_once '../../src/Modelos/iniciomodelo.php';
 
 use src\Modelos\Inciomodelo;
-
+require_once '../../src/Modelos/imagenes.php';
+use src\Config\Imagenes;
+$imagenes = new Imagenes();
 $inicioModelo = new Inciomodelo();
 $imagenes = $inicioModelo->obtenerImagenesAleatorias();
 ?>
@@ -130,9 +132,18 @@ $imagenes = $inicioModelo->obtenerImagenesAleatorias();
 
             <input type="checkbox" id="Nav-MenuBtn">
 
-            <!--Contenedor Del Usuario Y Carrito De Compras-->
+            <?php 
+            $foto = $imagenes->verfoto($idUsuario);
+            if(!empty($foto)){
+              $url = $foto;
+              $img = $imagenes->obtenerimaus($url);
+            }
+            else{
+              $img = '../imagenes/usuario.png';
+            }
+            ?>
             <div id="Contenedor-UC">
-                <a href="usuario.php"><img src="../imagenes/usuario.png" alt="" id="usuario"></a>
+                <a href="usuario.php"><img src="<?php echo $img ?>" alt="" id="usuario"></a>
                 <a href="carritodecompras.php"><img src="../imagenes/carrito.png" alt="" id="carrito"></a>
             </div>
             <!--Menu Desplegado-->

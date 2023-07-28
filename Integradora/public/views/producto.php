@@ -15,6 +15,13 @@ if(!isset($_SESSION['NOMBRE_USUARIO'])){
   header("location:login.php");
 
 }
+if (isset($_SESSION['ID_USUARIO'])) {
+  
+  header("location:login.php");
+}
+else{
+  $idUsuario = $_SESSION['ID_USUARIO'];
+}
 
 $num_cart=0;
 if(isset($_SESSION['carrito']['productos'])){
@@ -205,7 +212,17 @@ $sql = null;
                 <div class="col-xl-2 col-lg-2 col-md-2 col-sm-4 col-4 d-flex justify-content-end">
                 <ul class="navbar-nav">
                 <li class="nav-item">
-                <a href="usuario.php"><img src="../imagenes/usuario.png" width="40" height="40"></a>
+                <?php 
+            $foto = $imagenes->verfoto($idUsuario);
+            if(!empty($foto)){
+              $url = $foto;
+              $img = $imagenes->obtenerimaus($url);
+            }
+            else{
+              $img = '../imagenes/usuario.png';
+            }
+            ?>
+                <a href="usuario.php"><img src="<?php echo $img ?>" width="40" height="40"></a>
                 <a href="carritodecompras.php"><img src="../imagenes/carrito.png" width="40" height="40"></a>
                 </div>
               </li>

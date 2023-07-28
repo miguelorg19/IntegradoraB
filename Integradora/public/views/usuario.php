@@ -2,7 +2,16 @@
 require_once '../../src/Modelos/imagenes.php';
 use src\Config\Imagenes;
 session_start();
+if(!isset($_SESSION['NOMBRE_USUARIO'])){
+
+  header("location:login.php");
+
+}
 if (isset($_SESSION['ID_USUARIO'])) {
+  
+  header("location:login.php");
+}
+else{
   $idUsuario = $_SESSION['ID_USUARIO'];
 }
 $imagenes = new Imagenes();

@@ -9,11 +9,17 @@ $con = $db->conectar();
 
 session_start();
 
-
 if(!isset($_SESSION['NOMBRE_USUARIO'])){
 
     header("location:login.php");
   
+}
+if (isset($_SESSION['ID_USUARIO'])) {
+    
+    header("location:login.php");
+}
+else{
+    $idUsuario = $_SESSION['ID_USUARIO'];
 }
 
 if(isset($_POST['total']) && isset($_POST['action'])){

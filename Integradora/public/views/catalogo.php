@@ -11,7 +11,18 @@ use src\Config\Imagenes;
 $imagenes = new Imagenes();
 
 session_start();
+if(!isset($_SESSION['NOMBRE_USUARIO'])){
 
+  header("location:login.php");
+
+}
+if (isset($_SESSION['ID_USUARIO'])) {
+  
+  header("location:login.php");
+}
+else{
+  $idUsuario = $_SESSION['ID_USUARIO'];
+}
 
 $num_cart = 0;
 if (isset($_SESSION['carrito']['productos'])) {
@@ -300,8 +311,17 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
     </form>
     <div id="Contenedor-UC">
       <div id="ContUs">
-
-        <a href=""><img src="../imagenes/usuario.png" id="usuario" alt=""></a>
+      <?php 
+            $foto = $imagenes->verfoto($idUsuario);
+            if(!empty($foto)){
+              $url = $foto;
+              $img = $imagenes->obtenerimaus($url);
+            }
+            else{
+              $img = '../imagenes/usuario.png';
+            }
+            ?>
+        <a href=""><img src="<?php $img ?>" id="usuario" alt=""></a>
         <h2><?php //echo $_SESSION["Nombre"]; 
             ?></h2>
       </div>

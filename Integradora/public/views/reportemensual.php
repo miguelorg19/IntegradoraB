@@ -2,9 +2,23 @@
 
 use src\Config\Conexion;
 use src\Modelos\Graficamensual;
-
+require_once '../../src/Modelos/imagenes.php';
+use src\Config\Imagenes;
+$imagenes = new Imagenes();
 require_once '../../src/Modelos/graficamensual.php';
+session_start();
+if(!isset($_SESSION['NOMBRE_USUARIO'])){
 
+    header("location:login.php");
+  
+}
+if (isset($_SESSION['ID_USUARIO'])) {
+    
+    header("location:login.php");
+}
+else{
+    $idUsuario = $_SESSION['ID_USUARIO'];
+}
 $modelo = new Graficamensual();
 
 // Verificar si se seleccionó un mes en el formulario

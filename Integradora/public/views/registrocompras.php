@@ -1,8 +1,21 @@
 <?php
 require_once __DIR__. '/../../src/Modelos/consultascompras.php';
+
 use src\Config\Compras;
 $res='';
 $num ='';
+if(!isset($_SESSION['NOMBRE_USUARIO'])){
+
+  header("location:login.php");
+
+}
+if (isset($_SESSION['ID_USUARIO'])) {
+  
+  header("location:login.php");
+}
+else{
+  $idUsuario = $_SESSION['ID_USUARIO'];
+}
 $productos = new Compras();
 if (isset($_SESSION['vacio'])) {
   $res = $_SESSION['vacio'];
@@ -84,7 +97,17 @@ if (isset($_GET['categoria'])) {
       <input type="checkbox" id="Nav-MenuBtn">
       <!--Contenedor Del Usuario Y Carrito De Compras-->
       <div id="Contenedor-UC">
-        <a href="usuario.php"><img src="../imagenes/usuario.png" alt="" id="usuario"></a>
+      <?php 
+            $foto = $imagenes->verfoto($idUsuario);
+            if(!empty($foto)){
+              $url = $foto;
+              $img = $imagenes->obtenerimaus($url);
+            }
+            else{
+              $img = '../imagenes/usuario.png';
+            }
+            ?>
+        <a href="usuario.php"><img src="<?php echo $img ?>" alt="" id="usuario"></a>
        
       </div>
       <!--Menu Desplegado-->
