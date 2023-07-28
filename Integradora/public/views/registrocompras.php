@@ -37,6 +37,7 @@ if (isset($_GET['categoria'])) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300&family=Noto+Sans+JP:wght@500&family=Rubik:wght@300&family=Ubuntu:ital,wght@1,500&display=swap" rel="stylesheet">
+    <link href="/public/css/menucss.css" rel="stylesheet">
     <style>
       .con{
         margin-left:1%;
@@ -49,6 +50,7 @@ if (isset($_GET['categoria'])) {
       }
       .conts{
         margin: 0 auto;
+        margin-top: 10%;
       }
       .te{
             font-size: 1.3em;
