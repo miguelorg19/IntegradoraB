@@ -96,7 +96,7 @@ if (isset($_GET['PagoTotal'])) {
       <!--Contenedor Del Usuario Y Carrito De Compras-->
       <div id="Contenedor-UC">
         <a href="usuario.php"><img src="../imagenes/usuario.png" alt="" id="usuario"></a>
-        <a href="carrito.php"><img src="../imagenes/carrito.png" alt="" id="carrito"></a>
+     
       </div>
       <!--Menu Desplegado-->
       <div id="Menu-Desplegado">
