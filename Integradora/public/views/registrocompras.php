@@ -71,49 +71,61 @@ if (isset($_GET['categoria'])) {
     </style>
 </head>
 <body>
-<header>
-      <nav class="navbar navbar-expand-md" style="background-color:black;">
-        <div class="container-fluid">
-        <button class="navbar-toggler bg-secondary col-12" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-              </button>
-        
-        <div class="collapse navbar-collapse col-lg-11 col-sm-6 col-md-6" id="menu">
-            <ul class="navbar-nav d-flex justify-content-center">
-              <li class="nav-item">
-              <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#"><img src="../imagenes/menu.png" width="40" height="40"></a>
-              <ul class="dropdown-menu bg-light">
-                <li>
-                  <a class="dropdown-item" href="">Inicio</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="catalogo.php">Catalogo</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="registroventas.php">Registro de ventas</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="">Ventas diarias</a>
-                </li>
-                  <li>
-                  <a class="dropdown-item" href="">Ventas mensuales</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="pedidos.php">Pedidos</a>
-                </li>
-              </ul>
-                </li>
-            </ul>
-        <div class="collapse navbar-collapse col-lg-1 col-sm-6 col-md-6 d-flex justify-content-end con" id="menu">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-              <a href="usuario.php"><img src="../imagenes/usuario.png" width="40" height="40"></a>
-              <img src="../imagenes/carrito.png" width="40" height="40">
-              </li>
-        </div>      
+<div class="navcont">
+    <nav>
+      <!--Menu-->
+
+      <label for="Nav-MenuBtn">
+        <img src="../imagenes/menu.png" role="button" alt="" id="menu">
+      </label>
+
+      <input type="checkbox" id="Nav-MenuBtn">
+      <!--Contenedor Del Usuario Y Carrito De Compras-->
+      <div id="Contenedor-UC">
+        <a href="usuario.php"><img src="../imagenes/usuario.png" alt="" id="usuario"></a>
+       
+      </div>
+      <!--Menu Desplegado-->
+      <div id="Menu-Desplegado">
+        <div id="Contenedor-Menu-Desplegado">
+          <h3>Jacky Papeleria</h3>
+          <label for="Nav-MenuBtn">
+            <img src="../imagenes/cerca.png" role="button" alt="" id="Cerrar">
+          </label>
         </div>
-  </nav>
-</header>
+
+        <div id="Nav-Items">
+          <ul>
+            <li>
+              <a href="papemaxinicio.php">Inicio</a>
+            </li>
+            <li>
+              <a href="catalogo.php">Catalogo</a>
+            </li>
+            <li>
+              <a href="registroventas.php">Registro de ventas</a>
+            </li>
+            <li>
+              <a href="registrocompras.php">Registro de compras</a>
+            </li>
+            <li>
+              <a href="ventasdiarias.php">Ventas diarias</a>
+            </li>
+            <li>
+              <a href="reportemensual.php">Ventas mensuales</a>
+            </li>
+            <li>
+              <a href="pedidos.php">Pedidos</a>
+            </li>
+            
+            <li><a href="cerrar_sesion.php">Cerrar Sesion</a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
  <div class="container-fluid conts row justify-content-around">
       <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 cont mt-4">
       <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 row">
