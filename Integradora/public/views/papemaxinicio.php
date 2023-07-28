@@ -37,6 +37,7 @@ $imagenes = $inicioModelo->obtenerImagenesAleatorias();
     <style>
         .carousel-item img {
             height: 13rem;
+            padding: 2%;
         }
 
 

@@ -395,7 +395,7 @@ if($productos != null){
               $img = '../imagenes/usuario.png';
             }
         ?>
-        <a href=""><img src="<?php echo $img  ?>" id="usuario"></a>
+        <a href="usuario.php"><img src="<?php echo $img  ?>" id="usuario"></a>
         <div id="ContCart">
             <a href="carritodecompras.php"><img src="../imagenes/carrito.png" alt="" id="carrito"></a>
             <span id="num_cart" class="badge bg-primary"><?php echo $num_cart; ?></span>
