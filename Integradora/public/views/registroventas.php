@@ -7,7 +7,6 @@ $res = '';
 $Pago = 0;
 $imagenes = new Imagenes();
 $productos = new Ventas();
-session_start();
 if(isset($_SESSION['NOMBRE_USUARIO'])){
   $nombreus = $_SESSION['NOMBRE_USUARIO'];
 }
@@ -21,10 +20,7 @@ if (isset($_SESSION['ID_USUARIO'])) {
 else {
   header("location:login.php");
 }
-if($idUsuario != 1)
-{
-  header("location:papemaxinicio.php");
-}
+
 
 
 if (isset($_SESSION['resultado'])) {
@@ -100,6 +96,9 @@ if (isset($_GET['PagoTotal'])) {
       font-family: 'Inter', sans-serif;
       font-weight: bold;
     }
+    .usuario{
+            margin-left: 100%;
+        }
   </style>
 </head>
 
@@ -126,7 +125,7 @@ if (isset($_GET['PagoTotal'])) {
               $img = '../imagenes/usuario.png';
             }
             ?>
-        <a href="usuario.php"><img src="<?php echo $img ?>" alt="" id="usuario"></a>
+        <a href="usuario.php"><img src="<?php echo $img ?>" alt="" id="usuario" class="usuario"></a>
      
       </div>
       <!--Menu Desplegado-->
