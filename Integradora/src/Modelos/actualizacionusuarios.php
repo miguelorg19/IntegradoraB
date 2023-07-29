@@ -5,7 +5,6 @@ require_once '../Config/conexion.php';
 require_once '../../src/Modelos/imagenes.php';
 use PDOException;
 session_start();
-
 if (isset($_SESSION['usuario_id'])) {
     $idUsuario = $_SESSION['usuario_id'];
    } else {
@@ -21,7 +20,7 @@ class Actualizacion {
             $this->conexion = $conexion_instancia->conectar();
         } catch (PDOException $e) {
             header('Location: ../../public/views/usuario.php'); 
-            $_SESSION['message'] = 'Error en la conexión a la base de datos: ' . $e->getMessage();
+            echo 'Error en la conexión a la base de datos: ' . $e->getMessage();
             exit();
         }
     }
@@ -104,8 +103,8 @@ class Actualizacion {
 
                 return true;
             } else {
+                 $_SESSION['message'] = '<div class="alert alert-danger">Error en la actualización del apellido Paterno (Verifique los datos o no se encontró el usuario).</div>';
                 header('Location: ../../public/views/usuario.php'); 
-                $_SESSION['message'] = '<div class="alert alert-danger">Error en la actualización del apellido Paterno (Verifique los datos o no se encontró el usuario).</div>';
                 return false; 
             }
         } catch (PDOException $e) {
@@ -130,9 +129,8 @@ class Actualizacion {
             $stmt->execute();
     
             if ($stmt->rowCount() > 0) {
-
-                header('Location: ../../public/views/usuario.php');
                 $_SESSION['message'] = '<div class="alert alert-success">Se actualizó el apellido Materno correctamente.</div>'; 
+                header('Location: ../../public/views/usuario.php');
 
                 return true;
             } else {
@@ -167,8 +165,8 @@ class Actualizacion {
                 header('Location: ../../public/views/usuario.php');
                 return true;
             } else {
-                header('Location: ../../public/views/usuario.php'); 
                 $_SESSION['message'] = '<div class="alert alert-danger">Error en la actualización del telefono (Verifique los datos o no se encontró el usuario).</div>';
+                header('Location: ../../public/views/usuario.php'); 
                 return false; 
             }
         } catch (PDOException $e) {
@@ -186,13 +184,10 @@ class Actualizacion {
         $nuevonombre = 'usuario_'. $idUs . '.' . $extension;
         $ruta = $directorio. $nuevonombre;
         if(move_uploaded_file($imgtmp, $ruta)){
-        $_SESSION['message'] ='Imagen subida ';
-        header('Location: ../../public/views/usuario.php'); 
+        echo'Imagen subida ';
         }
         else{
-            $_SESSION['message']='error al subir imagen';
-            header('Location: ../../public/views/usuario.php'); 
-        
+            echo'error al subir imagen'; 
         }
         $sql = $this->conexion->prepare("UPDATE usuarios set Foto = ? where ID_Usuario = ?");
         $sql ->execute([$nuevonombre, $idUs]);

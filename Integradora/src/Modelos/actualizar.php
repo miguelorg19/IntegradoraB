@@ -5,7 +5,7 @@ require __DIR__ . '/../Config/snitizarusuario.php';
 use src\Config\validacionesr;
 use src\Config\sanitizarregi;
 use src\Modelos\Actualizacion;
-
+session_start();
 $validar = new validacionesr();
 $san = new sanitizarregi();
 $actualiza = new Actualizacion();
@@ -84,17 +84,14 @@ if (isset($_POST['guardar'])) {
             }
         }
     }
-
-    if (!empty($_FILES['img'])) {
-        if (isset($_FILES['img'])) {
-            $img = $_FILES["img"];
-            $imgname = $img['name'];
-            $imgtmp = $img['tmp_name'];
-            $actualiza->guardarimg($imgname, $idUsuario, $imgtmp);
-        }
-
-
     }
-}
-
-header('Location: ../../public/views/usuario.php');
+    if (!empty($_FILES['img'])) {
+            if (isset($_FILES['img'])) {
+                $img = $_FILES["img"];
+                $imgname = $img['name'];
+                $imgtmp = $img['tmp_name'];
+                $actualiza->guardarimg($imgname, $idUsuario, $imgtmp);
+                
+            }
+        }
+    header('Location: ../../public/views/usuario.php'); 

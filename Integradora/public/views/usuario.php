@@ -121,7 +121,7 @@ $imagenes = new Imagenes();
 </header>
       <div class="container mt-4 d-flex justify-content-center row pw col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
         <div class="col-xl-8 col-lg-8 col-md-6 col-sm-12 col-12 d-flex justify-content-center conss">
-        <form action="../../src/Modelos/actualizar.php" method="post">
+        <form action="../../src/Modelos/actualizar.php" method="post" enctype="multipart/form-data">
             <div  class="d-flex justify-content-center">
             <?php 
             $foto = $imagenes->verfoto($idUsuario);
@@ -142,7 +142,8 @@ $imagenes = new Imagenes();
             <input type="file" name="img"  accept=".jpg, .jpeg, .png">
             </div>
         </div>
-        <?php if (isset($_SESSION['message'])) {echo $_SESSION['message'];unset($_SESSION['message']);}?> 
+        <?php if (isset($_SESSION['message'])) {echo $_SESSION['message'];
+          unset($_SESSION['message']);}?> 
         <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12 conss">
         <input type="text" class="form-control tex" placeholder="<?php echo $_SESSION['usuario_nombre']?>" aria-label="Recipient's username" name="Nombre" aria-describedby="button-addon2">
         <input type="text" class="form-control tex mt-3" placeholder="<?php echo $_SESSION['ApellidoP']?>" name="ApeP" aria-label="Recipient's username" aria-describedby="button-addon2">
