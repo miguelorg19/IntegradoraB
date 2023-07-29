@@ -185,24 +185,17 @@ class Actualizacion {
         $extension = pathinfo($imgname, PATHINFO_EXTENSION);
         $nuevonombre = 'usuario_'. $idUs . '.' . $extension;
         $ruta = $directorio. $nuevonombre;
-    
-        if (move_uploaded_file($imgtmp, $ruta)) {
-            $_SESSION['message'] = '<div class="alert alert-success">Imagen subida.</div>';
-            $sql = $this->conexion->prepare("UPDATE usuarios SET Foto = ? WHERE ID_Usuario = ?");
-            if ($sql->execute([$nuevonombre, $idUs])) {
-                header('Location: ../../public/views/usuario.php');
-                return true;
-            } else {
-                $_SESSION['message'] = '<div class="alert alert-danger">Error al actualizar la foto en la base de datos.</div>';
-                header('Location: ../../public/views/usuario.php');
-                return false;
-            }
-        } else {
-            $_SESSION['message'] = '<div class="alert alert-danger">Error al subir imagen.</div>';
-            header('Location: ../../public/views/usuario.php');
-            return false;
+        if(move_uploaded_file($imgtmp, $ruta)){
+        $_SESSION['message'] ='Imagen subida ';
+        header('Location: ../../public/views/usuario.php'); 
         }
+        else{
+            $_SESSION['message']='error al subir imagen';
+            header('Location: ../../public/views/usuario.php'); 
         
+        }
+        $sql = $this->conexion->prepare("UPDATE usuarios set Foto = ? where ID_Usuario = ?");
+        $sql ->execute([$nuevonombre, $idUs]);
     }
     
 
