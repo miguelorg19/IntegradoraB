@@ -67,7 +67,6 @@ class Pedidos{
             $query -> execute([$id]);
             $resultado = $query->fetchAll(\PDO::FETCH_COLUMN);
             return $resultado;
-            
         }
         catch(PDOException $e){
             echo 'Fallo la conexion'. $e->getmessage();

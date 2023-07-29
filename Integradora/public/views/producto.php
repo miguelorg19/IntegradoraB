@@ -10,6 +10,7 @@ use src\Config\Productos;
 
 $productos = new Productos();
 $imagenes = new Imagenes();
+
 session_start();
 if (isset($_SESSION['NOMBRE_USUARIO'])) {
   $nombreus = $_SESSION['NOMBRE_USUARIO'];
@@ -181,31 +182,24 @@ $sql = null;
       font-size: .9rem;
       font-family: 'Inter', sans-serif;
     }
-    #ContCart{
-        display:flex;
-        }
-        #num_cart{
-            height:3vh;
-        }
 
-    .con{
-      margin-top: 10%;
+    .conm{
+      margin-top: 5%;
     }
   </style>
 
 </head>
 
 <body>
+  <div class="navcont">
+    <nav>
+      <!--Menu-->
 
-<div class="navcont">
-        <nav>
-            <!--Menu-->
+      <label for="Nav-MenuBtn">
+        <img src="../imagenes/menu.png" role="button" alt="" id="menu">
+      </label>
 
-            <label for="Nav-MenuBtn">
-                <img src="../imagenes/menu.png" role="button" alt="" id="menu">
-            </label>
-
-            <input type="checkbox" id="Nav-MenuBtn">
+      <input type="checkbox" id="Nav-MenuBtn">
 
       <?php
       $foto = $imagenes->verfoto($idUsuario);
@@ -216,13 +210,10 @@ $sql = null;
         $img = '../imagenes/usuario.png';
       }
       ?>
-        <div id="ContCart">
+      <div id="Contenedor-UC">
         <a href="usuario.php"><img src="<?php echo $img ?>" alt="" id="usuario"></a>
-        <div id="ContCart">
-            <a href="carritodecompras.php"><img src="../imagenes/carrito.png" alt="" id="carrito"></a>
-            <span id="num_cart" class="badge bg-primary"><?php echo $num_cart; ?></span>
-        </div>    
-        </div>  
+        <a href="carritodecompras.php"><img src="../imagenes/carrito.png" alt="" id="carrito"></a>
+      </div>
       <!--Menu Desplegado-->
       <div id="Menu-Desplegado">
         <div id="Contenedor-Menu-Desplegado">
@@ -232,43 +223,37 @@ $sql = null;
           </label>
         </div>
 
-                <div id="Nav-Items">
-                    <ul>
-                        <li>
-                            <a class="dropdown-item" href="papemaxinicio.php">Inicio</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="catalogo.php">Catalogo</a>
-                        </li>
-                        <?php if($idUsuario == 1)
-                            {
-                            echo '<li><a href="registroventas.php">Registrar Ventas</a></li>'.
-                            '<li><a href="registrocompras.php">Registrar compras</a></li>'.
-                            '<li><a href="ventasdiarias.php">Ventas diarias</a></li>'.
-                            '<li><a href="reportemensual.php">Ventas mensuales</a></li>';
-                            }?>
-                        <li>
-                            <a class="dropdown-item" href="pedidos.php">Pedidos</a>
-                        </li>
-                        
-                        
-                        <li><a href="cerrar_sesion.php">Cerrar Sesion</a>
-                        </li>
-                        <a href="usuario.php"><img src="<?php echo $img ?>" width="40" height="40"></a>
-                <span class="badge bg-primary" id="num_cart"><?php echo $num_cart; ?></span><a href="carritodecompras.php"><img src="../imagenes/carrito.png" width="40" height="40"></a>
- 
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </div>
+        <div id="Nav-Items">
+          <ul>
+            <li>
+              <a href="papemaxinicio.php">Inicio</a>
+            </li>
+            <li>
+              <a href="catalogo.php">Catalogo</a>
+            </li>
+            <?php if ($idUsuario == 1) {
+              echo '<li><a href="registroventas.php">Registrar Ventas</a></li>' .
+                '<li><a href="registrocompras.php">Registrar compras</a></li>' .
+                '<li><a href="ventasdiarias.php">Ventas diarias</a></li>' .
+                '<li><a href="reportemensual.php">Ventas mensuales</a></li>';
+            } ?>
+            <li>
+              <a href="pedidos.php">Pedidos</a>
+            </li>
 
 
+            <li><a href="cerrar_sesion.php">Cerrar Sesion</a>
+            </li>
 
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
 
   <?php foreach ($resultado as $res) {
   ?>
-    <div class="container row col-9 d-flex justify-content-center con">
+    <div class="container row col-9 d-flex justify-content-center con conm">
       <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 d-flex justify-content-center cons">
         <?php $productimg = $res['Imagen'];
         $img = $imagenes->obtenerimag($productimg);

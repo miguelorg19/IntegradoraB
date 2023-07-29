@@ -155,6 +155,7 @@ else {
 
   <div class="container table-responsive d-flex justify-content-center row pw col-xl-9 col-lg-9 col-md-6 col-sm-12 col-12 esp">
     <h1 class="te">Pedidos</h1>
+    <form>
       <table class="table table-borderless table-hover tex">
         <thead>
           <tr>
@@ -173,65 +174,33 @@ else {
               <td>$<?php echo $productos['Costo_Total']; ?></td>
               <td><?php echo $productos['Estatus']; ?></td>
               <td>
-                <a class="btn btn-dark btn-sm" href="detallespedido.php?id=<?php echo $productos['Id_Orden_Venta']; ?>"><i class="bi bi-eye"></i></a>
+                <a class="btn btn-dark btn-sm" href="detallespedido.php?id=<?php echo $productos['Id_Orden_Venta'] ?>"><i class="bi bi-eye"></i></a>
+              </td>
+              <td class="status"><?php echo $productos['Estatus']; ?></td>
+              <td>
+                <a class="btn btn-dark btn-sm" href="detallespedido.php?id=<?php echo $productos['Id_Orden_Venta'] ?>"><i class="bi bi-eye"></i></a>
               </td>
               <td>
-                <?php if ($productos['Estatus'] == 'PENDIENTE' ) { ?>
-                  <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $productos['Id_Orden_Venta']; ?>"><i class="bi bi-check-lg"></i></button>
-            </td>
-            <?php } ?>
-
-          <?php if ($productos['Estatus'] == 'PENDIENTE') { ?>
-              <td>
-              <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#mocalcance<?php echo $productos['Id_Orden_Venta']; ?>"><i class="bi bi-trash"></i></button>
+                <button class="btn btn-success btn-sm btn-success-btn" data-orden-id="<?php echo $productos['Id_Orden_Venta']; ?>">
+                  <i class="bi bi-check-lg"></i>
+                </button>
+                <?php if ($productos['Estatus'] !== 'REALIZADO') { ?>
+                  <button class="btn btn-danger btn-sm btn-delete"><i class="bi bi-trash"></i></button>
+                <?php } ?>
               </td>
-          <?php } ?>
-          <div class="modal fade" id="exampleModal<?php echo $productos['Id_Orden_Venta']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog">
-                      <div class="modal-content">
-                          <div class="modal-header">
-                              <h1 class="ti">Confirmar pedido</h1>
-                          </div>
-                          <div class="modal-body">
-                            <?php $id = $productos['Id_Orden_Venta'] ?>
-                              <form action="../../src/http/actualizarpedido.php" method="POST">
-                                  <input type="number"  class="form-control tex" name="id_venta" value="<?php echo $id ?>" readonly>
-                                  <input type="text" class="form-control tex mt-2"  aria-label="Amount (to the nearest dollar)" placeholder="Nombre" value="$<?php echo $productos['Costo_Total']; ?>" disabled>
-                                  <input type="text" class="form-control tex mt-2"  aria-label="Amount (to the nearest dollar)" placeholder="Precio de venta" value="<?php echo $productos['Fecha']; ?> " disabled>
-                          </div>
-                          <div class="modal-footer">
-                              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
-                              <button type="submit" name="realizar" class="btn btn-success">Realizar</button>
-                          </div>
-                              </form>
-                      </div>
-                  </div>
-              </div>
-              <div class="modal fade" id="mocalcance<?php echo $productos['Id_Orden_Venta']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog">
-                      <div class="modal-content">
-                          <div class="modal-header">
-                              <h1 class="ti">Cancelacion de pedido</h1>
-                          </div>
-                          <div class="modal-body">
-                              <div class="modal-body">
-                              <form action="../../src/http/actualizarpedido.php" method="POST">
-                                  <input type="number"  class="form-control tex" name="id_venta" value="<?php echo $productos['Id_Orden_Venta']; ?>" readonly>
-                                  <input type="text" class="form-control tex mt-2" name="nombre" aria-label="Amount (to the nearest dollar)" placeholder="Nombre" value="$<?php echo $productos['Costo_Total']; ?>" disabled>
-                                  <input type="text" class="form-control tex mt-2" name="precio" aria-label="Amount (to the nearest dollar)" placeholder="Precio de venta" value="<?php echo $productos['Fecha']; ?> " disabled>
-                          </div>
-                          <div class="modal-footer">
-                              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
-                              <button type="submit" name="cancelar" class="btn btn-success">Cancelar</button>
-                          </div>
-                              </form>
-                      </div>
-                  </div>
-              </div>
+            </tr>
           <?php } ?>
         </tbody>
       </table>
+    </form>
   </div>
+  
+
+
+
+
+
+
 
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
