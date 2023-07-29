@@ -9,12 +9,10 @@
     <link rel="stylesheet" href="public/css/styles.css">
 
     <style>
-        /* Estilos iniciales de los contenedores */
         #ContBtn1,
         #ContBtn2 {
-            width: 50%; /* Ajusta el ancho según tus necesidades */
+            width: 40%; 
             text-align: center;
-            margin-top: 2px; /* Ajusta el margen superior según tus necesidades */
         }
 
         #ContBtn1 a,
@@ -24,10 +22,9 @@
             border: 1px;
             text-decoration: none;
             color: #fff;
-            border-radius: 14px;
+            border-radius: 10px;
             transition: background-color 0.3s ease;
             display: block; 
-            margin: 0 auto;
         }
 
         #ContBtn1 a:hover,
@@ -36,9 +33,7 @@
         }
         #ingresar, #registrarse {
             text-align: center;
-            padding: 20px 20px;
-            justify-content: center;
-            margin: auto;
+            padding: 10px 20px;
         }
     </style>
 </head>
@@ -63,7 +58,6 @@
     </div>
 
     <script>
-        // Función para centrar las etiquetas <a>
         function centrarEtiquetas() {
             const contenedorBtns = document.getElementById('ContenedorBtns');
             const etiquetasA = contenedorBtns.getElementsByTagName('a');
@@ -72,8 +66,6 @@
                 etiquetasA[i].style.display = 'inline-block';
             }
         }
-
-        // Llamar a la función después de que la página se haya cargado completamente
         window.onload = centrarEtiquetas;
     </script>
 
