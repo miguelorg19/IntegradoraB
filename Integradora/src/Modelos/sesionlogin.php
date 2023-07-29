@@ -1,10 +1,19 @@
 <?php
+namespace src\Modelos;
+use PDO;
+use PDOException;
 class Usuario {
     private $db;
 
-    public function __construct($db) {
-        $this->db = $db;
-        session_start(); 
+    public function __construct() {
+        try {
+            $conexion_instancia = new \src\Config\Conexion();
+            $this->db = $conexion_instancia->conectar();
+        } catch (PDOException $e) {
+            header('Location: ../../public/views/usuario.php'); 
+            $_SESSION['message'] = 'Error en la conexión a la base de datos: ' . $e->getMessage();
+            exit();
+        }
     }
 
     
