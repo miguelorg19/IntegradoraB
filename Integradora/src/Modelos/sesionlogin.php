@@ -1,11 +1,11 @@
 <?php
 namespace src\Modelos;
-require_once '../Config/conexion.php';
+require __DIR__ . '/../Config/conexion.php';
 use PDO;
 use PDOException;
 class Usuario {
     private $db;
-
+    
     public function __construct() {
         try {
             $conexion_instancia = new \src\Config\Conexion();
@@ -17,30 +17,29 @@ class Usuario {
         }
     }
     
-    public function iniciarSesion($correo, $contraseña) {
-        $query = "SELECT * FROM usuarios WHERE Correo = :correo";
-        $stmt = $this->db->prepare($query);
-        $stmt->bindParam(':correo', $correo);
+    public function iniciarSesion($email, $password) {
+        $consulta = "SELECT * FROM usuarios WHERE Correo = :email";
+        $stmt = $this->db->prepare($consulta);
+        $stmt->bindParam(':email', $email);
         $stmt->execute();
-        if ($stmt->rowCount() > 0) {
-            $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
-            if (password_verify($contraseña, $usuario['contrasenia'])) {
-                session_start();
-                $_SESSION['usuario_id'] = $usuario['ID_Usuario'];
-                $_SESSION['usuario_correo'] = $usuario['Correo'];
-                $_SESSION['usuario_nombre'] = $usuario['Nombre'];
-                $_SESSION['ApellidoP']=$usuario['Apellido_Paterno'];
-                $_SESSION['ApellidoM']=$usuario['Apellido_Materno'];
-                $_SESSION['Telefono']=$usuario['Telefono'];
-                $_SESSION['usuario_rol'] = $usuario['Rol'];
-                return true;
-            }
+        $usuario = $stmt->fetch(PDO::FETCH_ASSOC); // Utilizamos fetch para obtener el resultado directamente
+    
+        if ($usuario && password_verify($password, $usuario['Contrasenia'])) {
+            session_start();
+            $_SESSION['usuario_id'] = $usuario['ID_Usuario'];
+            $_SESSION['usuario_correo'] = $usuario['Correo'];
+            $_SESSION['usuario_nombre'] = $usuario['Nombre'];
+            $_SESSION['ApellidoP'] = $usuario['Apellido_Paterno'];
+            $_SESSION['ApellidoM'] = $usuario['Apellido_Materno'];
+            $_SESSION['Telefono'] = $usuario['Telefono'];
+            $_SESSION['usuario_rol'] = $usuario['Rol'];
+            return true; // Autenticación exitosa, retornamos true
         }
-        echo '<div class="alert alert-danger" role="alert">
-        Error de conexión: Correo o Contraseña incorrecta
-        </div>';
-        return false;
+    
+        return false; // Autenticación fallida, retornamos false
     }
+    
+    
     
 }
 ?>
