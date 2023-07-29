@@ -1,12 +1,21 @@
 <?php
+namespace src\Modelos;
+require_once '../Config/conexion.php';
+use PDO;
+use PDOException;
 class Usuario {
     private $db;
 
-    public function __construct($db) {
-        $this->db = $db;
-        session_start(); 
+    public function __construct() {
+        try {
+            $conexion_instancia = new \src\Config\Conexion();
+            $this->db = $conexion_instancia->conectar();
+        } catch (PDOException $e) {
+            header('Location: ../../public/views/usuario.php'); 
+            $_SESSION['message'] = 'Error en la conexión a la base de datos: ' . $e->getMessage();
+            exit();
+        }
     }
-
     
     public function iniciarSesion($correo, $contraseña) {
         $query = "SELECT * FROM usuarios WHERE Correo = :correo";
@@ -16,6 +25,7 @@ class Usuario {
         if ($stmt->rowCount() > 0) {
             $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
             if (password_verify($contraseña, $usuario['contrasenia'])) {
+                session_start();
                 $_SESSION['usuario_id'] = $usuario['ID_Usuario'];
                 $_SESSION['usuario_correo'] = $usuario['Correo'];
                 $_SESSION['usuario_nombre'] = $usuario['Nombre'];

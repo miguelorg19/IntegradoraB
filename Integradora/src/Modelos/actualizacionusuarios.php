@@ -11,7 +11,6 @@ if (isset($_SESSION['ID_USUARIO'])) {
     header('Location: /../../public/views/login.php');
     exit();
 }
-
 class Actualizacion {
     private $conexion;
 

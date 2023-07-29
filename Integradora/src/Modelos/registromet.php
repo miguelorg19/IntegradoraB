@@ -68,7 +68,7 @@ $registro = new Registro();
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     session_start();
     $nombre = $_POST["nombre"];
-    $apellidoPat = $_POST["ApeP"];
+    $apellidoPat = $_POST["ApP"];
     $apellidoMat = $_POST["ApM"];
     $telefono = $_POST["Telefono"];
     $correo = $_POST["Correo"];

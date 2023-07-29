@@ -158,7 +158,7 @@ public function telefonos(&$telefono) {
     $telefono = preg_replace('/[^0-9]/', '', $telefono);
 
     if(strlen($telefono) !== 10) {
-        $_SESSION['Mensaje']='<div class="alert alert-danger">Campo telefono solo puede contener 10 caracteres</div>';
+        $_SESSION['Mensaje']='<div class="alert alert-danger">Campo telefono solo puede contener 10 caracteres numericos</div>';
         header('Location:  ../../public/views/registro.php');
         return false;
     }
