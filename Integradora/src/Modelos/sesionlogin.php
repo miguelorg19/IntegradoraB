@@ -33,9 +33,11 @@ class Usuario {
             $_SESSION['ApellidoM'] = $usuario['Apellido_Materno'];
             $_SESSION['Telefono'] = $usuario['Telefono'];
             $_SESSION['usuario_rol'] = $usuario['Rol'];
-            return true; // Autenticación exitosa, retornamos true
+            return true; 
         }
-    
+        $_SESSION['Men']='<div class="alert alert-danger" role="alert">
+        Error de conexión: Correo o Contraseña incorrecta
+        </div>';
         return false; // Autenticación fallida, retornamos false
     }
     

@@ -2,6 +2,7 @@
 namespace src\Modelos;
 require __DIR__ . '/../../vendor/autoload.php';
 require_once '../Config/conexion.php';
+require_once '../../src/Modelos/imagenes.php';
 use PDOException;
 session_start();
 
@@ -72,7 +73,6 @@ class Actualizacion {
             if ($stmt->rowCount() > 0) {
                 $_SESSION['message'] = '<div class="alert alert-success">Se actualizó el nombre correctamente.</div>';
                 header('Location: ../../public/views/usuario.php');
-
                 return true;
             } else {
                 $_SESSION['message'] ='<div class="alert alert-danger">Error en la  actualización del nombre (Verifique los datos o no se encontró el usuario).</div>';
