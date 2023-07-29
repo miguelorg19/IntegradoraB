@@ -4,7 +4,6 @@ require __DIR__ . '/../../vendor/autoload.php';
 require_once 'conexion.php';
 use PDO;
 use PDOException;
-session_start();
 class validacionesr{
 
     private $conexion;

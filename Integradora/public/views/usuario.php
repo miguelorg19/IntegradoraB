@@ -4,13 +4,13 @@ require_once '../../src/Modelos/imagenes.php';
 use src\Config\Imagenes;
 
 session_start();
-if (isset($_SESSION['NOMBRE_USUARIO'])) {
-  $nombreus = $_SESSION['NOMBRE_USUARIO'];
+if (isset($_SESSION['usuario_nombre'])) {
+  $nombreus = $_SESSION['usuario_nombre'];
 } else {
   header("location:login.php");
 }
-if (isset($_SESSION['ID_USUARIO'])) {
-  $idUsuario = $_SESSION['ID_USUARIO'];
+if (isset($_SESSION['usuario_id'])) {
+  $idUsuario = $_SESSION['usuario_id'];
 } else {
   header("location:login.php");
 }
@@ -143,11 +143,11 @@ $imagenes = new Imagenes();
             </div>
         </div>
         <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12 conss">
-        <input type="text" class="form-control tex" placeholder="Nombre" value="<?php echo $_SESSION['NOMBRE_USUARIO']?>" aria-label="Recipient's username" name="Nombre" aria-describedby="button-addon2">
-        <input type="text" class="form-control tex mt-3" placeholder="Apellido Paterno" value="<?php echo $_SESSION['ApellidoP']?>" name="ApeP" aria-label="Recipient's username" aria-describedby="button-addon2">
-        <input type="text" class="form-control tex mt-3" value="<?php echo $_SESSION['ApellidoM']?>" name="ApeM" aria-label="Recipient's username" aria-describedby="button-addon2">
-        <input type="text" class="form-control tex mt-3" value="<?php echo $_SESSION['Telefono']?>" name="telefono" aria-label="Recipient's username" aria-describedby="button-addon2">
-        <input type="email" class="form-control tex mt-3" value="<?php echo $_SESSION['usuario_correo']?>" name="correo" aria-label="Recipient's username" aria-describedby="button-addon2">
+        <input type="text" class="form-control tex" placeholder="<?php echo $_SESSION['usuario_nombre']?>" aria-label="Recipient's username" name="Nombre" aria-describedby="button-addon2">
+        <input type="text" class="form-control tex mt-3" placeholder="<?php echo $_SESSION['ApellidoP']?>" name="ApeP" aria-label="Recipient's username" aria-describedby="button-addon2">
+        <input type="text" class="form-control tex mt-3" placeholder="<?php echo $_SESSION['ApellidoM']?>" name="ApeM" aria-label="Recipient's username" aria-describedby="button-addon2">
+        <input type="text" class="form-control tex mt-3" placeholder="<?php echo $_SESSION['Telefono']?>" name="telefono" aria-label="Recipient's username" aria-describedby="button-addon2">
+        <input type="email" class="form-control tex mt-3" placeholder="<?php echo $_SESSION['usuario_correo']?>" name="correo" aria-label="Recipient's username" aria-describedby="button-addon2">
         </div>
         <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12  d-flex justify-content-end">
         <button type="submit" name="guardar" class="btn btn-dark text" style="margin-right:2%">Actualizar</button>

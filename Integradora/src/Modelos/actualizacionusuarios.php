@@ -5,12 +5,12 @@ require_once '../Config/conexion.php';
 use PDOException;
 session_start();
 
-if (isset($_SESSION['ID_USUARIO'])) {
-    $idUsuario = $_SESSION['ID_USUARIO'];
-} else {
-    header('Location: /../../public/views/login.php');
-    exit();
-}
+if (isset($_SESSION['usuario_id'])) {
+    $idUsuario = $_SESSION['usuario_id'];
+   } else {
+       header('Location: /../../public/views/login.php');
+       exit();
+   }
 class Actualizacion {
     private $conexion;
 
@@ -185,13 +185,26 @@ class Actualizacion {
         $extension = pathinfo($imgname, PATHINFO_EXTENSION);
         $nuevonombre = 'usuario_'. $idUs . '.' . $extension;
         $ruta = $directorio. $nuevonombre;
-        if(move_uploaded_file($imgtmp, $ruta)){
-        echo 'Imagen subida ';
+    
+        if (move_uploaded_file($imgtmp, $ruta)) {
+            $_SESSION['message'] = '<div class="alert alert-success">Imagen subida.</div>';
+            $sql = $this->conexion->prepare("UPDATE usuarios SET Foto = ? WHERE ID_Usuario = ?");
+            if ($sql->execute([$nuevonombre, $idUs])) {
+                header('Location: ../../public/views/usuario.php');
+                return true;
+            } else {
+                $_SESSION['message'] = '<div class="alert alert-danger">Error al actualizar la foto en la base de datos.</div>';
+                header('Location: ../../public/views/usuario.php');
+                return false;
+            }
+        } else {
+            $_SESSION['message'] = '<div class="alert alert-danger">Error al subir imagen.</div>';
+            header('Location: ../../public/views/usuario.php');
+            return false;
         }
-        else{
-        }
-        $sql = $this->conexion->prepare("UPDATE usuarios set Foto = ? where ID_Usuario = ?");
-        $sql -> execute([$nuevonombre, $idUs]);
+        
     }
+    
+
 }
 ?>

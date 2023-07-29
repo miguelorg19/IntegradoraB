@@ -2,12 +2,6 @@
 require __DIR__ . '/../../src/Modelos/sesionlogin.php';
 use src\Modelos\Usuario;
 $usuario = new Usuario();
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-$contraseñaIntroducida = '87654'; // Aquí debes colocar la contraseña que deseas verificar
-
-$hashAlmacenado = '$2y$10$PmTbx.cOsgdLgrKdRCooi.LfBVtpoTxQgGFeLEwHkMzBwhmMjRlae'; // Aquí debes colocar el hash almacenado en la base de datos
-
 if (password_verify($contraseñaIntroducida, $hashAlmacenado)) {
     echo 'La contraseña es correcta';
 } else {
