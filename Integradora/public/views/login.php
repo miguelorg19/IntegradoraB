@@ -1,47 +1,15 @@
 <?php
-
-require '../../src/Config/conexion.php';
-use src\Config\Conexion;
-$db = new Conexion();
-$con = $db->conectar();
+require '../../src/Modelos/sesionlogin.php';
+use src\Modelos\Usuario;
+$actualiza= new Usuario();
 
 if(isset($_POST['correo']) && isset($_POST['contraseña'])){
-
-$correo = $_POST['correo'];
-$contraseña = $_POST['contraseña'];
-
-$query = $con->prepare("SELECT * FROM usuarios WHERE Correo = :correo LIMIT 1");
-
-$query->execute(array(":correo"=>$correo));
-
-
-
-$reg = $query->rowCount();
-
-if($reg = $query->fetchALL(PDO::FETCH_ASSOC)){
-
-    foreach($reg as $usuario){
-
-        if(password_verify($contraseña, $usuario['Contrasenia'])){
-            session_start();
-
-            $_SESSION['ID_USUARIO'] = $usuario['ID_Usuario'];
-            $_SESSION['NOMBRE_USUARIO'] = $usuario['Nombre'];
-            
-            header("location:catalogo.php");
-            exit;
-        }
-
-    }
-}
-else{
+    $correo=$_POST['correo'];
+    $contra=$_POST['contraseña'];
+    $actualiza->iniciarSesion($correo,$contra);
+}else{
     header("location:login.php");
 }
-    
-
-
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -95,7 +63,7 @@ else{
 
         
     </div>
-
+    
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
 </body>
