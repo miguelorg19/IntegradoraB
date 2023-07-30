@@ -5,7 +5,7 @@ use Src\Config\Conexion;
 
 session_start();
 
-if(!isset($_SESSION['NOMBRE_USUARIO'])){
+if(!isset($_SESSION['usuario_id'])){
     header("location:login.php");
 }
 

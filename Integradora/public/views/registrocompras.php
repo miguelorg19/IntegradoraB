@@ -4,17 +4,15 @@ require_once __DIR__. '/../../src/Modelos/consultascompras.php';
 use src\Config\Compras;
 $res='';
 $num ='';
-if(isset($_SESSION['NOMBRE_USUARIO'])){
-  $nombreus = $_SESSION['NOMBRE_USUARIO'];
-}
-else
-{
+session_start();
+if (isset($_SESSION['usuario_nombre'])) {
+  $nombreus = $_SESSION['usuario_nombre'];
+} else {
   header("location:login.php");
 }
-if (isset($_SESSION['ID_USUARIO'])) {
-  $idUsuario = $_SESSION['ID_USUARIO'];
-} 
-else {
+if (isset($_SESSION['usuario_id'])) {
+  $idUsuario = $_SESSION['usuario_id'];
+} else {
   header("location:login.php");
 }
 if($idUsuario != 1)
