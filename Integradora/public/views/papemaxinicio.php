@@ -182,9 +182,15 @@ $imagenes = $inicioModelo->obtenerImagenesAleatorias();
                             '<li><a href="ventasdiarias.php">Ventas diarias</a></li>'.
                             '<li><a href="reportemensual.php">Ventas mensuales</a></li>';
                             }?>
-                        <li>
-                            <a class="dropdown-item" href="pedidos.php">Pedidos</a>
-                        </li>
+                        <?php if($idUsuario == 1)
+                            {
+                                echo '<li><a href="pedidos.php">Pedidos</a></li>';
+                            }
+                            else 
+                            {
+                                echo '<li><a href="pedidos_usuario.php">Mis pedidos</a></li>';
+                            }
+                            ?>
                         
                         
                         <li><a href="cerrar_sesion.php">Cerrar Sesion</a>

@@ -8,7 +8,7 @@ if (isset($_POST['correo']) && isset($_POST['contraseña'])) {
     $contra = $_POST['contraseña'];
 
     if ($usuario->iniciarSesion($correo, $contra)) {
-        header('location: catalogo.php');
+        header('location: papemaxinicio.php');
         exit;}
 }
 

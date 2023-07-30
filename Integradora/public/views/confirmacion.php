@@ -2,6 +2,9 @@
 
 require_once '../../src/Config/conexion.php';
 use src\Config\Conexion;
+require_once '../../src/Modelos/imagenes.php';
+use src\Config\Imagenes;
+$imagenes = new Imagenes();
 session_start();
 
 if (isset($_SESSION['usuario_nombre'])) {
@@ -260,14 +263,19 @@ if($productos != null){
 
                 <div id="Nav-Items">
                 <ul>
-                    <li><a href="catalogo.php">Inicio</a></li>
-                    <li><a href="">Filtro</a></li>
-                    <li><a href="">Categorias</a></li>
+                    <li><a href="papemaxinicio.php">Inicio</a></li>
+                    <li><a href="catalogo.php">Catalogo</a></li>
+                    <?php if($idUsuario == 1)
+                    {
+                        echo '<li><a href="pedidos.php">Pedidos</a></li>';
+                    }
+                    else 
+                    {
+                        echo '<li><a href="pedidos_usuario.php">Mis pedidos</a></li>';
+                    }
+                    ?>
+                    <li><a href="cerrar_sesion.php">Cerrar sesion</a></li>
                 </ul>
-                </div>
-
-                <div id="cerrarSesion">
-                    <a href="cerrar_sesion.php" class="btn btn-light">Cerrar Sesion</a>
                 </div>
             </div>
     </nav>

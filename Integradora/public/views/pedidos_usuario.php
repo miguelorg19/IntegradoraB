@@ -1,10 +1,11 @@
 <?php
 require_once __DIR__ . '/../../src/Modelos/consultas_pedidos_usuarios.php';
-
+require_once '../../src/Modelos/imagenes.php';
+use src\Config\Imagenes;
 use src\Config\Pedidos;
 
 $productos = new Pedidos();
-
+$imagenes = new Imagenes();
 session_start();
 
 if (isset($_SESSION['usuario_nombre'])) {
@@ -19,8 +20,10 @@ if (isset($_SESSION['usuario_nombre'])) {
   }
 
 $ID_USUARIO = $_SESSION['usuario_id'];
+if($ID_USUARIO != 1)
+{
  $datos = $productos->orden($ID_USUARIO);
-
+}
 $contador=0;
 
 $num_cart = 0;
@@ -736,10 +739,20 @@ if (isset($_SESSION['carrito']['productos'])) {
         </label>
         <input type="checkbox" id="Nav-MenuBtn">
         <!--Contenedor Del Usuario Y Carrito De Compras-->
+        <?php 
+            $foto = $imagenes->verfoto($idUsuario);
+            if(!empty($foto)){
+              $url = $foto;
+              $img = $imagenes->obtenerimaus($url);
+            }
+            else{
+              $img = '../imagenes/usuario.png';
+            }
+            ?>
         <div id="Contenedor-UC">
-        <a href=""><img src="../imagenes/usuario.png" alt="" id="usuario"></a>
+        <a href="usuario.php"><img src="<?php echo $img ?>" alt="" id="usuario"></a>
         <div id="ContCart">
-            <a href=""><img src="../imagenes/carrito.png" alt="" id="carrito"></a>
+            <a href="carritodecompras.php"><img src="../imagenes/carrito.png" alt="" id="carrito"></a>
             <span id="num_cart" class="badge bg-primary"><?php echo $num_cart; ?></span>
         </div>    
         </div>
@@ -754,14 +767,17 @@ if (isset($_SESSION['carrito']['productos'])) {
 
             <div id="Nav-Items">
             <ul>
-                <li><a href="catalogo.php">Inicio</a></li>
-                <li><a href="">Filtro</a></li>
-                <li><a href="">Categorias</a></li>
+                <li><a href="papemaxinicio.php">Inicio</a></li>
+                <li><a href="catalogo.php">Catalogo</a></li>
+                <?php if($idUsuario == 1)
+                            {
+                            echo '<li><a href="registroventas.php">Registrar Ventas</a></li>'.
+                            '<li><a href="registrocompras.php">Registrar compras</a></li>'.
+                            '<li><a href="ventasdiarias.php">Ventas diarias</a></li>'.
+                            '<li><a href="reportemensual.php">Ventas mensuales</a></li>';
+                            }?>
+                <li><a href="cerrar_sesion.php">Cerrar Sesion</a></li>      
             </ul>
-            </div>
-
-            <div id="cerrarSesion">
-                <a href="cerrar_sesion.php" class="btn btn-light">Cerrar Sesion</a>
             </div>
         </div>
     </nav>

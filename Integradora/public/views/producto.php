@@ -186,6 +186,9 @@ $sql = null;
     .conm{
       margin-top: 5%;
     }
+    #num_cart{
+                height:3vh;
+            }
   </style>
 
 </head>
@@ -213,6 +216,7 @@ $sql = null;
       <div id="Contenedor-UC">
         <a href="usuario.php"><img src="<?php echo $img ?>" alt="" id="usuario"></a>
         <a href="carritodecompras.php"><img src="../imagenes/carrito.png" alt="" id="carrito"></a>
+        <span id="num_cart" class="badge bg-primary"><?php echo $num_cart; ?></span>
       </div>
       <!--Menu Desplegado-->
       <div id="Menu-Desplegado">
@@ -237,9 +241,15 @@ $sql = null;
                 '<li><a href="ventasdiarias.php">Ventas diarias</a></li>' .
                 '<li><a href="reportemensual.php">Ventas mensuales</a></li>';
             } ?>
-            <li>
-              <a href="pedidos.php">Pedidos</a>
-            </li>
+                      <?php if($idUsuario == 1)
+                    {
+                        echo '<li><a href="pedidos.php">Pedidos</a></li>';
+                    }
+                    else 
+                    {
+                        echo '<li><a href="pedidos_usuario.php">Mis pedidos</a></li>';
+                    }
+                    ?>
 
 
             <li><a href="cerrar_sesion.php">Cerrar Sesion</a>

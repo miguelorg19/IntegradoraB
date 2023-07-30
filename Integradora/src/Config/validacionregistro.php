@@ -185,7 +185,7 @@ public function contras($contras, $contrasConfirmacion) {
         return false;
     }
 
-    if(strlen($contras)>3){
+    if(strlen($contras)<3){
         $_SESSION['Mensaje']='<div class="alert alert-danger">La contraseña debe contener al menos 3 caracteres</div>';
         header('Location:  ../../public/views/registro.php');
     }

@@ -369,6 +369,15 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
               </div>
             </li>
             <?php if($idUsuario == 1)
+                    {
+                        echo '<li><a href="pedidos.php">Pedidos</a></li>';
+                    }
+                    else 
+                    {
+                        echo '<li><a href="pedidos_usuario.php">Mis pedidos</a></li>';
+                    }
+                    ?>
+            <?php if($idUsuario == 1)
             {
             echo '<li><a href="registroventas.php">Registrar Ventas</a></li>'.
             '<li><a href="registrocompras.php">Registrar compras</a></li>'.

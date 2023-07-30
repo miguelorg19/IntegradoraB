@@ -49,17 +49,7 @@ if (isset($_SESSION['usuario_id'])) {
 
     }
 
-    .contenido {
-      background-image: url('../imagenes/papeleriapedidos.jpg');
-
-      height: 100%;
-      width: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: -1;
-    }
-
+    
     .tex {
       font-size: 1rem;
       font-family: 'Inter', sans-serif;
@@ -104,7 +94,7 @@ if (isset($_SESSION['usuario_id'])) {
             }
             ?>
       <div id="Contenedor-UC">
-        <a href="usuario.php"><img src="../imagenes/usuario.png" alt="" id="usuario"></a>
+        <a href="usuario.php"><img src="<?php echo $img ?>" alt="" id="usuario"></a>
         
       </div>
       <!--Menu Desplegado-->
@@ -143,12 +133,6 @@ if (isset($_SESSION['usuario_id'])) {
     </nav>
   </div>
 
-  <div class="contenido">
-
-    <img style="height: 100%; width:100%;" src="../imagenes/papeleriapedidos.jpg" alt="" id="home">
-
-  </div>
-
 
   <div class="container table-responsive d-flex justify-content-center row pw col-xl-9 col-lg-9 col-md-6 col-sm-12 col-12 esp">
     <h1 class="te">Pedidos</h1>
@@ -171,27 +155,66 @@ if (isset($_SESSION['usuario_id'])) {
               <td>$<?php echo $productos['Costo_Total']; ?></td>
               <td><?php echo $productos['Estatus']; ?></td>
               <td>
-                <a class="btn btn-dark btn-sm" href="detallespedido.php?id=<?php echo $productos['Id_Orden_Venta'] ?>"><i class="bi bi-eye"></i></a>
+                <a class="btn btn-dark btn-sm" href="pedidos_usuario.php?id=<?php echo $productos['Id_Orden_Venta'] ?>"><i class="bi bi-eye"></i></a>
               </td>
-              <td class="status"><?php echo $productos['Estatus']; ?></td>
+            
               <td>
-                <a class="btn btn-dark btn-sm" href="detallespedido.php?id=<?php echo $productos['Id_Orden_Venta'] ?>"><i class="bi bi-eye"></i></a>
-              </td>
+                <?php if ($productos['Estatus'] == 'PENDIENTE' && $idUsuario==1 ) { ?>
+                  <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $productos['Id_Orden_Venta']; ?>"><i class="bi bi-check-lg"></i></button>
+            </td>
+            <?php } ?>
+
+          <?php if ($productos['Estatus'] == 'PENDIENTE') { ?>
               <td>
-                <button class="btn btn-success btn-sm btn-success-btn" data-orden-id="<?php echo $productos['Id_Orden_Venta']; ?>">
-                  <i class="bi bi-check-lg"></i>
-                </button>
-                <?php if ($productos['Estatus'] !== 'REALIZADO') { ?>
-                  <button class="btn btn-danger btn-sm btn-delete"><i class="bi bi-trash"></i></button>
-                <?php } ?>
+              <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#mocalcance<?php echo $productos['Id_Orden_Venta']; ?>"><i class="bi bi-trash"></i></button>
               </td>
-            </tr>
+          <?php } ?>
+          <div class="modal fade" id="exampleModal<?php echo $productos['Id_Orden_Venta']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h1 class="ti">Confirmar pedido</h1>
+                          </div>
+                          <div class="modal-body">
+                            <?php $id = $productos['Id_Orden_Venta'] ?>
+                              <form action="../../src/http/actualizarpedido.php" method="POST">
+                                  <input type="number"  class="form-control tex" name="id_venta" value="<?php echo $id ?>" readonly>
+                                  <input type="text" class="form-control tex mt-2"  aria-label="Amount (to the nearest dollar)" placeholder="Nombre" value="$<?php echo $productos['Costo_Total']; ?>" disabled>
+                                  <input type="text" class="form-control tex mt-2"  aria-label="Amount (to the nearest dollar)" placeholder="Precio de venta" value="<?php echo $productos['Fecha']; ?> " disabled>
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                              <button type="submit" name="realizar" class="btn btn-success">Realizar</button>
+                          </div>
+                              </form>
+                      </div>
+                  </div>
+              </div>
+              <div class="modal fade" id="mocalcance<?php echo $productos['Id_Orden_Venta']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h1 class="ti">Cancelacion de pedido</h1>
+                          </div>
+                          <div class="modal-body">
+                              <div class="modal-body">
+                              <form action="../../src/http/actualizarpedido.php" method="POST">
+                                  <input type="number"  class="form-control tex" name="id_venta" value="<?php echo $productos['Id_Orden_Venta']; ?>" readonly>
+                                  <input type="text" class="form-control tex mt-2" name="nombre" aria-label="Amount (to the nearest dollar)" placeholder="Nombre" value="$<?php echo $productos['Costo_Total']; ?>" disabled>
+                                  <input type="text" class="form-control tex mt-2" name="precio" aria-label="Amount (to the nearest dollar)" placeholder="Precio de venta" value="<?php echo $productos['Fecha']; ?> " disabled>
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                              <button type="submit" name="cancelar" class="btn btn-success">Cancelar</button>
+                          </div>
+                              </form>
+                      </div>
+                  </div>
+              </div>
           <?php } ?>
         </tbody>
       </table>
-    </form>
   </div>
-  
 
 
 

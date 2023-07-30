@@ -640,14 +640,17 @@ if (isset($_SESSION['carrito']['productos'])) {
             <div id="Nav-Items">
             <ul>
                 <li><a href="catalogo.php">Inicio</a></li>
-                <li><a href="">Filtro</a></li>
-                <li><a href="">Categorias</a></li>
-            </ul>
-            </div>
-
-            <div id="cerrarSesion">
-                <a href="cerrar_sesion.php" class="btn btn-light">Cerrar Sesion</a>
-            </div>
+                <li><a href="catalogo.php">Catalogo</a></li>
+                    <?php if($idUsuario == 1)
+                    {
+                        echo '<li><a href="pedidos.php">Pedidos</a></li>';
+                    }
+                    else 
+                    {
+                        echo '<li><a href="pedidos_usuario.php">Mis pedidos</a></li>';
+                    }
+                    ?>
+                    <li><a href="cerrar_sesion.php">Cerrar sesion</a></li>
         </div>
     </nav>
 
