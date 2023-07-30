@@ -16,7 +16,7 @@ class Pedidos{
     {
         try{
         $conexion = $this->conexion->conectar();
-        $query = $conexion->query('SELECT Id_Orden_Venta,Fecha,Costo_Total,Estatus FROM orden_ventas');
+        $query = $conexion->query('SELECT Id_Orden_Venta,Fecha,Costo_Total,Estatus,Folio FROM orden_ventas');
         $ped = $query->fetchall(\PDO::FETCH_ASSOC);
         return $ped;
         }

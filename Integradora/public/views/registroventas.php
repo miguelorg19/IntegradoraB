@@ -7,7 +7,6 @@ $res = '';
 $Pago = 0;
 $imagenes = new Imagenes();
 $productos = new Ventas();
-session_start();
 if (isset($_SESSION['usuario_nombre'])) {
   $nombreus = $_SESSION['usuario_nombre'];
 } else {

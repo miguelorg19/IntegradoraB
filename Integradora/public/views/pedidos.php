@@ -141,6 +141,7 @@ if (isset($_SESSION['usuario_id'])) {
         <thead>
           <tr>
             <th scope="col">#De Pedido</th>
+            <th scope="col">Folio</th>
             <th scope="col">Fecha </th>
             <th scope="col">Total a pagar</th>
             <th scope="col">Estado del pedido</th>
@@ -151,11 +152,12 @@ if (isset($_SESSION['usuario_id'])) {
           ?>
             <tr>
               <th scope="row"><?php echo $productos['Id_Orden_Venta']; ?></th>
+              <td><?php echo $productos['Folio']; ?></td>
               <td><?php echo $productos['Fecha']; ?></td>
               <td>$<?php echo $productos['Costo_Total']; ?></td>
               <td><?php echo $productos['Estatus']; ?></td>
               <td>
-                <a class="btn btn-dark btn-sm" href="pedidos_usuario.php?id=<?php echo $productos['Id_Orden_Venta'] ?>"><i class="bi bi-eye"></i></a>
+                <a class="btn btn-dark btn-sm" href="detallespedido.php?id=<?php echo $productos['Id_Orden_Venta'] ?>"><i class="bi bi-eye"></i></a>
               </td>
             
               <td>
