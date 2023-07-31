@@ -1,0 +1,427 @@
+
+        body{
+            display: flex;
+            justify-content: center;
+        }
+
+        /*Inicia Menu*/
+        #menu{
+            width: 6vh;
+            height: 6vh;
+        }
+
+        #Jacky{
+            background: -webkit-linear-gradient(45deg,#ff9500, #b300ff,rgb(251, 42, 255));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent; 
+            font-weight: bold;
+        }
+
+        .main{
+            transition: .5s;
+            position: fixed;
+            padding: 1vh;
+            left: 0;
+            top: 8%;
+            width: 20%;
+            height: 92%;
+            background-color: black;
+            z-index: 1;
+        }
+
+        #Cerrar{
+            width: 4vh;
+            height: 4vh;
+        }
+        
+        
+        
+
+        
+
+        #Nav-Items{
+            margin-top: 3vh;
+            margin-left: -3vh;
+        } 
+
+        #Nav-Items a{
+            transition: .3s;
+            text-decoration: none;
+            color: white;
+            font-weight: 400;
+            font-size: 18px;
+        }
+
+        #Nav-Items a:hover{
+            color: #b300ff;
+            transition: .3s;
+            margin-left: 1vh;
+        }
+        
+        #Nav-Items ul li{
+            list-style: none;
+            margin-bottom: 2vh;
+        }
+        
+        #Contenedor-UC{
+            display: flex;
+            justify-content: space-between;
+            width: 15vh;
+        }
+
+        #carrito{
+            width: 6vh;
+            height: 6vh;
+        }
+
+
+
+
+            #ver{
+                margin-right:1vh;
+            }
+            
+            h3{
+            background: -webkit-linear-gradient(45deg,#ff9500, #b300ff,rgb(251, 42, 255));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent; 
+            font-weight: bold;
+            }
+
+            body{
+                display: flex;
+                justify-content: center;
+                }
+
+        /*Inicia Menu*/
+            #menu{
+                width: 6vh;
+                height: 6vh;
+            }
+
+            #Jacky{
+                background: -webkit-linear-gradient(45deg,#ff9500, #b300ff,rgb(251, 42, 255));
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent; 
+                font-weight: bold;
+            }
+
+            .main{
+                transition: .5s;
+                position: fixed;
+                padding: 1vh;
+                left: 0;
+                top: 8%;
+                width: 20%;
+                height: 92%;
+                background-color: black;
+                z-index: 1;
+            }
+
+            #Cerrar{
+                width: 4vh;
+                height: 4vh;
+            }
+            
+            nav{
+                background-color: transparent;
+                position: fixed;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+                height: 8vh;
+                z-index: 1;
+                background-color: black;
+            }
+
+            #usuario{
+                background-color: white;
+                width: 6vh;
+                height: 6vh;
+                border-radius: 3vh;
+                border: .5vh solid white;
+            }
+
+        #M{
+            display: none;
+        }
+       
+        #Menu-Desplegado{
+            width: 50vh;
+            transition: 2s;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: -100vh;
+            z-index: 2;
+            background-color: black;
+            padding: 2vh;
+        }
+        #Contenedor-Menu-Desplegado{
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+        }
+
+        #M:checked ~ #Menu-Desplegado{
+            left: 0;
+            transition: .5s;
+        }
+        
+        #usuario{
+          background-color: white;
+          width: 6vh;
+          height: 6vh;
+          border-radius: 3vh;
+          border: .5vh solid white;
+        }
+        #Buscar{
+            width: 3vh;
+            height: 3vh;
+            position: relative;
+            right: 5vh;
+            bottom: .2vh;
+
+        }
+
+        #Buscador{
+            width: 15em;
+            height: 2.5em;
+            border-radius: 3vh;
+            border: none;
+            padding: 10px;
+        }
+    
+
+    
+
+        #Nav-Items{
+            margin-top: 3vh;
+            margin-left: -3vh;
+        } 
+
+        #Nav-Items a{
+            transition: .3s;
+            text-decoration: none;
+            color: white;
+            font-weight: 400;
+            font-size: 18px;
+        }
+
+        #Nav-Items a:hover{
+            color: #b300ff;
+            transition: .3s;
+            margin-left: 1vh;
+        }
+        
+        #Nav-Items ul li{
+            list-style: none;
+            margin-bottom: 2vh;
+        }
+        
+        #Contenedor-UC{
+            display: flex;
+            justify-content: space-between;
+            width: 15vh;
+        }
+
+        #carrito{
+            width: 6vh;
+            height: 6vh;
+        }
+
+        #ContCart {
+            display: flex;
+        }
+
+        #num_cart {
+        height: 2.5vh;
+        text-align: center;
+        }
+
+        
+
+        #ver{
+            margin-right:1vh;
+        }
+        
+        h3{
+        background: -webkit-linear-gradient(45deg,#ff9500, #b300ff,rgb(251, 42, 255));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent; 
+        font-weight: bold;
+        }
+
+        .detalle{
+            margin-top:10vh;
+            
+        }
+
+        #ContCart{
+        display:flex;
+        }
+
+        #num_cart{
+            height:2.5vh;
+        }
+
+        #cerrarSesion{
+            width:100%;
+            height:75%;
+            display:flex;
+            align-items:flex-end;
+        }
+
+        
+        label{
+            margin-bottom:0;
+        }
+
+        #Nav-MenuBtn{
+        display: none;
+        }
+       
+        #Menu-Desplegado{
+            width: 50vh;
+            transition: 2s;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: -100vh;
+            z-index: 2;
+            background-color: black;
+            padding: 2vh;
+        }
+        #Contenedor-Menu-Desplegado{
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+        }
+
+        #Nav-MenuBtn:checked ~ #Menu-Desplegado{
+            left: 0;
+            transition: .5s;
+        }
+        
+        #usuario{
+          background-color: white;
+          width: 6vh;
+          height: 6vh;
+          border-radius: 3vh;
+          border: .5vh solid white;
+        }
+        #Buscar{
+            width: 3vh;
+            height: 3vh;
+            position: relative;
+            right: 5vh;
+            bottom: .2vh;
+
+        }
+
+        #Buscador{
+            width: 15em;
+            height: 2.5em;
+            border-radius: 3vh;
+            border: none;
+            padding: 10px;
+        }
+
+        #Nav-Items{
+            margin-top: 3vh;
+        } 
+
+        #Nav-Items a{
+            transition: .3s;
+            text-decoration: none;
+            color: white;
+            font-weight: 400;
+            font-size: 18px;
+        }
+
+        #Nav-Items a:hover{
+            color: #b300ff;
+            transition: .3s;
+            margin-left: 1vh;
+        }
+        
+        #Nav-Items ul li{
+            list-style: none;
+            margin-bottom: 2vh;
+            margin-left: -4vh;
+        }
+        
+        #Contenedor-UC{
+            display: flex;
+            justify-content: space-between;
+            width: 14vh;
+        }
+
+        #carrito{
+            width: 6vh;
+            height: 6vh;
+        }
+        /*Termina Menu*/
+        
+
+
+        
+        @media (width <=768px){
+
+            #Nav-MenuBtn:checked ~ #Menu-Desplegado{
+                width: 100%;
+            }
+
+        }
+
+
+        #Nav-Items{
+            padding-left:3vh;
+        }
+        
+        #titulo-pedido{
+            background: -webkit-linear-gradient(-95deg,mediumaquamarine, #b300ff,mediumslateblue);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent; 
+            font-weight: bold;
+        }
+
+        .ordenes{
+            margin-top:10vh;
+            padding:3vh;
+            background-image: url(../../imagenes/pizarra2.jpg);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+
+            
+            border: 15px ridge rgb(245, 173, 66);
+            box-shadow: 0px 5px 5px black;
+        }
+        @font-face {
+        font-family: sketch;
+        src: url(../../fuentes/sketch.ttf);
+    }
+
+    .titulo-pedidos{
+        font-family:'sketch';
+        color:white;
+        font-weight:bold;
+    }
+
+    table{
+        font-family:'sketch';
+        width:100%;
+        color:white;
+    }
+    td{
+        padding-bottom:5px;
+    }
+
+    #cerrar{
+        width:4vh;
+    }
+
+        
+
+        
