@@ -5,9 +5,9 @@ use PDOException;
 class Conexion{
     function conectar()
     {
-    $bd = 'mysql:host=localhost; dbname=papemaxp';
-    $usuario = 'root';
-    $contraseña = '';  
+    $bd = 'mysql:host=54.87.196.147; dbname=papemaxp';
+    $usuario = 'emith14';
+    $contraseña = 'Emith14!';  
     $options = [
         \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
         \PDO::ATTR_EMULATE_PREPARES=>false
