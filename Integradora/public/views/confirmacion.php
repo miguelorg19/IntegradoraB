@@ -1,15 +1,22 @@
 <?php
 
-require '../../src/Config/database.php';
-
+require_once '../../src/Config/conexion.php';
+use src\Config\Conexion;
+require_once '../../src/Modelos/imagenes.php';
+use src\Config\Imagenes;
+$imagenes = new Imagenes();
 session_start();
 
-if(!isset($_SESSION['NOMBRE_USUARIO'])){
-
-  header("location:login.php");
-
-}
-
+if (isset($_SESSION['usuario_nombre'])) {
+    $nombreus = $_SESSION['usuario_nombre'];
+  } else {
+    header("location:login.php");
+  }
+  if (isset($_SESSION['usuario_id'])) {
+    $idUsuario = $_SESSION['usuario_id'];
+  } else {
+    header("location:login.php");
+  }
 $contador = 0;
 
 
@@ -27,7 +34,7 @@ $total = 0;
 
 if($productos != null){
     foreach($productos as $clave => $cantidad){
-        $sql = $con->prepare("SELECT ID_Productos, Nombre, Precio_de_Venta, $cantidad AS cantidad FROM Productos WHERE ID_Productos = ?");
+        $sql = $con->prepare("SELECT ID_Productos, Nombre, Precio_de_Venta, $cantidad AS cantidad FROM productos WHERE ID_Productos = ?");
         $sql->execute([$clave]);
         $lista_productos[] = $sql->fetch(PDO::FETCH_ASSOC);
     }
@@ -229,7 +236,17 @@ if($productos != null){
             <input type="checkbox" id="Nav-MenuBtn">
             <!--Contenedor Del Usuario Y Carrito De Compras-->
             <div id="Contenedor-UC">
-                <a href=""><img src="../imagenes/usuario.png" alt="" id="usuario"></a>
+            <?php 
+            $foto = $imagenes->verfoto($idUsuario);
+            if(!empty($foto)){
+              $url = $foto;
+              $img = $imagenes->obtenerimaus($url);
+            }
+            else{
+              $img = '../imagenes/usuario.png';
+            }
+            ?>
+                <a href="usuario.php"><img src="<?php echo $img ?>" id="usuario"></a>
                 <div id="ContCart">
                     <a href=""><img src="../imagenes/carrito.png" alt="" id="carrito"></a>
                     <span id="num_cart" class="badge bg-primary"><?php echo $num_cart; ?></span>
@@ -246,14 +263,19 @@ if($productos != null){
 
                 <div id="Nav-Items">
                 <ul>
-                    <li><a href="catalogo.php">Inicio</a></li>
-                    <li><a href="">Filtro</a></li>
-                    <li><a href="">Categorias</a></li>
+                    <li><a href="papemaxinicio.php">Inicio</a></li>
+                    <li><a href="catalogo.php">Catalogo</a></li>
+                    <?php if($idUsuario == 1)
+                    {
+                        echo '<li><a href="pedidos.php">Pedidos</a></li>';
+                    }
+                    else 
+                    {
+                        echo '<li><a href="pedidos_usuario.php">Mis pedidos</a></li>';
+                    }
+                    ?>
+                    <li><a href="cerrar_sesion.php">Cerrar sesion</a></li>
                 </ul>
-                </div>
-
-                <div id="cerrarSesion">
-                    <a href="cerrar_sesion.php" class="btn btn-light">Cerrar Sesion</a>
                 </div>
             </div>
     </nav>
